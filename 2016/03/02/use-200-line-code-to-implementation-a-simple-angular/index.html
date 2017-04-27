@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>(翻译)使用200行代码创建属于你自己的精简版angular | 最前端</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="第一次翻译外文，就拿这篇作为第一次练习。加上一些自己的理解并且做了些删减。 正文开始： 我的实践经验证明有两种好方法来学习一项新技术  自己重新实现这个项目  分析那些你所知道的技术概念是如何运用在这个项目里的   在一些情况下第一种方式很难做到。比如，如果你为了理解 kernel（linux内核）的工作原理而去重新实现一次它会很困难很慢。往往更有效的是你去实现一个轻量的版本，去除掉那些你没兴趣的">
+<meta name="keywords" content="angular,mvvm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(翻译)使用200行代码创建属于你自己的精简版angular">
+<meta property="og:url" content="http://zqianduan.com/2016/03/02/use-200-line-code-to-implementation-a-simple-angular/index.html">
+<meta property="og:site_name" content="最前端">
+<meta property="og:description" content="第一次翻译外文，就拿这篇作为第一次练习。加上一些自己的理解并且做了些删减。 正文开始： 我的实践经验证明有两种好方法来学习一项新技术  自己重新实现这个项目  分析那些你所知道的技术概念是如何运用在这个项目里的   在一些情况下第一种方式很难做到。比如，如果你为了理解 kernel（linux内核）的工作原理而去重新实现一次它会很困难很慢。往往更有效的是你去实现一个轻量的版本，去除掉那些你没兴趣的">
+<meta property="og:image" content="http://blog.mgechev.com/images/lightweight-ng/main-components.png">
+<meta property="og:image" content="http://blog.mgechev.com/images/lightweight-ng/snap.png">
+<meta property="og:image" content="http://blog.mgechev.com/images/lightweight-ng/lifecycle-overview.png">
+<meta property="og:image" content="http://blog.mgechev.com/images/no-production.gif">
+<meta property="og:updated_time" content="2017-04-27T07:01:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="(翻译)使用200行代码创建属于你自己的精简版angular">
+<meta name="twitter:description" content="第一次翻译外文，就拿这篇作为第一次练习。加上一些自己的理解并且做了些删减。 正文开始： 我的实践经验证明有两种好方法来学习一项新技术  自己重新实现这个项目  分析那些你所知道的技术概念是如何运用在这个项目里的   在一些情况下第一种方式很难做到。比如，如果你为了理解 kernel（linux内核）的工作原理而去重新实现一次它会很困难很慢。往往更有效的是你去实现一个轻量的版本，去除掉那些你没兴趣的">
+<meta name="twitter:image" content="http://blog.mgechev.com/images/lightweight-ng/main-components.png">
+  
+    <link rel="alternative" href="/atom.xml" title="最前端" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay">
+	<div class="st-so-wrap">
+		<input type="text" id="local-search-input" class="st-default-search-input st-so" placeholder="回车搜索 直接有效">
+	</div>
+</div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Jimco</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/jimco" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/515789799" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/301/" style="font-size: 10px;">301</a> <a href="/tags/algorithm/" style="font-size: 11.67px;">algorithm</a> <a href="/tags/angular/" style="font-size: 15px;">angular</a> <a href="/tags/async/" style="font-size: 10px;">async</a> <a href="/tags/backbone/" style="font-size: 10px;">backbone</a> <a href="/tags/bfc/" style="font-size: 10px;">bfc</a> <a href="/tags/browser/" style="font-size: 10px;">browser</a> <a href="/tags/cache/" style="font-size: 10px;">cache</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/comet/" style="font-size: 10px;">comet</a> <a href="/tags/css/" style="font-size: 18.33px;">css</a> <a href="/tags/dom/" style="font-size: 10px;">dom</a> <a href="/tags/emlog/" style="font-size: 10px;">emlog</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/event/" style="font-size: 10px;">event</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/frontend/" style="font-size: 10px;">frontend</a> <a href="/tags/gzip/" style="font-size: 11.67px;">gzip</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/https/" style="font-size: 11.67px;">https</a> <a href="/tags/iframe/" style="font-size: 10px;">iframe</a> <a href="/tags/image/" style="font-size: 10px;">image</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/layout/" style="font-size: 13.33px;">layout</a> <a href="/tags/media/" style="font-size: 10px;">media</a> <a href="/tags/memory/" style="font-size: 10px;">memory</a> <a href="/tags/meta/" style="font-size: 10px;">meta</a> <a href="/tags/mvvm/" style="font-size: 13.33px;">mvvm</a> <a href="/tags/oo/" style="font-size: 10px;">oo</a> <a href="/tags/pattern/" style="font-size: 10px;">pattern</a> <a href="/tags/promise/" style="font-size: 13.33px;">promise</a> <a href="/tags/router/" style="font-size: 10px;">router</a> <a href="/tags/samba/" style="font-size: 10px;">samba</a> <a href="/tags/server/" style="font-size: 16.67px;">server</a> <a href="/tags/setInterval/" style="font-size: 10px;">setInterval</a> <a href="/tags/snippet/" style="font-size: 10px;">snippet</a> <a href="/tags/socket-io/" style="font-size: 10px;">socket.io</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/this/" style="font-size: 10px;">this</a> <a href="/tags/typecho/" style="font-size: 10px;">typecho</a> <a href="/tags/ubb/" style="font-size: 10px;">ubb</a> <a href="/tags/uglify/" style="font-size: 10px;">uglify</a> <a href="/tags/waterflow/" style="font-size: 10px;">waterflow</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/二进制/" style="font-size: 10px;">二进制</a> <a href="/tags/运算符/" style="font-size: 10px;">运算符</a> <a href="/tags/重定向/" style="font-size: 10px;">重定向</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+					
+						<section class="switch-part switch-part3">
+					
+					<div id="js-aboutme">狼厂攻城师，爱打羽毛球，欢迎骚扰！</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Jimco</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Jimco</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/jimco" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/515789799" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-use-200-line-code-to-implementation-a-simple-angular" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/02/use-200-line-code-to-implementation-a-simple-angular/" class="article-date">
+  	<time datetime="2016-03-02T06:15:19.000Z" itemprop="datePublished">2016-03-02</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      (翻译)使用200行代码创建属于你自己的精简版angular
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Javascript/">Javascript</a>
+	</div>
+
+
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angular/">angular</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mvvm/">mvvm</a></li></ul>
+	</div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>第一次翻译外文，就拿这篇作为第一次练习。加上一些自己的理解并且做了些删减。</p>
+<p>正文开始：</p>
+<p>我的实践经验证明有两种好方法来学习一项新技术</p>
+<ul>
+<li><p>自己重新实现这个项目</p>
+</li>
+<li><p>分析那些你所知道的技术概念是如何运用在这个项目里的</p>
+</li>
+</ul>
+<p>在一些情况下第一种方式很难做到。比如，如果你为了理解 kernel（linux内核）的工作原理而去重新实现一次它会很困难很慢。往往更有效的是你去实现一个轻量的版本，去除掉那些你没兴趣的技术细节，只关注核心功能。</p>
+<p>第二种方法一般是很有效的，特别是当你具有一些相似的技术经验的时候。最好的证明就是我写的 <a href="https://github.com/mgechev/angularjs-in-patterns" target="_blank" rel="external">angularjs-in-patterns</a>，对于有经验的工程师来说这是个对 angular 框架非常好的介绍。<br><a id="more"></a></p>
+<p>不管怎么说，从头开始实现一些东西并且去理解代码使用的技术细节是非常好的学习方式。整个 angularjs 框架大概有 20k 行代码，其中有很多特别难懂的地方。这是很多聪明的程序员夜以继日的工作做出来的伟大的壮举。然而为了理解这个框架还有它主要的设计原则，我们可以仅仅简单的实现一个“模型”。</p>
+<p>我们可以通过下面这些步骤来实现这个模型：</p>
+<ul>
+<li><p>简化 api</p>
+</li>
+<li><p>去除掉对于理解核心功能无关的组件代码</p>
+</li>
+</ul>
+<p>这就是我在 <a href="https://github.com/mgechev/light-angularjs" target="_blank" rel="external">Lightweight AngularJS</a> 里面做的事情。</p>
+<p>在开始阅读下面的内容之前，建议先了解下angularjs的基本用法，可以看这篇<a href="http://blog.mgechev.com/2014/05/08/angularjs-in-patterns-part-1-overview-of-angularjs/" target="_blank" rel="external">文章</a></p>
+<p>下面是一些 demo 例子还有代码片段：</p>
+<ul>
+<li><p><a href="https://github.com/mgechev/light-angularjs" target="_blank" rel="external">Lightweight AngularJS source code</a></p>
+</li>
+<li><p><a href="https://mgechev.github.io/light-angularjs/" target="_blank" rel="external">Very simple todo application built with Lightweight AngularJS</a></p>
+</li>
+</ul>
+<p>让我们开始我们的实现：</p>
+<h2 id="主要的组件："><a href="#主要的组件：" class="headerlink" title="主要的组件："></a>主要的组件：</h2><p>我们不完全实现 angularjs 的那套技术，我们就仅仅定义一部分的组件并且实现大部分的 angularjs 里面的时尚特性。可能会接口变得简单点，或者减少些功能特性。</p>
+<p>我们会实现的 angular 的组件包括：</p>
+<ul>
+<li><p>Controllers</p>
+</li>
+<li><p>Directives</p>
+</li>
+<li><p>Services</p>
+</li>
+</ul>
+<p>为了达到这些功能我们需要实现 <code>$compile</code> service(我们称之为 <code>DOMCompiler</code>)，还有 <code>$provider</code> 跟 <code>$injector</code>(在我们的实现里统称为 Provider)。为了实现双向绑定我们还要实现 scope。</p>
+<p>下面是 Provider, Scope 跟 DOMCompiler 的依赖关系：</p>
+<p><img src="http://blog.mgechev.com/images/lightweight-ng/main-components.png" alt="yilai"></p>
+<h3 id="Provider"><a href="#Provider" class="headerlink" title="Provider"></a>Provider</h3><p>就像上面提到的，我们的 Provider 会包括原生 angular 里面的两个组件的内容：</p>
+<ul>
+<li><p>$provide</p>
+</li>
+<li><p>$injector</p>
+</li>
+</ul>
+<p>他是一个具有如下功能特性的单例：</p>
+<ul>
+<li><p>注册组件（directives, services 和 controllers）</p>
+</li>
+<li><p>解决各个组件之间的依赖关系</p>
+</li>
+<li><p>初始化所有组件</p>
+</li>
+</ul>
+<h3 id="DOMCompiler"><a href="#DOMCompiler" class="headerlink" title="DOMCompiler"></a>DOMCompiler</h3><p>DOMCompiler 也是一个单例，他会遍历 dom 树去查找对应的 directives 节点。我们这里仅仅支持那种用在 dom 元素属性上的 directive。当 DOMCompiler 发现 directive 的时候会给他提供 scope 的功能特性（因为对应的 directive 可能需要一个新的 scope）并且调用关联在它上面对应的逻辑代码（也就是 link 函数里面的逻辑）。所以这个组件的主要职责就是：</p>
+<p>编译 dom：</p>
+<ul>
+<li><p>遍历dom树的所有节点</p>
+</li>
+<li><p>找到注册的属性类型的 directives 指令</p>
+</li>
+<li><p>调用对应的 directive 对应的 link 逻辑</p>
+</li>
+<li><p>管理 scope</p>
+</li>
+</ul>
+<h3 id="Scope"><a href="#Scope" class="headerlink" title="Scope"></a>Scope</h3><p>我们的轻量级 angular 的最后一个主要的组件就是 scope。为了实现双向绑定的功能，我们需要有一个 $scope 对象来挂载属性。我们可以把这些属性组合成表达式并且监控它们。当我们发现监控的某个表达式的值改变了，我们就调用对应的回调函数。</p>
+<p>scope 的职责：</p>
+<ul>
+<li><p>监控表达式</p>
+</li>
+<li><p>在每次 $digest 循环的时候执行所有的表达式，直到稳定（译者注：稳定就是说，表达式的值不再改变的时候）</p>
+</li>
+<li><p>在表达式的值发生改变时，调用对应的所有的回调函数</p>
+</li>
+</ul>
+<p>下面本来还有些图论的讲解，但是认为意义不大，这边就略去了。</p>
+<h2 id="开始实现"><a href="#开始实现" class="headerlink" title="开始实现"></a>开始实现</h2><p>让我们开始实现我们的轻量版 angular</p>
+<h3 id="Provider-1"><a href="#Provider-1" class="headerlink" title="Provider"></a>Provider</h3><p>正如我们上面说的，Provide 会：</p>
+<ul>
+<li><p>注册组件（directives, services 和 controllers）</p>
+</li>
+<li><p>解决各个组件之间的依赖关系</p>
+</li>
+<li><p>初始化所有组件</p>
+</li>
+</ul>
+<p>所以它具有下面这些接口：</p>
+<ul>
+<li><p>get(name, locals) - 通过名称 还有本地依赖 返回对应的 service</p>
+</li>
+<li><p>invoke(fn, locals) - 通过 service 对应的工厂函数还有本地依赖初始化 service</p>
+</li>
+<li><p>directive(name, fn) - 通过名称还有工厂函数注册一个 directive</p>
+</li>
+<li><p>controller(name, fn) - 通过名称还有工厂函数注册一个 controller。注意 angularjs 的代码里并没有 controllers 对应的代码，他们是通过 $controller 来实现的</p>
+</li>
+<li><p>service(name, fn) - 通过名称还有工厂函数注册一个 service</p>
+</li>
+<li><p>annotate(fn) - 返回一个数组，数组里是当前 service 依赖的模块的名称</p>
+</li>
+</ul>
+<p>组件的注册：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Provider = &#123;</div><div class="line">    <span class="attr">_providers</span>: &#123;&#125;,</div><div class="line">    <span class="attr">directive</span>: <span class="function"><span class="keyword">function</span>(<span class="params">name, fn</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>._register(name + Provider.DIRECTIVES_SUFFIX, fn);</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">controller</span>: <span class="function"><span class="keyword">function</span>(<span class="params">name, fn</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>._register(name + Provider.CONTROLLERS_SUFFIX,</div><div class="line">        <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="keyword">return</span> fn;</div><div class="line">        &#125;);</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">service</span>: <span class="function"><span class="keyword">function</span>(<span class="params">name, fn</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>._register(name, fn);</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">_register</span>: <span class="function"><span class="keyword">function</span>(<span class="params">name, factory</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>._providers[name] = factory;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//...</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line">Provider.DIRECTIVES_SUFFIX = <span class="string">'Directive'</span>;</div><div class="line">Provider.CONTROLLERS_SUFFIX = <span class="string">'Controller'</span>;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>译者注：看到这里容易对 controller 的包装一层有疑问，先忽略，看完 invoke 的实现后，下面我再给出解释。</p>
+</blockquote>
+<p>上面的代码提供了一个针对注册组件的简单的实现。我们定义了一个私有属性 _provides 用来存储所有的组件的工厂函数。我们还定义了 directive, service 和 controller 这些方法。这些方法本质上内部会调用 _register 来实现。在 controller 方法里面我们简单的在给的工厂函数外面包装了一层函数，因为我们希望可以多次实例化同一个 controller 而不去缓存返回的值。在我们看了下面的 get 和 ngl-controller 方法实现后会对 controller 方法有更加清晰的认识。下面还剩下的方法就是：</p>
+<ul>
+<li><p>invoke</p>
+</li>
+<li><p>get</p>
+</li>
+<li><p>annotate</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Provider = &#123;</div><div class="line">    <span class="comment">// ...</span></div><div class="line">    get: <span class="function"><span class="keyword">function</span>(<span class="params">name, locals</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>._cache[name]) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">this</span>._cache[name];</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">var</span> provider = <span class="keyword">this</span>._providers[name];</div><div class="line">        <span class="keyword">if</span> (!provider || <span class="keyword">typeof</span> provider !== <span class="string">'function'</span>) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> (<span class="keyword">this</span>._cache[name] = <span class="keyword">this</span>.invoke(provider, locals));</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">annotate</span>: <span class="function"><span class="keyword">function</span>(<span class="params">fn</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> res = fn.toString().replace(<span class="regexp">/((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg</span>, <span class="string">''</span>).match(<span class="regexp">/\((.*?)\)/</span>);</div><div class="line">        <span class="keyword">if</span> (res &amp;&amp; res[<span class="number">1</span>]) &#123;</div><div class="line">            <span class="keyword">return</span> res[<span class="number">1</span>].split(<span class="string">','</span>).map(<span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>&#123;</div><div class="line">                <span class="keyword">return</span> d.trim();</div><div class="line">            &#125;);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> [];</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">invoke</span>: <span class="function"><span class="keyword">function</span>(<span class="params">fn, locals</span>) </span>&#123;</div><div class="line">        locals = locals || &#123;&#125;;</div><div class="line">        <span class="keyword">var</span> deps = <span class="keyword">this</span>.annotate(fn).map(<span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</div><div class="line">            <span class="keyword">return</span> locals[s] || <span class="keyword">this</span>.get(s, locals);</div><div class="line">        &#125;,</div><div class="line">        <span class="keyword">this</span>);</div><div class="line">        <span class="keyword">return</span> fn.apply(<span class="literal">null</span>, deps);</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">_cache</span>: &#123;</div><div class="line">        <span class="attr">$rootScope</span>: <span class="keyword">new</span> Scope()</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>我们写了更多的逻辑，下面我们看看 get 的实现。在 get 方法中我们先检测下一个组件是不是已经缓存在了私有属性 _cache 里面：</p>
+<ul>
+<li><p>如果缓存了就直接返回（译者注：这边其实就是个单例模式，只会调用注册的工厂函数一次，以后直接调用缓存的生成好的对象）。$rootScope 默认就会被缓存，因为我们需要一个单独的全局的并且唯一的超级 scope。一旦整个应用启动了，他就会被实例化</p>
+</li>
+<li><p>如果不在缓存里，就从私有属性 _providers 里面拿到它的工厂函数，并且调用 invoke 去执行工厂函数实例化它</p>
+</li>
+</ul>
+<p>在 invoke 函数里，我们做的第一件事就是判断如果没有 locals 对象就赋值一个空的值，这些 locals 对象 叫做局部依赖，什么是局部依赖呢？</p>
+<p>在 angularjs 里面我们可以想到两种依赖：</p>
+<ul>
+<li><p>局部依赖</p>
+</li>
+<li><p>全局依赖</p>
+</li>
+</ul>
+<p>全局依赖是我们使用 factory, service, filter 等等注册的组件。他们可以被所有应用里的其他组件依赖使用。但是 $scope 呢？对于每一个 controller（具有相同执行函数的 controller）我们希望拥有不同的 scope，$scope 对象不像 $http, $resource，它不是全局的依赖对象，而是跟 $delegate 对象一样是局部依赖，针对当前的组件。</p>
+<p>让我们呢回到 invoke 的实现上。通过合理的规避 null, undefined 这些值，我们可以获取到当前组件的依赖项的名字。注意我们的实现仅仅支持解析那种作为参数属性的依赖写法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Controller</span>(<span class="params">$scope, $http</span>) </span>&#123;</div><div class="line">    <span class="comment">// ...</span></div><div class="line">&#125;</div><div class="line">angular.controller(<span class="string">'Controller'</span>, Controller);</div></pre></td></tr></table></figure>
+<p>一旦把 controller 的定义转换成字符串，我们就可以很简单的通过 annotate 里面的正则匹配出它的依赖项。但是万一 controller 的定义里面有注释呢？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Controller</span>(<span class="params">$scope <span class="regexp">/* only local scope, for the component */</span>, $http</span>) </span>&#123;</div><div class="line">    <span class="comment">// ...</span></div><div class="line">&#125;</div><div class="line">angular.controller(<span class="string">'Controller'</span>, Controller);</div></pre></td></tr></table></figure>
+<p>这边简单的正则就不起作用了，因为执行 Controller.toString() 也会返回注释，所以这就是我们为什么最开始要使用下面的正则先去掉注释：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">.replace(<span class="regexp">/((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg</span>, <span class="string">''</span>).</div></pre></td></tr></table></figure>
+<p>当我们拿到依赖项的名称后，我们需要去实例化他们。所以我们使用 map 来循环遍历，挨个的调用 get 来获取实例。你注意到这边的问题了吗？</p>
+<p>如果我们有个组件 A，A 依赖 B 和 C。并且假设 C 依赖 A？在这种情况下我们就会发生无止境的循环，也就是循环依赖。在这个实现里面我们不会处理这种问题，但是你应该小心点，尽量避免。</p>
+<p>所以上面就是我们的 provider 的实现，现在我们可以这样注册组件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Provider.service(<span class="string">'RESTfulService'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">url</span>) </span>&#123;</div><div class="line">        <span class="comment">// make restful call &amp; return promise</span></div><div class="line">    &#125;;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">Provider.controller(<span class="string">'MainCtrl'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">RESTfulService</span>) </span>&#123;</div><div class="line">    RESTfulService(url).then(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">        alert(data);</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>然后我们可以这样执行 MainCtrl：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> ctrl = Provider.get(<span class="string">'MainCtrl'</span> + Provider.CONTROLLERS_SUFFIX);</div><div class="line">Provider.invoke(ctrl);</div></pre></td></tr></table></figure>
+<p>译者注：</p>
+<p>这边可以开始解释下上面的 Provider 里面 controller 方法里为啥要包装一层了。</p>
+<p>首先我们注意到 controller 的调用方式是特殊的，Provider.get 内部已经调用了一次 invoke，但是我们还要再调用一次 invoke 才能执行 MainCtrl 的真正执行函数。这是因为我们包装了一层，导致 _cache 里面单例存储的是 MainCtrl 的执行函数。而不是执行函数的结果。</p>
+<p>想想这才是合理的，因为 MainCtrl 可能会有多个调用，这些调用只有执行函数是一致的，但是执行函数的执行结果根据不同的 scope 环境是不一样的。换句话说对于 controller 来说 执行函数才是单列的，执行结果是差异的。如果我们不包装一层，就会导致第一次的执行结果会直接缓存，这样下次再使用 MainCtrl 的时候得到的值就是上一次的。</p>
+<p>当然带来的问题就是我们需要 get 到执行函数后，再次调用 invoke 来获取结果。</p>
+<p>这边的 controller 初始化，需要看下面的 ngl-controller 的实现，可以到时再回过头来看这边会理解的更清楚。</p>
+<h3 id="DOMCompiler-1"><a href="#DOMCompiler-1" class="headerlink" title="DOMCompiler"></a>DOMCompiler</h3><p>DOMCompiler的主要职责是：</p>
+<p>编译dom</p>
+<ul>
+<li><p>遍历 dom 树的所有节点</p>
+</li>
+<li><p>找到注册的属性类型的 directives 指令</p>
+</li>
+<li><p>调用对应的 directive 对应的 link 逻辑</p>
+</li>
+<li><p>管理 scope</p>
+</li>
+</ul>
+<p>下面的这些接口就够了：</p>
+<ul>
+<li><p>bootstrap() - 启动整个项目（类似 angularjs 里面的 angular.bootstrap，不过一直使用 html 根节点作为启动的节点）</p>
+</li>
+<li><p>compile(el, scope) - 执行所有依附在当前 html 节点上的 directives 的代码，并且递归执行子元素的组件逻辑。我们需要一个 scope 对象关联当前的 html 节点，这样才能实现双向绑定。因为每个 directive 可能都会生成一个不同的 scope，所以我们需要在递归调用的时候传入当前的 scope 对象</p>
+</li>
+</ul>
+<p>下面是对应的实现：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> DOMCompiler = &#123;</div><div class="line">    <span class="attr">bootstrap</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.compile(<span class="built_in">document</span>.children[<span class="number">0</span>], Provider.get(<span class="string">'$rootScope'</span>));</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">compile</span>: <span class="function"><span class="keyword">function</span>(<span class="params">el, scope</span>) </span>&#123;</div><div class="line">        <span class="comment">// 获取某个元素上的所有指令</span></div><div class="line">        <span class="keyword">var</span> dirs = <span class="keyword">this</span>._getElDirectives(el);</div><div class="line">        <span class="keyword">var</span> dir;</div><div class="line">        <span class="keyword">var</span> scopeCreated;</div><div class="line">        dirs.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>&#123;</div><div class="line">            dir = Provider.get(d.name + Provider.DIRECTIVES_SUFFIX);</div><div class="line">            <span class="comment">// dir.scope代表当前 directive是否需要生成新的scope</span></div><div class="line">            <span class="comment">// 这边的情况是只要有一个指令需要单独的scope，其他的directive也会变成具有新的scope对象，这边是不是不太好</span></div><div class="line">            <span class="keyword">if</span> (dir.scope &amp;&amp; !scopeCreated) &#123;</div><div class="line">                scope = scope.$<span class="keyword">new</span>();</div><div class="line">                scopeCreated = <span class="literal">true</span>;</div><div class="line">            &#125;</div><div class="line">            dir.link(el, scope, d.value);</div><div class="line">        &#125;);</div><div class="line">        <span class="built_in">Array</span>.prototype.slice.call(el.children).forEach(<span class="function"><span class="keyword">function</span>(<span class="params">c</span>) </span>&#123;</div><div class="line">            <span class="keyword">this</span>.compile(c, scope);</div><div class="line">        &#125;,</div><div class="line">        <span class="keyword">this</span>);</div><div class="line">    &#125;,</div><div class="line">    <span class="comment">// ...</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>bootstrap 的实现很简单，就是调用了一下 compile，传递的是 html 的根节点，以及全局的 $rootScope。</p>
+<p>在 compile 里面的代码就很有趣了，最开始我们使用了一个辅助方法来获取某个节点上面的所有指令，我们后面再来看这个 _getElDirectives 的实现。</p>
+<p>当我们获取到当前节点的所有指令后，我们循环遍历下并且使用 Provider.get 获取到对应的 directive 的工厂函数的执行返回对象。然后我们检查当前的 directive 是否需要一个新的 scope，如果需要并且我们还没有为当前的节点初始化过新的 scope 对象，我们就执行 scope.$new() 来生成一个新的 scope 对象，这个对象会原型继承当前的 scope 对象。然后我们执行当前 directive 的 link 方法。最后我们递归执行子节点，因为 el.children 是一个 nodelist 对象，所以我们使用 Array.prototype.slice.call 将它转换成数组，之后对它递归调用 compile。</p>
+<p>再让我们看看 _getElDirectives：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// ...</span></div><div class="line">_getElDirectives: <span class="function"><span class="keyword">function</span>(<span class="params">el</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> attrs = el.attributes;</div><div class="line">    <span class="keyword">var</span> result = [];</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; attrs.length; i += <span class="number">1</span>) &#123;</div><div class="line">        <span class="keyword">if</span> (Provider.get(attrs[i].name + Provider.DIRECTIVES_SUFFIX)) &#123;</div><div class="line">            result.push(&#123;</div><div class="line">                <span class="attr">name</span>: attrs[i].name,</div><div class="line">                <span class="attr">value</span>: attrs[i].value</div><div class="line">            &#125;);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">&#125;</div><div class="line"><span class="comment">// ...</span></div></pre></td></tr></table></figure>
+<p>主要就是遍历当前节点 el 的所有属性，发现一个注册过的指令就把它的名字和值加入到返回的数组里。</p>
+<p>好了，到这里我们的 DOMCompiler 就完成了，下面我们看看最后一个重要的组件：</p>
+<h3 id="Scope-1"><a href="#Scope-1" class="headerlink" title="Scope"></a>Scope</h3><p>为了实现脏检测的功能，于是 scope 可能是整个实现里面最复杂的部分了，在 angularjs 里面我们称为 $digest 循环。</p>
+<p>笼统的讲双向绑定的最主要原理，就是在 $digest 循环里面执行监控表达式。一旦这个循环开始调用，就会执行所有监控的表达式并且检测最后的执行结果是不是跟当前的执行结果不同，如果 angularjs 发现他们不同，它就会执行这个表达式对应的回调函数。</p>
+<p>一个监控者就是一个对象，像这样 <code>{ expr, fn, last }</code>，expr 是对应的监控表达试，fn 是对应的回调函数会在值变化后执行，last 是上一次的表达式的执行结果。</p>
+<p>scope 对象有下面这些方法：</p>
+<ul>
+<li><p>$watch(expr, fn) - 监控表达式 expr。一旦发现 expr 的值有变化就只行回调函数fn，并且传入新的值</p>
+</li>
+<li><p>$destroy() - 销毁当前的 scope 对象</p>
+</li>
+<li><p>$eval(expr) - 根据上下文执行当前的表达式</p>
+</li>
+<li><p>$new() - 原型继承当前的 scope 对象，生成一个新的 scope 对象</p>
+</li>
+<li><p>$digest() - 运行脏检测</p>
+</li>
+</ul>
+<p>让我们来深入的看看 scope 的实现：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Scope</span>(<span class="params">parent, id</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.$$watchers = [];</div><div class="line">    <span class="keyword">this</span>.$$children = [];</div><div class="line">    <span class="keyword">this</span>.$parent = parent;</div><div class="line">    <span class="keyword">this</span>.$id = id || <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line">Scope.counter = <span class="number">0</span>;</div></pre></td></tr></table></figure>
+<p>我们大幅度的简化了 angularjs 的 scope，我们仅仅有一个监控者的列表，一个子 scope 对象的列表，一个父 scope 对象，还有个当前 scope 的 id。我们添加了一个静态属性 counter 用来跟踪最后一个 scope，并且为下一个 scope 对象提供一个唯一的标识。</p>
+<p>我们来实现 $watch 方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Scope.prototype.$watch = <span class="function"><span class="keyword">function</span>(<span class="params">exp, fn</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.$$watchers.push(&#123;</div><div class="line">        <span class="attr">exp</span>: exp,</div><div class="line">        <span class="attr">fn</span>: fn,</div><div class="line">        <span class="attr">last</span>: Utils.clone(<span class="keyword">this</span>.$<span class="built_in">eval</span>(exp))</div><div class="line">    &#125;);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>在 $watch 方法中，我们添加了一个新对象到 this.$$watchers 监控者列表里。这个对象包括一个表达式，一个执行的回调还有最后一次表达式执行的结果 last。因为我们使用 this.$eval 执行表达式得到的结果有可能是个引用，所以我们需要克隆一份新的。</p>
+<p>下面我们看看如何新建 scope，和销毁 scope：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Scope.prototype.$<span class="keyword">new</span> = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    Scope.counter += <span class="number">1</span>;</div><div class="line">    <span class="keyword">var</span> obj = <span class="keyword">new</span> Scope(<span class="keyword">this</span>, Scope.counter);</div><div class="line">    <span class="comment">// 设置原型链，把当前的scope对象作为新scope的原型，这样新的scope对象可以访问到父scope的属性方法</span></div><div class="line">    <span class="built_in">Object</span>.setPrototypeOf(obj, <span class="keyword">this</span>);</div><div class="line">    <span class="keyword">this</span>.$$children.push(obj);</div><div class="line">    <span class="keyword">return</span> obj;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">Scope.prototype.$destroy = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> pc = <span class="keyword">this</span>.$parent.$$children;</div><div class="line">    pc.splice(pc.indexOf(<span class="keyword">this</span>), <span class="number">1</span>);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>\$new 用来创建一个新的 scope 对象，并且具有独一无二的标识，原型被设置为当前 scope 对象。然后我们把新生成的 scope 对象放到子 scope 对象列表（this.$$children）里。</p>
+<p>在 destroy 方法里，我们把当前 scope 对象从父级 scope 对象里的子 scope 对象列表（this.$$children）移除掉。</p>
+<p>下面我们看看传说中的脏检测 $digest 的实现：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">Scope.prototype.$digest = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> dirty, watcher, current, i;</div><div class="line">    <span class="keyword">do</span> &#123;</div><div class="line">        dirty = <span class="literal">false</span>;</div><div class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.$$watchers.length; i += <span class="number">1</span>) &#123;</div><div class="line">            watcher = <span class="keyword">this</span>.$$watchers[i];</div><div class="line">            current = <span class="keyword">this</span>.$<span class="built_in">eval</span>(watcher.exp);</div><div class="line">            <span class="keyword">if</span> (!Utils.equals(watcher.last, current)) &#123;</div><div class="line">                watcher.last = Utils.clone(current);</div><div class="line">                dirty = <span class="literal">true</span>;</div><div class="line">                watcher.fn(current);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125; <span class="keyword">while</span> ( dirty );</div><div class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.$$children.length; i += <span class="number">1</span>) &#123;</div><div class="line">        <span class="keyword">this</span>.$$children[i].$digest();</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>基本上我们一直循环运行检测一直到没有脏数据，默认情况下就是没有脏数据的。一旦我们发现当前表达式的执行结果跟上一次的结果不一样我们就任务有了脏数据，一旦我们发现一个脏数据我们就要重新执行一次所有的监控表达式。为什么呢？因为我们可能会有一些内部表达式依赖，所以一个表达式的结果可能会影响到另外一个的结果。这就是为什么我们需要一遍一遍的运行脏检测一直到所有的表达式都没有变化也就是稳定了。一旦我们发现数据改变了，我们就立即执行对应的回调并且更新对应的 last 值，并且标识当前有脏数据，这样就会再次调用脏检测。</p>
+<p>然后我们会继续递归调用子 scope 对象的脏数据检测，一个需要注意的情况就是这边也会发生循环依赖：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Controller</span>(<span class="params">$scope</span>) </span>&#123;</div><div class="line">    $scope.i = $scope.j = <span class="number">0</span>;</div><div class="line">    $scope.$watch(<span class="string">'i'</span>,</div><div class="line">    <span class="function"><span class="keyword">function</span>(<span class="params">val</span>) </span>&#123;</div><div class="line">        $scope.j += <span class="number">1</span>;</div><div class="line">    &#125;);</div><div class="line">    $scope.$watch(<span class="string">'j'</span>,</div><div class="line">    <span class="function"><span class="keyword">function</span>(<span class="params">val</span>) </span>&#123;</div><div class="line">        $scope.i += <span class="number">1</span>;</div><div class="line">    &#125;);</div><div class="line">    $scope.i += <span class="number">1</span>;</div><div class="line">    $scope.$digest();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这种情况下我们就会看到：</p>
+<p><img src="http://blog.mgechev.com/images/lightweight-ng/snap.png" alt="Aw, Snap!"></p>
+<p>最后一个方法是 $eval. 最好不要在生产环境里使用这个，这个是一个 hack 手段用来避免我们还需要自己做个表达式解析引擎。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// In the complete implementation there're</span></div><div class="line"><span class="comment">// lexer, parser and interpreter.</span></div><div class="line"><span class="comment">// Note that this implementation is pretty evil!</span></div><div class="line"><span class="comment">// It uses two dangerouse features:</span></div><div class="line"><span class="comment">// - eval</span></div><div class="line"><span class="comment">// - with</span></div><div class="line"><span class="comment">// The reason the 'use strict' statement is</span></div><div class="line"><span class="comment">// omitted is because of `with`</span></div><div class="line">Scope.prototype.$<span class="built_in">eval</span> = <span class="function"><span class="keyword">function</span>(<span class="params">exp</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> val;</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> exp === <span class="string">'function'</span>) &#123;</div><div class="line">        val = exp.call(<span class="keyword">this</span>);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="keyword">with</span>(<span class="keyword">this</span>) &#123;</div><div class="line">                val = <span class="built_in">eval</span>(exp);</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">catch</span>(e) &#123;</div><div class="line">            val = <span class="literal">undefined</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> val;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>我们检测监控的表达式是不是一个函数，如果是的话我们就使用当前的上下文执行它。否则我们就通过 with 把当前的执行环境改成当前 scope 的上下文并且使用 eval 来得到结果。这个可以允许我们执行类似 <code>foo + bar * baz()</code> 的表达式，甚至是更复杂的。当然我们不会支持 filters，因为他们是 angularjs 扩展的功能。</p>
+<h3 id="Directive"><a href="#Directive" class="headerlink" title="Directive"></a>Directive</h3><p>到目前为止使用已有的元素我们做不了什么。为了让它跑起来我们需要添加一些指令（directive）还有服务（service）。让我们来实现 ngl-bind (ng-bind ), ngl-model (ng-model), ngl-controller (ng-controller) and ngl-click (ng-click)。括号里代表在 angularjs 里面的对应 directive</p>
+<p><em>ng-bind</em></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Provider.directive(<span class="string">'ngl-bind'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">scope</span>: <span class="literal">false</span>,</div><div class="line">        <span class="attr">link</span>: <span class="function"><span class="keyword">function</span>(<span class="params">el, scope, exp</span>) </span>&#123;</div><div class="line">            el.innerHTML = scope.$<span class="built_in">eval</span>(exp);</div><div class="line">            scope.$watch(exp,</div><div class="line">            <span class="function"><span class="keyword">function</span>(<span class="params">val</span>) </span>&#123;</div><div class="line">                el.innerHTML = val;</div><div class="line">            &#125;);</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>ngl-bind 并不需要一个新的 scope，它仅仅对当前节点添加了一个监控。当脏检测发现有了改变，回调函数就会把新的值赋值到 innerHTML 更新 dom</p>
+<p><em>ngl-model</em></p>
+<p>我们的 ng-model 只会支持 input 框的改变检测，所以它的实现是这样：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">Provider.directive(<span class="string">'ngl-model'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">link</span>: <span class="function"><span class="keyword">function</span>(<span class="params">el, scope, exp</span>) </span>&#123;</div><div class="line">            el.onkeyup = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">                scope[exp] = el.value;</div><div class="line">                scope.$digest();</div><div class="line">            &#125;;</div><div class="line">            scope.$watch(exp,</div><div class="line">            <span class="function"><span class="keyword">function</span>(<span class="params">val</span>) </span>&#123;</div><div class="line">                el.value = val;</div><div class="line">            &#125;);</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>我们对当前的 input 框添加了一个 onkeyup 的监听，一旦当前 input 的值变化了，我们就调用当前 scope 对象的 $digest 脏检测循环，这样就可以保证这个改变会应用到所有 scope 的监控表达式，当值改变了我们就改变对应的节点的值。</p>
+<p><em>ngl-controller</em></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Provider.directive(<span class="string">'ngl-controller'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">scope</span>: <span class="literal">true</span>,</div><div class="line">        <span class="attr">link</span>: <span class="function"><span class="keyword">function</span>(<span class="params">el, scope, exp</span>) </span>&#123;</div><div class="line">            <span class="keyword">var</span> ctrl = Provider.get(exp + Provider.CONTROLLERS_SUFFIX);</div><div class="line">            Provider.invoke(ctrl, &#123;</div><div class="line">                <span class="attr">$scope</span>: scope</div><div class="line">            &#125;);</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>我们需要针对每个 controller 生成一个新的 scope 对象，所以它的 scope 的值是 true。我们使用 Provide.get 来获取到需要的 controller 执行函数，然后使用当前的 scope 来执行它。在 controller 里面我们可以给 scope 对象添加属性，我们可以使用 ngl-bind/ngl-model 绑定这些属性。一旦我们改变了属性值我们需要确保我们执行 $digest 脏检测来保证监控这些属性的表达式会执行。</p>
+<p><em>ngl-click</em></p>
+<p>在我们可以做一个有用的 todo 应用之前，这是我们最后要看的指令</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Provider.directive(<span class="string">'ngl-click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">scope</span>: <span class="literal">false</span>,</div><div class="line">        <span class="attr">link</span>: <span class="function"><span class="keyword">function</span>(<span class="params">el, scope, exp</span>) </span>&#123;</div><div class="line">            el.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">                scope.$<span class="built_in">eval</span>(exp);</div><div class="line">                scope.$digest();</div><div class="line">            &#125;;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>这里我们不需要新建个 scope 对象，我们需要的就是当用户点击按钮时执行当前 ngl-click 后面跟着的表达式并且调用脏检测。</p>
+<h2 id="一个完整的例子"><a href="#一个完整的例子" class="headerlink" title="一个完整的例子"></a>一个完整的例子</h2><p>为了保证我们可以理解双向绑定是怎么工作的，我们来看个下面的例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">ngl-controller</span>=<span class="string">"MainCtrl"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">ngl-bind</span>=<span class="string">"bar"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">ngl-click</span>=<span class="string">"foo()"</span>&gt;</span>Increment<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Provider.controller(<span class="string">'MainCtrl'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">$scope</span>) </span>&#123;</div><div class="line">    $scope.bar = <span class="number">0</span>;</div><div class="line">    $scope.foo = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        $scope.bar += <span class="number">1</span>;</div><div class="line">    &#125;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>让我们看看使用这些会发生什么：</p>
+<p><img src="http://blog.mgechev.com/images/lightweight-ng/lifecycle-overview.png" alt="lifecycle-overview"></p>
+<p>首先 DOMCompiler 会先发现我们的 ngl-controller 指令，然后会调用这个指令的 link 函数生成一个新的 scope 对象传递给 controller 的执行函数。我们增加了一个值为 0 的 bar 属性，还有一个叫做 foo 的方法，foo 方法会不断增加 bar。DOMCompiler 会发现 ngl-bind 然后为 bar 添加监控。并且还发现了 ngl-click 同时添加 click 事件到按钮上。</p>
+<p>一旦用户点击了按钮，foo 函数就会通过 $scope.$eval 执行。使用的 scope 对象就是传递给 MainCtrl 的 scope 对象。这之后 ngl-click 会执行脏检测 $scope.$digest，脏检测循环会遍历所有的监控表达式，发现 bar 的值变化了，因为我们添加了对应的回调函数，所以就执行它更新 span 的内容。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>这个框架离实际的生产环境应用还有很大差距，但是它还是实现了不少功能：</p>
+<ul>
+<li><p>双向绑定</p>
+</li>
+<li><p>依赖注入</p>
+</li>
+<li><p>作用域分离</p>
+</li>
+</ul>
+<p>跟在 angular 里面的运行方式差不多，这些可以帮助我们更容易理解 angularjs。</p>
+<p>但是你还是要记住的是不要把这些代码用在生产环境，最好还是直接使用 <code>bower install angular</code> 使用最新的 anguar。</p>
+<p><img src="http://blog.mgechev.com/images/no-production.gif" alt="no-production"></p>
+<blockquote>
+<p>本文转载自：<a href="http://purplebamboo.github.io/2015/05/27/use-200-line-code-to-implementation-a-simple-angular/" target="_blank" rel="external">http://purplebamboo.github.io/2015/05/27/use-200-line-code-to-implementation-a-simple-angular/</a></p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/03/02/js-data-two-way-binding/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          javascript实现数据双向绑定的三种方式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/02/easy-two-way-data-binding-in-javascript/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JavaScript 实现简单的双向数据绑定（译）</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="use-200-line-code-to-implementation-a-simple-angular" data-title="(翻译)使用200行代码创建属于你自己的精简版angular" data-url="http://zqianduan.com/2016/03/02/use-200-line-code-to-implementation-a-simple-angular/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"zqianduan"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 Jimco
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?ccac13d2d4e18f7ac82a7f1c9de98a90";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+  </div>
+</body>
+</html>

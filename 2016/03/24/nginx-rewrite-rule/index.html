@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Nginx Rewrite 规则 | 最前端</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Nginx Rewrite 是利用 nginx 提供的全局变量或自己设置的变量，结合正则表达式和标志位实现 url 重写以及重定向。rewrite 只能放在 server{}, location{}, if{} 中，并且只能对域名后边的除去传递的参数外的字符串起作用，例如 http://seanlook.com/a/we/index.php?id=1&amp;amp;u=str 只对 /a/we/inde">
+<meta name="keywords" content="emlog,typecho,wordpress">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nginx Rewrite 规则">
+<meta property="og:url" content="http://zqianduan.com/2016/03/24/nginx-rewrite-rule/index.html">
+<meta property="og:site_name" content="最前端">
+<meta property="og:description" content="Nginx Rewrite 是利用 nginx 提供的全局变量或自己设置的变量，结合正则表达式和标志位实现 url 重写以及重定向。rewrite 只能放在 server{}, location{}, if{} 中，并且只能对域名后边的除去传递的参数外的字符串起作用，例如 http://seanlook.com/a/we/index.php?id=1&amp;amp;u=str 只对 /a/we/inde">
+<meta property="og:updated_time" content="2017-04-27T07:01:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nginx Rewrite 规则">
+<meta name="twitter:description" content="Nginx Rewrite 是利用 nginx 提供的全局变量或自己设置的变量，结合正则表达式和标志位实现 url 重写以及重定向。rewrite 只能放在 server{}, location{}, if{} 中，并且只能对域名后边的除去传递的参数外的字符串起作用，例如 http://seanlook.com/a/we/index.php?id=1&amp;amp;u=str 只对 /a/we/inde">
+  
+    <link rel="alternative" href="/atom.xml" title="最前端" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay">
+	<div class="st-so-wrap">
+		<input type="text" id="local-search-input" class="st-default-search-input st-so" placeholder="回车搜索 直接有效">
+	</div>
+</div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Jimco</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/jimco" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/515789799" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/301/" style="font-size: 10px;">301</a> <a href="/tags/algorithm/" style="font-size: 11.67px;">algorithm</a> <a href="/tags/angular/" style="font-size: 15px;">angular</a> <a href="/tags/async/" style="font-size: 10px;">async</a> <a href="/tags/backbone/" style="font-size: 10px;">backbone</a> <a href="/tags/bfc/" style="font-size: 10px;">bfc</a> <a href="/tags/browser/" style="font-size: 10px;">browser</a> <a href="/tags/cache/" style="font-size: 10px;">cache</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/comet/" style="font-size: 10px;">comet</a> <a href="/tags/css/" style="font-size: 18.33px;">css</a> <a href="/tags/dom/" style="font-size: 10px;">dom</a> <a href="/tags/emlog/" style="font-size: 10px;">emlog</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/event/" style="font-size: 10px;">event</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/frontend/" style="font-size: 10px;">frontend</a> <a href="/tags/gzip/" style="font-size: 11.67px;">gzip</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/https/" style="font-size: 11.67px;">https</a> <a href="/tags/iframe/" style="font-size: 10px;">iframe</a> <a href="/tags/image/" style="font-size: 10px;">image</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/layout/" style="font-size: 13.33px;">layout</a> <a href="/tags/media/" style="font-size: 10px;">media</a> <a href="/tags/memory/" style="font-size: 10px;">memory</a> <a href="/tags/meta/" style="font-size: 10px;">meta</a> <a href="/tags/mvvm/" style="font-size: 13.33px;">mvvm</a> <a href="/tags/oo/" style="font-size: 10px;">oo</a> <a href="/tags/pattern/" style="font-size: 10px;">pattern</a> <a href="/tags/promise/" style="font-size: 13.33px;">promise</a> <a href="/tags/router/" style="font-size: 10px;">router</a> <a href="/tags/samba/" style="font-size: 10px;">samba</a> <a href="/tags/server/" style="font-size: 16.67px;">server</a> <a href="/tags/setInterval/" style="font-size: 10px;">setInterval</a> <a href="/tags/snippet/" style="font-size: 10px;">snippet</a> <a href="/tags/socket-io/" style="font-size: 10px;">socket.io</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/this/" style="font-size: 10px;">this</a> <a href="/tags/typecho/" style="font-size: 10px;">typecho</a> <a href="/tags/ubb/" style="font-size: 10px;">ubb</a> <a href="/tags/uglify/" style="font-size: 10px;">uglify</a> <a href="/tags/waterflow/" style="font-size: 10px;">waterflow</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/二进制/" style="font-size: 10px;">二进制</a> <a href="/tags/运算符/" style="font-size: 10px;">运算符</a> <a href="/tags/重定向/" style="font-size: 10px;">重定向</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+					
+						<section class="switch-part switch-part3">
+					
+					<div id="js-aboutme">狼厂攻城师，爱打羽毛球，欢迎骚扰！</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Jimco</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Jimco</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/jimco" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/515789799" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-nginx-rewrite-rule" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/24/nginx-rewrite-rule/" class="article-date">
+  	<time datetime="2016-03-24T11:43:20.000Z" itemprop="datePublished">2016-03-24</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Nginx Rewrite 规则
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Server/">Server</a>
+	</div>
+
+
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/emlog/">emlog</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/typecho/">typecho</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wordpress/">wordpress</a></li></ul>
+	</div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Nginx Rewrite 是利用 nginx 提供的全局变量或自己设置的变量，结合正则表达式和标志位实现 url 重写以及重定向。rewrite 只能放在 server{}, location{}, if{} 中，并且只能对域名后边的除去传递的参数外的字符串起作用，例如 <code>http://seanlook.com/a/we/index.php?id=1&amp;u=str</code> 只对 /a/we/index.php 重写。语法 <code>rewrite regex replacement [flag]</code>;</p>
+<p>如果相对域名或参数字符串起作用，可以使用全局变量匹配，也可以使用 proxy_pass 反向代理。</p>
+<p>表面看 rewrite 和 location 功能有点像，都能实现跳转，主要区别在于 rewrite 是在同一域名内更改获取资源的路径，而 location 是对一类路径做控制访问或反向代理，可以 proxy_pass 到其他机器。很多情况下 rewrite 也会写在 location 里，它们的执行顺序是：<br><a id="more"></a></p>
+<ol>
+<li>执行 server 块的 rewrite 指令</li>
+<li>执行 location 匹配</li>
+<li>执行选定的 location 中的 rewrite 指令</li>
+</ol>
+<p>如果其中某步 URI 被重写，则重新循环执行 1-3，直到找到真实存在的文件；循环超过 10 次，则返回 500 Internal Server Error 错误。</p>
+<h2 id="flag-标志位"><a href="#flag-标志位" class="headerlink" title="flag 标志位"></a>flag 标志位</h2><ul>
+<li><p><code>last</code>: 相当于 Apache的[L] 标记，表示完成 rewrite</p>
+</li>
+<li><p><code>break</code>: 停止执行当前虚拟主机的后续 rewrite 指令集</p>
+</li>
+<li><p><code>redirect</code>: 返回 302 临时重定向，地址栏会显示跳转后的地址</p>
+</li>
+<li><p><code>permanent</code>: 返回 301 永久重定向，地址栏会显示跳转后的地址</p>
+</li>
+</ul>
+<p>因为 301 和 302 不能简单的只返回状态码，还必须有重定向的 URL，这就是 return 指令无法返回 301, 302 的原因了。这里 last 和 break 区别有点难以理解：</p>
+<ol>
+<li>last 一般写在 server 和 if 中，而 break 一般使用在 location 中</li>
+<li>last 不终止重写后的 url 匹配，即新的 url 会再从 server 走一遍匹配流程，而 break 终止重写后的匹配</li>
+<li>break 和 last 都能组织继续执行后面的 rewrite 指令</li>
+</ol>
+<h2 id="if-指令与全局变量"><a href="#if-指令与全局变量" class="headerlink" title="if 指令与全局变量"></a>if 指令与全局变量</h2><p><strong>if判断指令</strong></p>
+<p>语法为 <code>if(condition) {...}</code>，对给定的条件 condition 进行判断。如果为真，大括号内的 rewrite 指令将被执行，if 条件(conditon)可以是如下任何内容：</p>
+<ul>
+<li><p>当表达式只是一个变量时，如果值为空或任何以 0 开头的字符串都会当做 false</p>
+</li>
+<li><p>直接比较变量和内容时，使用 <code>=</code> 或 <code>!=</code></p>
+</li>
+<li><p><code>~</code> 正则表达式匹配，<code>~*</code> 不区分大小写的匹配，<code>!~</code> 区分大小写的不匹配</p>
+</li>
+<li><p><code>-f</code> 和 <code>!-f</code> 用来判断是否存在文件</p>
+</li>
+<li><p><code>-d</code> 和 <code>!-d</code> 用来判断是否存在目录</p>
+</li>
+<li><p><code>-e</code> 和 <code>!-e</code> 用来判断是否存在文件或目录</p>
+</li>
+<li><p><code>-x</code> 和 <code>!-x</code> 用来判断文件是否可执行</p>
+</li>
+</ul>
+<p>栗子：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"># 如果UA包含"MSIE"，rewrite 请求到 /msid/ 目录下</div><div class="line">if ($http_user_agent ~ MSIE) &#123;</div><div class="line">    rewrite ^(.*)$ /msie/$1 break;</div><div class="line">&#125; </div><div class="line"></div><div class="line"># 如果 cookie 匹配正则，设置变量 $id 等于正则引用部分</div><div class="line">if ($http_cookie ~* "id=([^;]+)(?:;|$)") &#123;</div><div class="line">    set $id $1;</div><div class="line">&#125;</div><div class="line"></div><div class="line"># 如果提交方法为 POST，则返回状态 405（Method not allowed）。return 不能返回 301, 302</div><div class="line">if ($request_method = POST) &#123;</div><div class="line">    return 405;</div><div class="line">&#125;</div><div class="line"></div><div class="line"># 限速，$slow 可以通过 set 指令设置</div><div class="line">if ($slow) &#123;</div><div class="line">    limit_rate 10k;</div><div class="line">&#125; </div><div class="line"></div><div class="line"># 如果请求的文件名不存在，则反向代理到 localhost。这里的 break 也是停止 rewrite 检查</div><div class="line">if (!-f $request_filename)&#123;</div><div class="line">    break;</div><div class="line">    proxy_pass  http://127.0.0.1; </div><div class="line">&#125; </div><div class="line"></div><div class="line"># 如果 query string 中包含"post=140"，永久重定向到 example.com</div><div class="line">if ($args ~ post=140)&#123;</div><div class="line">    rewrite ^ http://example.com/ permanent;</div><div class="line">&#125;</div><div class="line"></div><div class="line"># 防盗链</div><div class="line">location ~* \.(gif|jpg|png|swf|flv)$ &#123;</div><div class="line">    valid_referers none blocked www.jefflei.com www.leizhenfang.com;</div><div class="line">    if ($invalid_referer) &#123;</div><div class="line">        return 404;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>全局变量</strong></p>
+<p>下面是可以用作if判断的全局变量：</p>
+<ul>
+<li><p><code>$args</code>: #这个变量等于请求行中的参数，同$query_string</p>
+</li>
+<li><p><code>$content_length</code>: 请求头中的Content-length字段。</p>
+</li>
+<li><p><code>$content_type</code>: 请求头中的Content-Type字段。</p>
+</li>
+<li><p><code>$document_root</code>: 当前请求在root指令中指定的值。</p>
+</li>
+<li><p><code>$host</code>: 请求主机头字段，否则为服务器名称。</p>
+</li>
+<li><p><code>$http_user_agent</code>: 客户端agent信息</p>
+</li>
+<li><p><code>$http_cookie</code>: 客户端cookie信息</p>
+</li>
+<li><p><code>$limit_rate</code>: 这个变量可以限制连接速率。</p>
+</li>
+<li><p><code>$request_method</code>: 客户端请求的动作，通常为GET或POST。</p>
+</li>
+<li><p><code>$remote_addr</code>: 客户端的IP地址。</p>
+</li>
+<li><p><code>$remote_port</code>: 客户端的端口。</p>
+</li>
+<li><p><code>$remote_user</code>: 已经经过Auth Basic Module验证的用户名。</p>
+</li>
+<li><p><code>$request_filename</code>: 当前请求的文件路径，由root或alias指令与URI请求生成。</p>
+</li>
+<li><p><code>$scheme</code>: HTTP方法（如http，https）。</p>
+</li>
+<li><p><code>$server_protocol</code>: 请求使用的协议，通常是HTTP/1.0或HTTP/1.1。</p>
+</li>
+<li><p><code>$server_addr</code>: 服务器地址，在完成一次系统调用后可以确定这个值。</p>
+</li>
+<li><p><code>$server_name</code>: 服务器名称。</p>
+</li>
+<li><p><code>$server_port</code>: 请求到达服务器的端口号。</p>
+</li>
+<li><p><code>$request_uri</code>: 包含请求参数的原始URI，不包含主机名，如：”/foo/bar.php?arg=baz”。</p>
+</li>
+<li><p><code>$uri</code>: 不带请求参数的当前URI，$uri不包含主机名，如”/foo/bar.html”。</p>
+</li>
+<li><p><code>$document_uri</code>: 与$uri相同。</p>
+</li>
+</ul>
+<p>栗子：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># http://localhost:88/test1/test2/test.php</div><div class="line"></div><div class="line">$host = localhost</div><div class="line">$server_port = 88</div><div class="line">$request_uri = http://localhost:88/test1/test2/test.php</div><div class="line">$document_uri = /test1/test2/test.php</div><div class="line">$document_root = /var/www/html</div><div class="line">$request_filename = /var/www/html/test1/test2/test.php</div></pre></td></tr></table></figure>
+<h2 id="常用正则"><a href="#常用正则" class="headerlink" title="常用正则"></a>常用正则</h2><ul>
+<li><p><code>.</code>: 匹配除换行符以外的任意字符</p>
+</li>
+<li><p><code>?</code>: 重复0次或1次</p>
+</li>
+<li><p><code>+</code>: 重复1次或更多次</p>
+</li>
+<li><p><code>*</code>: 重复0次或更多次</p>
+</li>
+<li><p><code>\d</code>: 匹配数字</p>
+</li>
+<li><p><code>^</code>: 匹配字符串的开始</p>
+</li>
+<li><p><code>$</code>: 匹配字符串的介绍</p>
+</li>
+<li><p><code>{n}</code>: 重复n次</p>
+</li>
+<li><p><code>{n,}</code>: 重复n次或更多次</p>
+</li>
+<li><p><code>[c]</code>: 匹配单个字符c</p>
+</li>
+<li><p><code>[a-z]</code>: 匹配a-z小写字母的任意一个</p>
+</li>
+</ul>
+<p>小括号 <code>()</code> 之间匹配的内容，可以在后面通过 <code>$1</code> 来引用，<code>$2</code> 表示的是前面第二个 <code>()</code> 里的内容。正则里面容易让人困惑的是 <code>\</code> 转义特殊字符。</p>
+<h2 id="rewrite-实例"><a href="#rewrite-实例" class="headerlink" title="rewrite 实例"></a>rewrite 实例</h2><ul>
+<li><p>WordPress 伪静态</p>
+  <figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">if</span> (-f <span class="variable">$request_filename</span>/index.html) &#123;</div><div class="line">    <span class="attribute">rewrite</span> (.*) <span class="variable">$1</span>/index.html <span class="literal">break</span>;</div><div class="line">&#125;</div><div class="line"><span class="attribute">if</span> (-f <span class="variable">$request_filename</span>/index.php) &#123;</div><div class="line">    <span class="attribute">rewrite</span> (.*) <span class="variable">$1</span>/index.php;</div><div class="line">&#125;</div><div class="line"><span class="attribute">if</span> (!-f <span class="variable">$request_filename</span>) &#123;</div><div class="line">    <span class="attribute">rewrite</span> (.*) /index.php;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>PHPCMS 伪静态</p>
+  <figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">rewrite</span><span class="regexp"> ^/caipu-([0-9]+)-([0-9]+)-([0-9]+).html</span> /index.php?m=content&amp;c=index&amp;a=show&amp;catid=<span class="variable">$1</span>&amp;id=<span class="variable">$2</span>&amp;page=<span class="variable">$3</span> <span class="literal">last</span>;</div><div class="line"><span class="attribute">rewrite</span><span class="regexp"> ^/content-([0-9]+)-([0-9]+)-([0-9]+).html</span> /index.php?m=content&amp;c=index&amp;a=show&amp;catid=<span class="variable">$1</span>&amp;id=<span class="variable">$2</span>&amp;page=<span class="variable">$3</span> <span class="literal">last</span>;</div><div class="line"><span class="attribute">rewrite</span><span class="regexp"> ^/list-([0-9]+)-([0-9]+).html</span> /index.php?m=content&amp;c=index&amp;a=lists&amp;catid=<span class="variable">$1</span>&amp;page=<span class="variable">$2</span> <span class="literal">last</span>;</div><div class="line"><span class="attribute">rewrite</span><span class="regexp"> ^/tag-([^\.]*)-([0-9]+)-([0-9]+).html</span> /index.php?m=content&amp;c=tag&amp;catid=<span class="variable">$2</span>&amp;tag=<span class="variable">$1</span>&amp;page=<span class="variable">$3</span> <span class="literal">last</span>;</div><div class="line"><span class="attribute">rewrite</span><span class="regexp"> ^/comment-([0-9]+)-([0-9]+)-([0-9]+).html</span> /index.php?m=comment&amp;c=index&amp;a=init&amp;commentid=content_<span class="variable">$1</span>-<span class="variable">$2</span>-<span class="variable">$3</span> <span class="literal">last</span>;</div><div class="line"><span class="attribute">rewrite</span><span class="regexp"> ^/([^\.]*).html</span> /index.php?m=member&amp;c=index&amp;a=<span class="variable">$1</span> <span class="literal">last</span>;</div></pre></td></tr></table></figure>
+</li>
+<li><p>DEDECMS 伪静态</p>
+  <figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">rewrite</span> <span class="string">"^/index.html$"</span> /index.php <span class="literal">last</span>;</div><div class="line"><span class="attribute">rewrite</span> <span class="string">"^/list-([0-9]+)\.html$"</span> /plus/list.php?tid=<span class="variable">$1</span> <span class="literal">last</span>;</div><div class="line"><span class="attribute">rewrite</span> <span class="string">"^/list-([0-9]+)-([0-9]+)-([0-9]+)\.html$"</span> /plus/list.php?tid=<span class="variable">$1</span>&amp;totalresult=<span class="variable">$2</span>&amp;PageNo=<span class="variable">$3</span> <span class="literal">last</span>;</div><div class="line"><span class="attribute">rewrite</span> <span class="string">"^/view-([0-9]+)-1\.html$"</span> /plus/view.php?arcID=<span class="variable">$1</span> <span class="literal">last</span>;</div><div class="line"><span class="attribute">rewrite</span> <span class="string">"^/view-([0-9]+)-([0-9]+)\.html$"</span> /plus/view.php?aid=<span class="variable">$1</span>&amp;pageno=<span class="variable">$2</span> <span class="literal">last</span>;</div><div class="line"><span class="attribute">rewrite</span> <span class="string">"^/tags.html$"</span> /tags.php <span class="literal">last</span>;</div><div class="line"><span class="attribute">rewrite</span> <span class="string">"^/tag-([0-9]+)-([0-9]+)\.html$"</span> /tags.php?/<span class="variable">$1</span>/<span class="variable">$2</span>/ <span class="literal">last</span>;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Discuz7 伪静态</p>
+  <figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">rewrite</span><span class="regexp"> ^/archiver/((fid|tid)-[\w\-]+\.html)$</span> /archiver/index.php?<span class="variable">$1</span> <span class="literal">last</span>;</div><div class="line"><span class="attribute">rewrite</span><span class="regexp"> ^/forum-([0-9]+)-([0-9]+)\.html$</span> /forumdisplay.php?fid=<span class="variable">$1</span>&amp;page=<span class="variable">$2</span> <span class="literal">last</span>;</div><div class="line"><span class="attribute">rewrite</span><span class="regexp"> ^/thread-([0-9]+)-([0-9]+)-([0-9]+)\.html$</span> /viewthread.php?tid=<span class="variable">$1</span>&amp;extra=page\%3D<span class="variable">$3</span>&amp;page=<span class="variable">$2</span> <span class="literal">last</span>;</div><div class="line"><span class="attribute">rewrite</span><span class="regexp"> ^/space-(username|uid)-(.+)\.html$</span> /space.php?<span class="variable">$1</span>=<span class="variable">$2</span> <span class="literal">last</span>;</div><div class="line"><span class="attribute">rewrite</span><span class="regexp"> ^/tag-(.+)\.html$</span> /tag.php?name=<span class="variable">$1</span> <span class="literal">last</span>;</div></pre></td></tr></table></figure>
+</li>
+<li><p>DiscuzX 伪静态</p>
+  <figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">rewrite</span><span class="regexp"> ^([^\.]*)/topic-(.+)\.html$</span> <span class="variable">$1</span>/portal.php?mod=topic&amp;topic=<span class="variable">$2</span> <span class="literal">last</span>;</div><div class="line"><span class="attribute">rewrite</span><span class="regexp"> ^([^\.]*)/article-([0-9]+)-([0-9]+)\.html$</span> <span class="variable">$1</span>/portal.php?mod=view&amp;aid=<span class="variable">$2</span>&amp;page=<span class="variable">$3</span> <span class="literal">last</span>;</div><div class="line"><span class="attribute">rewrite</span><span class="regexp"> ^([^\.]*)/forum-(\w+)-([0-9]+)\.html$</span> <span class="variable">$1</span>/forum.php?mod=forumdisplay&amp;fid=<span class="variable">$2</span>&amp;page=<span class="variable">$3</span> <span class="literal">last</span>;</div><div class="line"><span class="attribute">rewrite</span><span class="regexp"> ^([^\.]*)/thread-([0-9]+)-([0-9]+)-([0-9]+)\.html$</span> <span class="variable">$1</span>/forum.php?mod=viewthread&amp;tid=<span class="variable">$2</span>&amp;extra=page%3D<span class="variable">$4</span>&amp;page=<span class="variable">$3</span> <span class="literal">last</span>;</div><div class="line"><span class="attribute">rewrite</span><span class="regexp"> ^([^\.]*)/group-([0-9]+)-([0-9]+)\.html$</span> <span class="variable">$1</span>/forum.php?mod=group&amp;fid=<span class="variable">$2</span>&amp;page=<span class="variable">$3</span> <span class="literal">last</span>;</div><div class="line"><span class="attribute">rewrite</span><span class="regexp"> ^([^\.]*)/space-(username|uid)-(.+)\.html$</span> <span class="variable">$1</span>/home.php?mod=space&amp;<span class="variable">$2</span>=<span class="variable">$3</span> <span class="literal">last</span>;</div><div class="line"><span class="attribute">rewrite</span><span class="regexp"> ^([^\.]*)/([a-z]+)-(.+)\.html$</span> <span class="variable">$1</span>/<span class="variable">$2</span>.php?rewrite=<span class="variable">$3</span> <span class="literal">last</span>;</div><div class="line"><span class="attribute">if</span> (!-e <span class="variable">$request_filename</span>) &#123;</div><div class="line">    <span class="attribute">return</span> <span class="number">404</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>PHPWind 伪静态</p>
+  <figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">rewrite</span><span class="regexp"> ^(.*)-htm-(.*)$</span> <span class="variable">$1</span>.php?<span class="variable">$2</span> <span class="literal">last</span>;</div><div class="line"><span class="attribute">rewrite</span><span class="regexp"> ^(.*)/simple/([a-z0-9\_]+\.html)$</span> <span class="variable">$1</span>/simple/index.php?<span class="variable">$2</span> <span class="literal">last</span>;</div></pre></td></tr></table></figure>
+</li>
+<li><p>SHOPEX 伪静态</p>
+  <figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">if</span> (!-e <span class="variable">$request_filename</span>) &#123;</div><div class="line">    <span class="attribute">rewrite</span><span class="regexp"> ^/(.+\.(html|xml|json|htm|php|jsp|asp|shtml))$</span> /index.php?<span class="variable">$1</span> <span class="literal">last</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Typecho 伪静态</p>
+  <figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">if</span> (-f <span class="variable">$request_filename</span>/index.html) &#123;</div><div class="line">    <span class="attribute">rewrite</span> (.*) <span class="variable">$1</span>/index.html <span class="literal">break</span>;</div><div class="line">&#125;</div><div class="line"><span class="attribute">if</span> (-f <span class="variable">$request_filename</span>/index.php) &#123;</div><div class="line">    <span class="attribute">rewrite</span> (.*) <span class="variable">$1</span>/index.php;</div><div class="line">&#125;</div><div class="line"><span class="attribute">if</span> (!-f <span class="variable">$request_filename</span>) &#123;</div><div class="line">    <span class="attribute">rewrite</span> (.*) /index.php;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Emlog 伪静态</p>
+  <figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">if</span> (!-f <span class="variable">$request_filename</span>) &#123;</div><div class="line">    <span class="attribute">set</span> <span class="variable">$rule_0</span> <span class="number">1</span><span class="variable">$rule_0</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="attribute">if</span> (!-d <span class="variable">$request_filename</span>) &#123;</div><div class="line">  <span class="attribute">set</span> <span class="variable">$rule_0</span> <span class="number">2</span><span class="variable">$rule_0</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="attribute">if</span> (<span class="variable">$rule_0</span> = <span class="string">"21"</span>) &#123;</div><div class="line">    <span class="attribute">rewrite</span><span class="regexp"> ^/(post|record|sort|author|page)-([0-9]+)\.html(.*)$</span> /index.php?<span class="variable">$1</span>=<span class="variable">$2</span><span class="variable">$3</span>;</div><div class="line">    <span class="attribute">rewrite</span><span class="regexp"> ^/(post|record|sort|author|page)/([0-9]+)(.*)$</span> /index.php?<span class="variable">$1</span>=<span class="variable">$2</span><span class="variable">$3</span>;</div><div class="line">    <span class="attribute">rewrite</span><span class="regexp"> ^/tag-(.+)\.html$</span> /index.php?tag=<span class="variable">$1</span>;</div><div class="line">    <span class="attribute">rewrite</span><span class="regexp"> ^/tag/(.+)$</span> /index.php?tag=<span class="variable">$1</span>;</div><div class="line">    <span class="attribute">rewrite</span><span class="regexp"> ^/t/page/([0-9]+)$</span> /t/index.php?page=<span class="variable">$1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/03/23/mvc-deformation/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          前端 MVC 变形记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/30/js-snippet-code/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Javascript 代码片段笔记</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="nginx-rewrite-rule" data-title="Nginx Rewrite 规则" data-url="http://zqianduan.com/2016/03/24/nginx-rewrite-rule/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"zqianduan"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 Jimco
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?ccac13d2d4e18f7ac82a7f1c9de98a90";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+  </div>
+</body>
+</html>

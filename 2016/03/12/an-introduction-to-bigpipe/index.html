@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>BigPipe 学习研究 | 最前端</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1. 技术背景：FaceBook 页面加载技术试想这样一个场景，一个经常访问的网站，每次打开它的页面都要要花费 6 秒；同时另外一个网站提供了相似的服务，但响应时间只需 3 秒，那么你会如何选择呢？数据表明，如果用户打开一个网站，等待 3~4 秒还没有任何反应，他们会变得急躁，焦虑，抱怨，甚至关闭网页并且不再访问，这是非常糟糕的情况。所以，网页加载的速度十分重要,尤其对于拥有遍布全球的 5 亿用户">
+<meta name="keywords" content="server">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BigPipe 学习研究">
+<meta property="og:url" content="http://zqianduan.com/2016/03/12/an-introduction-to-bigpipe/index.html">
+<meta property="og:site_name" content="最前端">
+<meta property="og:description" content="1. 技术背景：FaceBook 页面加载技术试想这样一个场景，一个经常访问的网站，每次打开它的页面都要要花费 6 秒；同时另外一个网站提供了相似的服务，但响应时间只需 3 秒，那么你会如何选择呢？数据表明，如果用户打开一个网站，等待 3~4 秒还没有任何反应，他们会变得急躁，焦虑，抱怨，甚至关闭网页并且不再访问，这是非常糟糕的情况。所以，网页加载的速度十分重要,尤其对于拥有遍布全球的 5 亿用户">
+<meta property="og:image" content="http://www.searchtb.com/wp-content/uploads/2011/03/12.jpg">
+<meta property="og:image" content="http://www.searchtb.com/wp-content/uploads/2011/03/800px-Bigpipe40.jpg">
+<meta property="og:image" content="http://www.searchtb.com/wp-content/uploads/2011/03/800px-Bigpipe51.jpg">
+<meta property="og:image" content="http://www.searchtb.com/wp-content/uploads/2011/03/22.jpg">
+<meta property="og:image" content="http://www.searchtb.com/wp-content/uploads/2011/03/Bigpipe60.jpg">
+<meta property="og:image" content="http://www.searchtb.com/wp-content/uploads/2011/03/BigPipe_11.jpg">
+<meta property="og:updated_time" content="2017-04-27T07:01:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BigPipe 学习研究">
+<meta name="twitter:description" content="1. 技术背景：FaceBook 页面加载技术试想这样一个场景，一个经常访问的网站，每次打开它的页面都要要花费 6 秒；同时另外一个网站提供了相似的服务，但响应时间只需 3 秒，那么你会如何选择呢？数据表明，如果用户打开一个网站，等待 3~4 秒还没有任何反应，他们会变得急躁，焦虑，抱怨，甚至关闭网页并且不再访问，这是非常糟糕的情况。所以，网页加载的速度十分重要,尤其对于拥有遍布全球的 5 亿用户">
+<meta name="twitter:image" content="http://www.searchtb.com/wp-content/uploads/2011/03/12.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="最前端" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay">
+	<div class="st-so-wrap">
+		<input type="text" id="local-search-input" class="st-default-search-input st-so" placeholder="回车搜索 直接有效">
+	</div>
+</div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Jimco</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/jimco" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/515789799" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/301/" style="font-size: 10px;">301</a> <a href="/tags/algorithm/" style="font-size: 11.67px;">algorithm</a> <a href="/tags/angular/" style="font-size: 15px;">angular</a> <a href="/tags/async/" style="font-size: 10px;">async</a> <a href="/tags/backbone/" style="font-size: 10px;">backbone</a> <a href="/tags/bfc/" style="font-size: 10px;">bfc</a> <a href="/tags/browser/" style="font-size: 10px;">browser</a> <a href="/tags/cache/" style="font-size: 10px;">cache</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/comet/" style="font-size: 10px;">comet</a> <a href="/tags/css/" style="font-size: 18.33px;">css</a> <a href="/tags/dom/" style="font-size: 10px;">dom</a> <a href="/tags/emlog/" style="font-size: 10px;">emlog</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/event/" style="font-size: 10px;">event</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/frontend/" style="font-size: 10px;">frontend</a> <a href="/tags/gzip/" style="font-size: 11.67px;">gzip</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/https/" style="font-size: 11.67px;">https</a> <a href="/tags/iframe/" style="font-size: 10px;">iframe</a> <a href="/tags/image/" style="font-size: 10px;">image</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/layout/" style="font-size: 13.33px;">layout</a> <a href="/tags/media/" style="font-size: 10px;">media</a> <a href="/tags/memory/" style="font-size: 10px;">memory</a> <a href="/tags/meta/" style="font-size: 10px;">meta</a> <a href="/tags/mvvm/" style="font-size: 13.33px;">mvvm</a> <a href="/tags/oo/" style="font-size: 10px;">oo</a> <a href="/tags/pattern/" style="font-size: 10px;">pattern</a> <a href="/tags/promise/" style="font-size: 13.33px;">promise</a> <a href="/tags/router/" style="font-size: 10px;">router</a> <a href="/tags/samba/" style="font-size: 10px;">samba</a> <a href="/tags/server/" style="font-size: 16.67px;">server</a> <a href="/tags/setInterval/" style="font-size: 10px;">setInterval</a> <a href="/tags/snippet/" style="font-size: 10px;">snippet</a> <a href="/tags/socket-io/" style="font-size: 10px;">socket.io</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/this/" style="font-size: 10px;">this</a> <a href="/tags/typecho/" style="font-size: 10px;">typecho</a> <a href="/tags/ubb/" style="font-size: 10px;">ubb</a> <a href="/tags/uglify/" style="font-size: 10px;">uglify</a> <a href="/tags/waterflow/" style="font-size: 10px;">waterflow</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/二进制/" style="font-size: 10px;">二进制</a> <a href="/tags/运算符/" style="font-size: 10px;">运算符</a> <a href="/tags/重定向/" style="font-size: 10px;">重定向</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+					
+						<section class="switch-part switch-part3">
+					
+					<div id="js-aboutme">狼厂攻城师，爱打羽毛球，欢迎骚扰！</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Jimco</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Jimco</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/jimco" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/515789799" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-an-introduction-to-bigpipe" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/12/an-introduction-to-bigpipe/" class="article-date">
+  	<time datetime="2016-03-12T05:02:10.000Z" itemprop="datePublished">2016-03-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      BigPipe 学习研究
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Javascript/">Javascript</a>
+	</div>
+
+
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/server/">server</a></li></ul>
+	</div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-技术背景：FaceBook-页面加载技术"><a href="#1-技术背景：FaceBook-页面加载技术" class="headerlink" title="1. 技术背景：FaceBook 页面加载技术"></a>1. 技术背景：FaceBook 页面加载技术</h2><p>试想这样一个场景，一个经常访问的网站，每次打开它的页面都要要花费 6 秒；同时另外一个网站提供了相似的服务，但响应时间只需 3 秒，那么你会如何选择呢？数据表明，如果用户打开一个网站，等待 3~4 秒还没有任何反应，他们会变得急躁，焦虑，抱怨，甚至关闭网页并且不再访问，这是非常糟糕的情况。所以，网页加载的速度十分重要,尤其对于拥有遍布全球的 5 亿用户的 Facebook(全球最大的社交服务网站)这样的大型网站，有着大量并发请求、海量数据等客观情况，速度就成了必须攻克的难题之一。<br><a id="more"></a></p>
+<p>2010 年初的时候，Facebook 的前端性能研究小组开始了他们的优化项目，经过了六个月的努力，成功的将个人空间主页面加载耗时由原来的 5 秒减少为现在的 2.5 秒。这是一个非常了不起的成就，也给用户来带来了很好的体验。在优化项目中，工程师提出了一种新的页面加载技术，称之为 Bigpipe。目前淘宝和 Facebook 面临的问题非常相似：海量数据和页面过大，如果可以在详情页、列表页中使用 bigpipe，或者在 webx 中集成 bigpipe，将会带来明显的页面加载速度提升。</p>
+<h2 id="2-相关介绍"><a href="#2-相关介绍" class="headerlink" title="2. 相关介绍"></a>2. 相关介绍</h2><ul>
+<li><p>2.1 网站前端优化的重要性</p>
+<p>  《高性能网站建设指南》一书中指出，只有10%~20%的最终用户响应时间是花费在从Web 服务器获取HTML 文档并传送到浏览器中的。如果希望能够有效地减少页面的响应时间，就必须关注剩余的80%~90%的最终用户体验。做个比较，如果对后台业务逻辑进行优化，效率提高了50%，但最终的页面响应时间只减少了5%~10%，因为它所占的比重较少。如果对前端进行性能优化，效率提升50%，则会使最终页面响应时间减少40%~45%。这是多么可观的数字！另外，前端的性能优化一般比业务逻辑的优化更加容易。所以，前端优化投入小，见效快，性价比极高，需要投入更多的关注。</p>
+</li>
+<li><p>2.2 BigPipe与AJAX</p>
+<p>  Web2.0 的重要特征是网页显示大量动态内容，即 web2.0 注重网页与用户的交互。其核心技术是 AJAX，如今所有主流网站都或多或少使用 AJAX。与 AJAX 类似，BigPipe 实现了分块儿的概念，使页面能够分步输出，即每次输出一部分网页内容。接下来讨论 BigPipe 与 AJAX 的区别。</p>
+<p>  简单的说，BigPipe 比AJAX 有三个好处：</p>
+<ul>
+<li><p>AJAX 的核心是XMLHttpRequest，客户端需要异步的向服务器端发送请求，然后将传送过来的内容动态添加到网页上。如此实现存在一些缺陷，即发送往返请求需要耗费时间，而BigPipe 技术使浏览器并不需要发送XMLHttpRequest 请求，这样就节省时间损耗。</p>
+</li>
+<li><p>使用AJAX时，浏览器和服务器的工作顺序执行。服务器必须等待浏览器的请求，这样就会造成服务器的空闲。浏览器工作时，服务器在等待，而服务器工作时，浏览器在等待，这也是一种性能的浪费。使用BigPipe，浏览器和服务器可以并行同时工作，服务器不需要等待浏览器的请求，而是一直处于加载页面内容的工作阶段，这就会使效率得到更大的提高。</p>
+</li>
+<li><p>减少浏览器发送到请求。对一个5亿用户的网站来说，减少了使用AJAX额外带来的请求，会减少服务器的负载，同样会带来很大的性能提升。</p>
+<p>基于以上三点，Facebook 在进行页面优化时采用了BigPipe 技术。目前淘宝主搜索结果页中，需要加载类目，相关搜索，宝贝列表，广告等内容，前端这里使用php 的curl 的批处理来并发的访问引擎获取相应的数据，并进行分步输出。这种模式还是与bigpipe有些不同，这点后面会讲到。一般来讲，在页面比较大，而且比较复杂，样式表和脚本比较多的情况下，使用BigPipe 来优化输出页面是比较合适的。另外非常重要的一点，BigPipe 并不改变浏览器的结构与网络协议，仅使用JS就可以实现，用户不需要做任何的设置，就会看到明显的访问时间缩短。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-目前的问题"><a href="#3-目前的问题" class="headerlink" title="3. 目前的问题"></a>3. 目前的问题</h2><p>接下来讨论现有的瓶颈。面对网页越来越大的情况，尤其是大量的css 文件和js 文件需要加载，传统的页面加载模型很难满足这样的需求，直接结果就是页面加载速度变慢，这绝不是我们希望看到的。目前的技术实现中，用户提出页面访问请求后，页面的完整加载流程如下：</p>
+<ol>
+<li><p>用户访问网页，浏览器发送一个HTTP 请求到网络服务器</p>
+</li>
+<li><p>服务器解析这个请求，然后从存储层去数据，接着生成一个html 文件内容，并在一个HTTP Response 中把它传送给客户端</p>
+</li>
+<li><p>HTTP response 在网络中传输</p>
+</li>
+<li><p>浏览器解析这个Response ，创建一个DOM 树，然后下载所需的CSS 和JS文件</p>
+</li>
+<li><p>下载完CSS 文件后，浏览器解析他们并且应用在相应的内容上</p>
+</li>
+<li><p>下载完JS 后，浏览器解析和执行他们</p>
+</li>
+</ol>
+<p><img src="http://www.searchtb.com/wp-content/uploads/2011/03/12.jpg" alt="图1"></p>
+<p>完整流程见图1，图中左侧表示服务器，右侧表示浏览器。浏览器先发送请求，然后服务器进行查找数据，生成页面，返回html 代码，最后浏览器进行渲染页面。这种模式有非常明显的缺陷：流程中的操作有着严格的顺序，如果前面的一个操作没有执行结束，后面的操作就不能执行，即操作之间是不能重叠。这样就造成性能的瓶颈：服务器生成一个页面的内容时，浏览器是空闲的，显示空白内容；而当浏览器加载渲染页面内容时，服务器又是空闲的，时间与性能的浪费由此产生。</p>
+<p><img src="http://www.searchtb.com/wp-content/uploads/2011/03/800px-Bigpipe40.jpg" alt="图2"></p>
+<p>考虑图2 中现有的服务模型，横轴表示花费的时间。黄色表示在服务器的生成页面内容的时间，白色表示网络传输时间，蓝色表示在浏览器渲染页面的时间。可以看出，现有的模式造成很大的时间浪费。 考虑图3 中的情况，图中绿色表示服务器从春储层取查数据花费的时间，在海量数据下，当执行一条很费时的查询语句时（如下图右侧），服务器就就阻塞在那 里没有其他操作，而浏览器更是得不到任何反馈。这会造成非常不友好的用户体验，用户不知道什么原因使他们等待很长时间。</p>
+<p><img src="http://www.searchtb.com/wp-content/uploads/2011/03/800px-Bigpipe51.jpg" alt="图3"></p>
+<h2 id="4-BigPipe思想与原理"><a href="#4-BigPipe思想与原理" class="headerlink" title="4. BigPipe思想与原理"></a>4. BigPipe思想与原理</h2><p>面对上述问题，我们看下 BigPipe 的解决办法。BigPipe 提出分块的概念，即根据页面内容位置的不同，将整个页面分成不同的块儿 – 称为 pagelet。该技术的设计者 Changhao Jiang 是研究电子电路的博士，可能从微机上得到了启发，将众多 pagelet 加载的不同阶段像流水线一样在浏览器和服务器上执行，这样就做到了浏览器和服务器的并行化，从而达到重叠服务器端运行时间和浏览器端运行时间的目的。使用 BigPipe 不仅可以节省时间，使加载的时间缩短，而且可以同过 pagelet 的分步输出，使一部分的页面内容更快的输出，从而获得更好的用户体验。BigPipe 中，用户提出页面访问请求后，页面的完整加载流程如下:</p>
+<ol>
+<li><p>Request parsing：服务器解析和检查http request</p>
+</li>
+<li><p>Datafetching：服务器从存储层获取数据</p>
+</li>
+<li><p>Markup generation：服务器生成html 标记</p>
+</li>
+<li><p>Network transport ： 网络传输response</p>
+</li>
+<li><p>CSS downloading：浏览器下载CSS</p>
+</li>
+<li><p>DOM tree construction and CSS styling:浏览器生成DOM 树，并且使用CSS</p>
+</li>
+<li><p>JavaScript downloading: 浏览器下载页面引用的JS 文件</p>
+</li>
+<li><p>JavaScript execution: 浏览器执行页面JS代码</p>
+</li>
+</ol>
+<p>这 8 个流程几乎与上文中提到现有的模式没有区别，但这整个流程只是一个 pagelet 的完整流程，而多个 pagelet 的不同操作阶段就可以像流水线一样进行执行了。</p>
+<p><img src="http://www.searchtb.com/wp-content/uploads/2011/03/22.jpg" alt="图4"></p>
+<p>图4 中，可以看出 BigPipe 对原有的模式进行的改进。浏览器发送访问请求，然后浏览器分步返回不同的 pagelet 的内容，具体实现将在后面介绍.考虑图5中的改进，BigPipe 打破了原有的顺序执行，将页面分成不同的 pagelet ，如此一来，所有的 pagelet 的执行时间累加起来还是原有的时间。但是， 通过叠加不同 pagelet 的不同阶段的执行时间，使总的运行时间大大减少，这就是 Bigpipe 减少页面加载时间的秘密。</p>
+<p><img src="http://www.searchtb.com/wp-content/uploads/2011/03/Bigpipe60.jpg" alt="图5"></p>
+<p>FaceBook的页面被分成了很多不同的pagelets，如图：</p>
+<p><img src="http://www.searchtb.com/wp-content/uploads/2011/03/BigPipe_11.jpg" alt="图6"></p>
+<h2 id="5-BigPipe实现原理"><a href="#5-BigPipe实现原理" class="headerlink" title="5. BigPipe实现原理"></a>5. BigPipe实现原理</h2><p>了解了 BigPipe 的核心思想后，我们讨论它的实现原理。当浏览器访问服务器时，服务器接受请求并对其进行检查。如果请求有效，服务器端不做任何的查询，而是立刻返回一个 http request 给浏览器，内容是一段 html 代码，包括 html <head> 标签和 </head><body> 标签的一部分。<head> 标签包括 BigPipe 的 js 文件和 css 文件，这个 js 文件用来解析后面接收的 http response，因为后面传输的内容都为 js 脚本。未封闭的 </head><body> 标签中，是显示页面的逻辑结构和 pagelet 的占位符的模板，例如：</body></body></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"hotnews"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"societynews"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"financialnews"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"ITnews"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"sportsnews"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>上述模板使用 css-div 描述了页面的结构，不同的 div 标签对应不同的 pagelet，id 对应了 pagelet 的名称。将这个 response 返回给浏览器后，服务器开始对每个 pagelet 的内容进行查询，加载，生成。当一个 pagelet 的内容生成好，立刻调用 flush() 函数，将其返回给客户端，传输的数据是以 json 格式的，包括这个 pagelet 需要的 CSS 和 JS，以及 html 内容和一些元数据。例如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">    big_pipe.onPageletArrive(&#123;</div><div class="line">        <span class="attr">id</span>: <span class="string">'pagelet_composer'</span>,</div><div class="line">        <span class="attr">content</span>: <span class="string">'&lt;html&gt;'</span>,</div><div class="line">        <span class="attr">css</span>: <span class="string">'[..]'</span>,</div><div class="line">        <span class="attr">js</span>: <span class="string">'[..]'</span>,</div><div class="line">        <span class="comment">// ......</span></div><div class="line">    &#125;);</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>其中 “content” 表示这个 pagelet 的内容，是 html 源码，特殊字符如”/“需要进行转义；”id” 表示 content 要显示的位置，即为对应的 pagelet 的 id 标签；”css” 表示需要下载的 CSS 资源的路径；”js” 表示需要下载的 JS 脚本的路径。为了避免文件路径过长，所以在前面需要对 css 和 js 文件的路径进行转换，转换后为 5 位字符串：不同的 pagelet 可能会加载同一个 css 或 js 文件，所以要避免重复下载。</p>
+<p>虽然每个 pagelet 都有要加载的 js 文件，但是所有的 js 文件都是在最后加载，这样有利于加快页面加载速度。客户端，当通过调用 <code>onPageletArrive(json)</code> 函数，第一次影响传输的 JS 脚本中的函数解析了传入的 json 数据，接着下载需要的 CSS，然后把 html 内容显示到响应的 DIV 标签位置上。多个 pagelets 的 CSS 文件可以同时下载，CSS 下载完成的 pagelet 先显示。</p>
+<p>在 BigPipe 中，js 被给予了比 CSS 和 content 更低的优先级。这样， 只有当所有的 pagelets 都显示了，BigPipe 才开始去下载 JS 文件。所有的 JS 文件都下载完成后，Pagelets 的 JS 初始化代码开始执行，按照下载完成时间的先后顺序。在这个高度并行的系统中，几个的 pagelet 所要执行的不同的阶段可以同时执行。例如，浏览器可以给两个 pagelets 下载 CSS 资源，同时浏览器可以渲染另外一个 pagelet 的内容，同时服务器仍然在为另一个 pagelet 生成 html 源码。从用户的角度看来，页面时逐步呈现的。初始的页面显示的更快，可以有效减短用户感觉到的延迟。</p>
+<h2 id="6-BigPipe实现问题讨论"><a href="#6-BigPipe实现问题讨论" class="headerlink" title="6. BigPipe实现问题讨论"></a>6. BigPipe实现问题讨论</h2><ul>
+<li><p>6.1 服务器端的并行化</p>
+<p>  理想情况下，服务器端的实现是并行处理不同的 pagelet 的内容，这样可以提升性能。服务器并发处理多个 pagelet 的内容时，一个 pagelet 内容生成好了，立刻将其 flush 给浏览器。但是 PHP 是不支持线程，所以服务器无法利用多线程的概念去并发的加载多个 pagelet 的内容。对于小型网站来说，使用串行的加载 pagelet 的内容就已经可以达到优化的要求了。对于大型网站，为了达到更快的速度，服务器端可以选择并发的独立不同的 pagelet 的内容，具体实现有以下几种方式：</p>
+<ul>
+<li><p>java 多线程。后台逻辑使用 java，可以使用 java 的多线程机制去同时加载不同的 pagelet 的内容，加载完成后加页面内容返回给浏览器。在最后的引用部分可以看到网上用 java 多线程实现的例子。</p>
+</li>
+<li><p>使用 PHP 实现。PHP 不支持线程，无法像 java 使用多线程的机制来并发处理不同 pagelet 的内容。但是，Facebook 和淘宝主搜索的业务逻辑是用 PHP 实现的，所以我们必须考虑如何在 PHP 下完成并发处理。PHP 扩展中有 curl 模块，可以在该模块中 <code>curl_multi_fetch()</code> 函数进行批处理请求，把本来应该串行的请求访问并发的执行。可以这样写：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">do</span> &#123;</div><div class="line">    $mrc = curl_multi_exec($mh, $active);</div><div class="line">&#125;</div><div class="line"><span class="keyword">while</span>($mrc==CURLM_CALL_MULTI_PERFORM);</div><div class="line"> </div><div class="line"><span class="keyword">while</span>($active &amp;amp;&amp;amp; $mrc == CURLM_OK) &#123;</div><div class="line"> </div><div class="line">    <span class="keyword">if</span> (curl_multi_select($mh) != <span class="number">-1</span>) &#123;</div><div class="line"> </div><div class="line">        <span class="keyword">do</span> &#123;             </div><div class="line">            $mrc = curl_multi_exec($mh,$active);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">while</span>($mrc == CURLM_CALL_MULTI_PERFORM);</div><div class="line"> </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>但是会碰到一个问题，多个请求是同时返回结果的。当所有的 pagelet 的页面请求所消耗的时间差不多时，可以达到很好的性能，但是当有的消耗时间很长（执行一条复杂的查询）的情况下，批处理就会阻塞在那里，等每个请求都返回结果了才结束。而在这段时间致服务器会阻塞在那里不返回任何内容，而浏览器更是没有响应，这样就违背了 BigPipe 的原理。另外一种实现方法是使用 <code>stream_select</code> 函数。跟上一种方法类似，不过可以使用 PHP5 中新增的 <code>stream_socket_client()</code> 函数链接而不是之前 PHP 函数中的 <code>fsocketopen()</code> 函数。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span> (count($sockets)) &#123;</div><div class="line">    $read = $write = $sockets;</div><div class="line">    $n = stream_select($read,$write, $e, $timeout);</div><div class="line">     </div><div class="line">    <span class="keyword">if</span> ($n &amp;gt; <span class="number">0</span>) &#123;</div><div class="line">        <span class="keyword">foreach</span> ($read <span class="keyword">as</span> $r) &#123;</div><div class="line">            $id = array_search($r, $sockets);</div><div class="line">            $data = fread($r, <span class="number">8192</span>);</div><div class="line">             </div><div class="line">            <span class="keyword">if</span> (strlen($data) == <span class="number">0</span>) &#123;</div><div class="line">                fclose($r);                         </div><div class="line">                <span class="keyword">unset</span> ($sockets[$id]);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> &#123;</div><div class="line">                $retdata[$id] .= $data;                     </div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">         </div><div class="line">        $retdata[$id] = preg_replace(<span class="string">'/^HTTP(.*?)\r\n\r\n/is'</span>, &lt;em&gt;, $retdata[$id]);</div><div class="line">         </div><div class="line">        <span class="keyword">foreach</span> ($write <span class="keyword">as</span> $w) &#123;</div><div class="line">            <span class="keyword">if</span> (!is_resource($w)) <span class="keyword">continue</span>;</div><div class="line"></div><div class="line">            $id = array_search($w, $sockets);</div><div class="line">            fwrite($w, <span class="string">"GET /"</span> . $url[$id] . <span class="string">"HTTP/1.0\r\nHost: "</span> . $hosts[$id] .<span class="string">"\r\n\r\n"</span>);</div><div class="line">            $status[$id] = <span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">     </div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样实现也可以做到服务器的并发访问，但是会碰到和上一种方法同样的问题：服务器的阻塞问题。所以，可以采用另一种方法，用多进程模拟多线程。使用 PHP 的扩展模块 pctnl 模块中的 <code>pcntl_fork()</code> 函数来生成子进程， 用不同的子进程去处理不同的 pagelet 的页面内容。如果子进程返回内容，则返回给浏览器。或者，修改 curl 模块。使其可以支持回调函数，当并发请求中一个请求完成时，立刻调用回调函数。这两种方法目前还在探索中。</p>
+</li>
+</ul>
+</li>
+<li><p>6.2 直接调用 flush 函数输出</p>
+<p>  到这里，可能会有这样的疑问，为什服务器不直接把生成好的 HTML 内容分部 flush 返回给客户端，而是使用 json 格式传递，然后用 js 解析呢？这不是多此一举么？实际上，这也是目前主搜索前端使用的方法。我们看看使用 BigPipe 方式的两大好处：</p>
+<ul>
+<li><p>如果直接调用 <code>flush()</code> 函数输出 html 源码，当模块较多的情况，模块间必须按顺序加载，在 html 前面的模块必须先加载完，后面的才能加载，这样也就没办法每个模块同时显示一些内容。例如下面的 html：</p>
+<p>  上面 3 个 div 分别代表 3 个模块，如果直接分部输出 html，服务器端必须先加载完毕 div1 模块中的内容并 flush 出去后，才能继续加载 div2 的内容，如果 flush 顺序不一样，输出的 html 结构肯定就会出问题，这样就导致前台页面没办法同时显示 3 个 loading。因为这样 flush 必须要有先后顺序。而如果采用 JS 的话，可以前台显示3 个 loading，而且不需要关心到底哪个模块先加载完，这样还能发挥后台多线程处理数据的优势。</p>
+</li>
+<li><p>使用 JS 这种方式可以是页面结构更加清晰，管理更加方便。同时做到了页面逻辑结构和数据解耦，首先返回的是页面的结构，接着不断地返回 js 脚本，然后动态添加页面内容，而不是所有完整的 html 源码一起输出，增加了可维护性。</p>
+</li>
+</ul>
+</li>
+<li><p>6.3 访问者是爬虫或者访问者浏览器禁止使用 JS 的情况</p>
+<p>  我们知道 BigPipe 使用 js 脚本加载页面，那么当用户在浏览器里设置禁止使用 js 脚本（虽然人数很少），就会造成加载页面失败，这同样是非常不好的用户体验。对搜索引擎的爬虫来讲，同样会遇到类似的问题。解决办法是当用户发送访问请求时，服务器端检测 user-agent 和客户端是否支持 js 脚本。如果 user-agent 显示是一个搜索引擎爬虫或者客户端不支持 js，就不使用 BigPipe，而用原有的模式，从而解决问题。</p>
+</li>
+<li><p>6.4 对 SEO 的影响</p>
+<p>  这是一个必须考虑的问题，如今是搜索引擎的时代，如果网页对搜索引擎不友好，或者使搜索引擎很难识别内容，那么会降低网页在搜索引擎中的排名，直接减少网站的访问次数。在 BigPipe 中，页面的内容都是动态添加的，所以可能会使搜索引擎无法识别。但是正如前面所说，在服务器端首先要根据 user-agent 判断客户端是否是搜索引擎的爬虫，如果是的话，则转化为原有的模式，而不是动态添加。这样就解决了对搜索引擎的不友好。</p>
+</li>
+<li><p>6.5 融合其他技术</p>
+<p>  除了使用 BigPipe，Facebook 的页面加载技术还融合了其他的页面优化技术，具体如下：</p>
+<ul>
+<li><p>6.5.1 资源文件的G-zip压缩</p>
+<p>  这是非常重要的技术，使用 Gzip 对 css 和 js 文件压缩可以使大小减少70%，这是多么诱人的数字！在网络传输的文件中，主要就是样式表和脚本文件。如此可以大大减小传输的内容，使页面加载速度变得更快。具体实现可以借助服务器来进行，例如 Apache，使用 mod_deflate 模块来完成，具体配置为：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">AddOutputFilterByType DEFLATE text/html text/css application/xjavascript</div></pre></td></tr></table></figure>
+</li>
+<li><p>6.5.2 将 js 文件进行了精简</p>
+<p>  对 js 文件进行精简，可以从代码中移除不必要的字符，注释以及空行以减小 js 文件的大小，从而改善加载的页面的时间。精简 js 脚本的工具可以使用 JSMin，使用精简后的脚本的大小会减少 20% 左右。这也是一个很大的提升。</p>
+</li>
+<li><p>6.5.3 将 css 和 js 文件进行合并</p>
+<p>  这是前端优化的一项原则，将多个样式表和 js 文件进行合并，这样的话，将会减少 http 的请求个数。对于上亿用户的网站来说，这也会带来性能的提升，大约会减少5%左右的时间损耗。</p>
+</li>
+<li><p>6.5.4 使用外部 JS 和 CSS</p>
+<p>  同样是前端优化的一项原则。纯粹就速度来言，使用内联的 js 和 css 速度要更快，因为减少了 http 请求。但是，使用外部的文件更有利于文件的复用，这与面向对象编程的概念很像。更为重要的是，虽然在第一次的加载速度慢一点，但 css 文件和 js 脚本是可以被浏览器缓存。即之后用户的多次访问中，使用外部的 js 和 css 将会将会更好的提升速度。</p>
+</li>
+<li><p>6.5.5 将样式表放在顶部</p>
+<p>  和上面内容相似，这也是一种规范，将 html 内容所需的 css 文件放在首部加载是非常重要的。如果放在页面尾部，虽然会使页面内容更快的加载（因为将加载 css 文件的时间放在最后，从而使页面内容先显示出来），但是这样的内容是没有使用样式表的，在 css 文件加载进来后，浏览器会对其使用样式表，即再次改变页面的内容和样式，称之为“无样式内容的闪烁”，这对于用户来说当然是不友好的。实现的时候将 css 文件放在 <head> 标签中即可。</head></p>
+</li>
+<li><p>6.5.6 将脚本放在底部实现“barrier”</p>
+<p>  支持页面动态内容的 Js 脚本对于页面的加载并没有什么作用，把它放在顶部加载只会使页面更慢的加载，这点和前面的提到的 css 文件刚好相反，所以可以将它放在页尾加载。是用户能看到的页面内容先加载，js 文件最后加载，这样会使用户觉得页面速度更快。Bigpipe 实现一个 “barrier” 的概念，即当所有的 pagelet 的内容全部加载好了之后，浏览器再向服务器发送 js 的http 请求。可以在 BigPipe.js 中将所有的 pagelet 所需的 js 文件的路径保存下来，在判断所有的内容加载完成后统一向服务器发送请求。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="7-BigPipe-具体实现细节"><a href="#7-BigPipe-具体实现细节" class="headerlink" title="7. BigPipe 具体实现细节"></a>7. BigPipe 具体实现细节</h2><p>如上文讨论的那样，具体实现如下：</p>
+<p>当用户访问该页面时，在第一个 flush 的 Response 内容中，返回大部分的 HTML 代码，包括完整的 <heaad> 标签，和一个未封闭的 <body>，其中 <head> 标签中有需要导入的文件的路径，如一些公共的 css 文件和 BigPipe.js 文件，</head><body> 标签有页面的主要布局，第二块 flush 的内容为一段 js 脚本，处理 BigPipe 对象的生成，以及 js 和 css 文件的路径和字符串的映射</body></body></heaad></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> bigPipe = <span class="keyword">new</span> bigPipe();</div><div class="line"></div><div class="line">bigPipe.setResourceMap(&#123;</div><div class="line">    <span class="attr">aaaaa</span>: &#123;</div><div class="line">        <span class="string">'name'</span>: <span class="string">'js/list1.js'</span>,</div><div class="line">        <span class="string">'type'</span>: <span class="string">'js'</span>,</div><div class="line">        <span class="string">'src'</span>: <span class="string">'js/list1.js'</span></div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p><code>setResourceMap(json)</code> 为 BigPipe 中的函数，功能是设置文件的映射。”aaaaa” 应该是在服务器随即生成的五位字符串，name 表示文件名称，type 为文件的类型，可以是 js 或 css，”src” 为文件的路径。在下面的页面中，就可以使用 “aaaaa” 来替代 “js/list1.js” 了，减少了复杂性。接下来 flush 的是每一个 pagelet 的内容了，例如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">    bigPipe.onPageletArrive(&#123;</div><div class="line">        <span class="attr">id</span>: <span class="string">'list1'</span>,</div><div class="line">        <span class="attr">content</span>: <span class="string">'this is list 1 &lt;\/ br&gt; &lt;img src = \"img13.jpg\" \/&gt;'</span>,</div><div class="line"></div><div class="line">        <span class="attr">css</span>: [<span class="string">'eeeee'</span>],</div><div class="line"></div><div class="line">        <span class="attr">js</span>: [<span class="string">'aaaaa'</span>],</div><div class="line"></div><div class="line">        <span class="string">'resource_map'</span>: &#123;</div><div class="line"></div><div class="line">            <span class="attr">aaaaa</span>: &#123;</div><div class="line">                <span class="string">'name'</span>: <span class="string">'js/list1.js'</span>,</div><div class="line">                <span class="string">'type'</span>: <span class="string">'js'</span>,</div><div class="line">                <span class="string">'src'</span>: <span class="string">'js/list1.js'</span></div><div class="line">            &#125;,</div><div class="line">            <span class="attr">eeeee</span>: &#123;</div><div class="line">                <span class="string">'name'</span>: <span class="string">'css/list1.css'</span>,</div><div class="line">                <span class="string">'type'</span>: <span class="string">'css'</span></div><div class="line">                <span class="string">'src'</span>: <span class="string">'css/list1.css'</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><code>onPageletArrive(json_arrive)</code> 也是 BigPipe 的函数，功能是动态添加页面的内容和加载 pagelet 所需的文件，函数的参数为 json 格式的数据。其参数含义是：”id” 用来寻找 pagelet 标签；”content” 是 html 页面内容，在找到对应的 pagelet 的标签之后，将 content 内动态添加到 html 页面中；”css” 为该 Pagelet 所需的 css 文件，这里的 css 文件可能在之前导入过了；”js” 为该 pagelet 所需的 js 文件，同样，有可能在之前的 pagelet 已经导入过了。在函数实现过程中，因为 js 文件是最后加载的，可以把这些 js 的路径存入到一个数组当中（去掉重复的），在最后一起加载。”resource_map” 为该 pagelet 所单独需要加载的 js 和 css 文件，同样也是 json 格式的，结构与前面的 <code>setResource()</code> 中的参数一样。最后 flush 的是</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>即为最后的标签。</p>
+<h2 id="8-结论"><a href="#8-结论" class="headerlink" title="8. 结论"></a>8. 结论</h2><p>经过上面的讨论，我们可以发现，使用 BigPipe 技术优化页面可以有四个好处：</p>
+<p>1． 减少页面的加载时间</p>
+<p>2． 使页面分步输出，改善用户体验</p>
+<p>3． 使页面结构化，提高可读性，更加便于维护</p>
+<p>4． 每个pagelet 都是相互独立的，如果有一个pagelet 的内容不能加载，并不会影响其他的pagelet 的内容显示。</p>
+<p>同时，BigPipe 是一项比较新的理念， 在去年六月份才由 Facebook 的工程师提出，应该说有很大的发展空间。BigPipe 的原理非常简单，并不会引入很多额外的负担，适用范围很广，容易上手。几乎所有的网页都可以采用 BigPipe 的理念去进行优化，尤其对于是有着海量数据和网页比较大的网站，将会以低成本带来高回报。一般来讲，网站越大，脚本和样式表越多，浏览器版本越旧，网络环境越差，优化的结果越可观。</p>
+<h2 id="9-引用与参考资料"><a href="#9-引用与参考资料" class="headerlink" title="9. 引用与参考资料"></a>9. 引用与参考资料</h2><ul>
+<li><p>作者的博客：<a href="http://www.facebook.com/note.php?note_id=389414033919" target="_blank" rel="external">http://www.facebook.com/note.php?note_id=389414033919</a></p>
+</li>
+<li><p>bigpipe 技术的 ppt：<a href="http://twork.taobao.net/books/237" target="_blank" rel="external">http://twork.taobao.net/books/237</a></p>
+</li>
+<li><p>bigpipe 的 java 实现： <a href="http://codemonkeyism.com/facebook-bigpipe-java/" target="_blank" rel="external">http://codemonkeyism.com/facebook-bigpipe-java/</a></p>
+</li>
+<li><p>一篇介绍 bigpipe 的文章：<a href="http://www.54chen.com/architecture/rose-pipe-http-54chen.html" target="_blank" rel="external">http://www.54chen.com/architecture/rose-pipe-http-54chen.html</a></p>
+</li>
+<li><p>另一篇挺有用的文章：<a href="http://www.cnblogs.com/BearsTaR/archive/2010/06/18/facebook_html_chunk.html" target="_blank" rel="external">http://www.cnblogs.com/BearsTaR/archive/2010/06/18/facebook_html_chunk.html</a></p>
+</li>
+<li><p>人人网类似 bigpipe 的技术 – rosepipe：<a href="http://www.54chen.com/architecture/rose-open-source-portal-framework.html" target="_blank" rel="external">http://www.54chen.com/architecture/rose-open-source-portal-framework.html</a></p>
+</li>
+<li><p>《高性能网站建设指南》by Steve Souder， Copyright 2007 Steve Sounder， 978-0-596- 52930-7</p>
+</li>
+</ul>
+<blockquote>
+<p>本文转载自：<a href="http://www.searchtb.com/2011/04/an-introduction-to-bigpipe.html" target="_blank" rel="external">http://www.searchtb.com/2011/04/an-introduction-to-bigpipe.html</a></p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/03/10/html-css-layout/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          利用 HTML 和 CSS 实现常见的布局
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/13/sass-responsive-breakpoints/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">SASS优化响应式断点管理</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="an-introduction-to-bigpipe" data-title="BigPipe 学习研究" data-url="http://zqianduan.com/2016/03/12/an-introduction-to-bigpipe/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"zqianduan"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 Jimco
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?ccac13d2d4e18f7ac82a7f1c9de98a90";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+  </div>
+</body>
+</html>

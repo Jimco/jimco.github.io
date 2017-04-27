@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>SASS优化响应式断点管理 | 最前端</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="当你需要搞定响应式布局时，一堆堆的媒体查询、大量的属性、属性值往往可以把你搞颠，SASS（或者诸如此类的预处理器）被认为是处理响应式断点的最佳利器。 说到响应式断点处理，很多种方式涌上心头，经常有人问哪种方式最优，正如前端开发领域的大多数问题一样，这个问题同样没有标准答案，我们需要具体问题具体分析。更确切的说，难度不在于提出一个系统，而是提出一个既足够灵活（适用大部分场合）又不非常复杂的系统。 在">
+<meta name="keywords" content="css,media">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SASS优化响应式断点管理">
+<meta property="og:url" content="http://zqianduan.com/2016/03/13/sass-responsive-breakpoints/index.html">
+<meta property="og:site_name" content="最前端">
+<meta property="og:description" content="当你需要搞定响应式布局时，一堆堆的媒体查询、大量的属性、属性值往往可以把你搞颠，SASS（或者诸如此类的预处理器）被认为是处理响应式断点的最佳利器。 说到响应式断点处理，很多种方式涌上心头，经常有人问哪种方式最优，正如前端开发领域的大多数问题一样，这个问题同样没有标准答案，我们需要具体问题具体分析。更确切的说，难度不在于提出一个系统，而是提出一个既足够灵活（适用大部分场合）又不非常复杂的系统。 在">
+<meta property="og:updated_time" content="2017-04-27T07:01:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SASS优化响应式断点管理">
+<meta name="twitter:description" content="当你需要搞定响应式布局时，一堆堆的媒体查询、大量的属性、属性值往往可以把你搞颠，SASS（或者诸如此类的预处理器）被认为是处理响应式断点的最佳利器。 说到响应式断点处理，很多种方式涌上心头，经常有人问哪种方式最优，正如前端开发领域的大多数问题一样，这个问题同样没有标准答案，我们需要具体问题具体分析。更确切的说，难度不在于提出一个系统，而是提出一个既足够灵活（适用大部分场合）又不非常复杂的系统。 在">
+  
+    <link rel="alternative" href="/atom.xml" title="最前端" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay">
+	<div class="st-so-wrap">
+		<input type="text" id="local-search-input" class="st-default-search-input st-so" placeholder="回车搜索 直接有效">
+	</div>
+</div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Jimco</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/jimco" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/515789799" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/301/" style="font-size: 10px;">301</a> <a href="/tags/algorithm/" style="font-size: 11.67px;">algorithm</a> <a href="/tags/angular/" style="font-size: 15px;">angular</a> <a href="/tags/async/" style="font-size: 10px;">async</a> <a href="/tags/backbone/" style="font-size: 10px;">backbone</a> <a href="/tags/bfc/" style="font-size: 10px;">bfc</a> <a href="/tags/browser/" style="font-size: 10px;">browser</a> <a href="/tags/cache/" style="font-size: 10px;">cache</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/comet/" style="font-size: 10px;">comet</a> <a href="/tags/css/" style="font-size: 18.33px;">css</a> <a href="/tags/dom/" style="font-size: 10px;">dom</a> <a href="/tags/emlog/" style="font-size: 10px;">emlog</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/event/" style="font-size: 10px;">event</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/frontend/" style="font-size: 10px;">frontend</a> <a href="/tags/gzip/" style="font-size: 11.67px;">gzip</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/https/" style="font-size: 11.67px;">https</a> <a href="/tags/iframe/" style="font-size: 10px;">iframe</a> <a href="/tags/image/" style="font-size: 10px;">image</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/layout/" style="font-size: 13.33px;">layout</a> <a href="/tags/media/" style="font-size: 10px;">media</a> <a href="/tags/memory/" style="font-size: 10px;">memory</a> <a href="/tags/meta/" style="font-size: 10px;">meta</a> <a href="/tags/mvvm/" style="font-size: 13.33px;">mvvm</a> <a href="/tags/oo/" style="font-size: 10px;">oo</a> <a href="/tags/pattern/" style="font-size: 10px;">pattern</a> <a href="/tags/promise/" style="font-size: 13.33px;">promise</a> <a href="/tags/router/" style="font-size: 10px;">router</a> <a href="/tags/samba/" style="font-size: 10px;">samba</a> <a href="/tags/server/" style="font-size: 16.67px;">server</a> <a href="/tags/setInterval/" style="font-size: 10px;">setInterval</a> <a href="/tags/snippet/" style="font-size: 10px;">snippet</a> <a href="/tags/socket-io/" style="font-size: 10px;">socket.io</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/this/" style="font-size: 10px;">this</a> <a href="/tags/typecho/" style="font-size: 10px;">typecho</a> <a href="/tags/ubb/" style="font-size: 10px;">ubb</a> <a href="/tags/uglify/" style="font-size: 10px;">uglify</a> <a href="/tags/waterflow/" style="font-size: 10px;">waterflow</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/二进制/" style="font-size: 10px;">二进制</a> <a href="/tags/运算符/" style="font-size: 10px;">运算符</a> <a href="/tags/重定向/" style="font-size: 10px;">重定向</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+					
+						<section class="switch-part switch-part3">
+					
+					<div id="js-aboutme">狼厂攻城师，爱打羽毛球，欢迎骚扰！</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Jimco</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Jimco</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/jimco" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/515789799" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-sass-responsive-breakpoints" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/13/sass-responsive-breakpoints/" class="article-date">
+  	<time datetime="2016-03-13T04:33:27.000Z" itemprop="datePublished">2016-03-13</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SASS优化响应式断点管理
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/HTML-CSS/">HTML/CSS</a>
+	</div>
+
+
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/media/">media</a></li></ul>
+	</div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>当你需要搞定响应式布局时，一堆堆的媒体查询、大量的属性、属性值往往可以把你搞颠，SASS（或者诸如此类的预处理器）被认为是处理响应式断点的最佳利器。</p>
+<p>说到响应式断点处理，很多种方式涌上心头，经常有人问哪种方式最优，正如前端开发领域的大多数问题一样，这个问题同样没有标准答案，我们需要具体问题具体分析。更确切的说，难度不在于提出一个系统，而是提出一个既足够灵活（适用大部分场合）又不非常复杂的系统。</p>
+<p>在今天的文章里，我将给大家介绍若干种响应式布局断点的解决方案，每一种都经过实践验证，一些方案可能优于其他方案，我会把决定的权利交给大家。<br><a id="more"></a></p>
+<h2 id="1-使用变量-With-variables"><a href="#1-使用变量-With-variables" class="headerlink" title="1. 使用变量(With variables)"></a>1. 使用变量(With variables)</h2><p><a href="https://github.com/twbs/bootstrap/blob/master/less/variables.less#L259" target="_blank" rel="external">Bootstrap</a> 和 <a href="http://foundation.zurb.com/docs/media-queries.html" target="_blank" rel="external">Foundation</a> 采用这种方式，首先定义变量，然后在媒体查询中使用变量。换句话说，你可以在配置文件或者其他地方定义变量以备使用。我们来看看 Bootstrap 怎么干的。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">// Defining values</div><div class="line">$screen-sm-min: 768px;</div><div class="line">$screen-xs-max: ($screen-sm-min - 1);</div><div class="line">$screen-md-min: 992px;</div><div class="line">$screen-sm-max: ($screen-md-min - 1);</div><div class="line">$screen-lg-min: 1200px;</div><div class="line">$screen-md-max: ($screen-lg-min - 1);</div><div class="line"></div><div class="line">// Usage</div><div class="line">@media (max-width: $screen-xs-max) &#123; ... &#125;</div><div class="line">@media (min-width: $screen-sm-min) &#123; ... &#125;</div><div class="line">@media (max-width: $screen-sm-max) &#123; ... &#125;</div><div class="line">@media (min-width: $screen-md-min) &#123; ... &#125;</div><div class="line">@media (max-width: $screen-md-max) &#123; ... &#125;</div><div class="line">@media (min-width: $screen-lg-min) &#123; ... &#125;</div></pre></td></tr></table></figure>
+<p>Foudation 更进一步，使用跨范围的媒体查询，避免使用过多的 max-width 和 min-width</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">// Defining values</div><div class="line">$small-range:   (0em, 40em);       /* 0, 640px */</div><div class="line">$medium-range:  (40.063em, 64em);  /* 641px, 1024px */</div><div class="line">$large-range:   (64.063em, 90em);  /* 1025px, 1440px */</div><div class="line">$xlarge-range:  (90.063em, 120em); /* 1441px, 1920px */</div><div class="line">$xxlarge-range: (120.063em);       /* 1921px */</div><div class="line"> </div><div class="line">// Defining media queries</div><div class="line">$screen:       &quot;only screen&quot; !default;</div><div class="line">$landscape:    &quot;#&#123;$screen&#125; and (orientation: landscape)&quot; !default;</div><div class="line">$portrait:     &quot;#&#123;$screen&#125; and (orientation: portrait)&quot; !default;</div><div class="line">$small-up:     $screen !default;</div><div class="line">$small-only:   &quot;#&#123;$screen&#125; and (max-width: #&#123;upper-bound($small-range)&#125;)&quot; !default;</div><div class="line">$medium-up:    &quot;#&#123;$screen&#125; and (min-width:#&#123;lower-bound($medium-range)&#125;)&quot; !default;</div><div class="line">$medium-only:  &quot;#&#123;$screen&#125; and (min-width:#&#123;lower-bound($medium-range)&#125;) and (max-width:#&#123;upper-bound($medium-range)&#125;)&quot; !default;</div><div class="line">$large-up:     &quot;#&#123;$screen&#125; and (min-width:#&#123;lower-bound($large-range)&#125;)&quot; !default;</div><div class="line">$large-only:   &quot;#&#123;$screen&#125; and (min-width:#&#123;lower-bound($large-range)&#125;) and (max-width:#&#123;upper-bound($large-range)&#125;)&quot; !default;</div><div class="line">$xlarge-up:    &quot;#&#123;$screen&#125; and (min-width:#&#123;lower-bound($xlarge-range)&#125;)&quot; !default;</div><div class="line">$xlarge-only:  &quot;#&#123;$screen&#125; and (min-width:#&#123;lower-bound($xlarge-range)&#125;) and (max-width:#&#123;upper-bound($xlarge-range)&#125;)&quot; !default;</div><div class="line">$xxlarge-up:   &quot;#&#123;$screen&#125; and (min-width:#&#123;lower-bound($xxlarge-range)&#125;)&quot; !default;</div><div class="line">$xxlarge-only: &quot;#&#123;$screen&#125; and (min-width:#&#123;lower-bound($xxlarge-range)&#125;) and (max-width:#&#123;upper-bound($xxlarge-range)&#125;)&quot; !default;</div><div class="line"> </div><div class="line">// Usage</div><div class="line">@media #&#123;$small-up&#125;     &#123; ... &#125;</div><div class="line">@media #&#123;$small-only&#125;   &#123; ... &#125;</div><div class="line">@media #&#123;$medium-up&#125;    &#123; ... &#125;</div><div class="line">@media #&#123;$medium-only&#125;  &#123; ... &#125;</div><div class="line">@media #&#123;$large-up&#125;     &#123; ... &#125;</div><div class="line">@media #&#123;$large-only&#125;   &#123; ... &#125;</div><div class="line">@media #&#123;$xlarge-up&#125;    &#123; ... &#125;</div><div class="line">@media #&#123;$xlarge-only&#125;  &#123; ... &#125;</div><div class="line">@media #&#123;$xxlarge-up&#125;   &#123; ... &#125;</div><div class="line">@media #&#123;$xxlarge-only&#125; &#123; ... &#125;</div></pre></td></tr></table></figure>
+<p>两种方法各有一个不爽的地方，在 Bootstrap 里每次都要使用 max-width，在 Foundation 里我们需要使用插值变量这种又丑又烦的方式，我们需要想办法解决这些问题。</p>
+<h2 id="2-使用独立-Mixin-With-a-standalone-mixin"><a href="#2-使用独立-Mixin-With-a-standalone-mixin" class="headerlink" title="2. 使用独立 Mixin(With a standalone mixin)"></a>2. 使用独立 Mixin(With a standalone mixin)</h2><p><a href="http://css-tricks.com/media-queries-sass-3-2-and-codekit/" target="_blank" rel="external">《media queries in Sass 3.2》</a>是 <a href="http://css-tricks.com/" target="_blank" rel="external">CSS-Tricks</a> 里最火的文章之一，在这篇文章里 Chris Coyier 在借鉴 <a href="http://thesassway.com/intermediate/responsive-web-design-in-sass-using-media-queries-in-sass-32" target="_blank" rel="external">a former idea by Mason Wendell</a> 和 <a href="http://jeffcroft.com/blog/2012/mar/02/implementing-responsive-design/" target="_blank" rel="external">a former idea by Jeff Croft</a> 两文的基础上，如何使用 sass 实现响应式布局的断点管理。</p>
+<p>命名断点是非常重要的，因为可以为抽象的数字赋予意义（你知道767px是什么意思吗，我不知道，直到我去使用小屏幕的时候才知道）。为什么 Bootstrap 和 Foundation 要使用变量呢，不也是为了给抽象的数字起个名字吗？</p>
+<p>所以我们定义个 mixin，接收断点名作唯一的参数，返回媒体查询的内容。准备好了吗？走起。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">@mixin respond-to($breakpoint) &#123;</div><div class="line">    @if $breakpoint == &quot;small&quot; &#123;</div><div class="line">        @media (min-width: 767px) &#123;</div><div class="line">            @content;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    @else if $breakpoint == &quot;medium&quot; &#123;</div><div class="line">        @media (min-width: 992px) &#123;</div><div class="line">            @content;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    @else if $breakpoint == &quot;large&quot; &#123;</div><div class="line">        @media (min-width: 1200px) &#123;</div><div class="line">            @content;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后，我们这样使用 mixin：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">@include respond-to(small) &#123; ... &#125;</div><div class="line">@include respond-to(medium) &#123; ... &#125;</div><div class="line">@include respond-to(large) &#123; ... &#125;</div></pre></td></tr></table></figure>
+<p>这个方法是极好的（甄嬛体，老外也看？），原因有二：抽象数据有意义，大量断点集中管理。如果你想把“992px”改成“970px”，你不需要爬过每一个 css 文件，而只需更新 mixin，然后全部更新。</p>
+<p>但是也还有两个问题：</p>
+<ul>
+<li>断点不容易从mixin里拿出来，放到配置文件里去</li>
+<li>冗余太多</li>
+</ul>
+<h2 id="3-可配置的mixin-With-a-configurable-mixin"><a href="#3-可配置的mixin-With-a-configurable-mixin" class="headerlink" title="3. 可配置的mixin(With a configurable mixin)"></a>3. 可配置的mixin(With a configurable mixin)</h2><p>为了解决上面的两个问题，我们需要从断点 mixin 中抽出一个列表，只剩下 mixin 核心，然后这个列表就可以随便移动，或者扔到配置文件中。然后，使用 sass 3.3+ 中的 maps，我们可以方便的使用关联的属性和属性值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$breakpoints: (</div><div class="line">    &apos;small&apos;  : 767px,</div><div class="line">    &apos;medium&apos; : 992px,</div><div class="line">    &apos;large&apos;  : 1200px</div><div class="line">);</div></pre></td></tr></table></figure>
+<p>然后原来的 mixin 进行相应的修改：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">@mixin respond-to($breakpoint) &#123;</div><div class="line">    // Retrieves the value from the key</div><div class="line">    $value: map-get($breakpoints, $breakpoint);</div><div class="line"> </div><div class="line">    // If the key exists in the map</div><div class="line">    @if $value != null &#123;</div><div class="line">        // Prints a media query based on the value</div><div class="line">        @media (min-width: $value) &#123;</div><div class="line">            @content;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    // If the key doesn&apos;t exist in the map</div><div class="line">    @else &#123;</div><div class="line">        @warn &quot;Unfortunately, no value could be retrieved from `#&#123;$breakpoint&#125;`. &quot;</div><div class="line">            + &quot;Please make sure it is defined in `$breakpoints` map.&quot;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们在修改 mixin 的同时也进行了一些提高，不要小看这些提高，我们加上了错误处理，如果在 maps 中没有找到断点值，将会弹出一个错误提示，这将便于我们开发过程中的调试。</p>
+<p>我们让 mixin 变得更加精简，能很好的处理错误，同时我们去掉了一个功能——判断属性是否是你想要的（min-width, max-width, min-height等），这在移动优先的网页中没问题，因为我们仅仅需要 min-width。但是，如果需要查询其他属性，我们需要把这个功能加回来。为了达到这个目的，我想到了一个非常优雅的解决方案，同时并不增加复杂性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">$breakpoints: (</div><div class="line">    &apos;small&apos;  : ( min-width:  767px ),</div><div class="line">    &apos;medium&apos; : ( min-width:  992px ),</div><div class="line">    &apos;large&apos;  : ( min-width: 1200px )</div><div class="line">);</div><div class="line">  </div><div class="line">@mixin respond-to($name) &#123;</div><div class="line">    // If the key exists in the map</div><div class="line">    @if map-has-key($breakpoints, $name) &#123;</div><div class="line">        // Prints a media query based on the value</div><div class="line">        @media #&#123;inspect(map-get($breakpoints, $name))&#125; &#123;</div><div class="line">            @content;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    // If the key doesn&apos;t exist in the map</div><div class="line">    @else &#123;</div><div class="line">        @warn &quot;Unfortunately, no value could be retrieved from `#&#123;$breakpoint&#125;`. &quot;</div><div class="line">            + &quot;Please make sure it is defined in `$breakpoints` map.&quot;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在这里，我们主要做了三个事情</p>
+<ul>
+<li>检查查询的断点在map中存在不存在</li>
+<li>如果存在，打印对应的媒体查询。</li>
+<li>如果不在，进行错误提示。</li>
+</ul>
+<p>简单吧，如果我们回顾前面的两个缺陷，已经不再有 WET(Write Everything Twice) 问题，也不再有不灵活的媒体查询。但是还有一个问题，不支持复杂的媒体查询。复杂指的是涉及多个组件的查询（e.g. screen and (min-width: 767px)）。我们上面这些方案除了第一种变量之外都不能很好的解决这个问题。</p>
+<h2 id="4-使用外部工具-With-an-external-tool"><a href="#4-使用外部工具-With-an-external-tool" class="headerlink" title="4. 使用外部工具(With an external tool)"></a>4. 使用外部工具(With an external tool)</h2><p>最后一个同样重要的是，如果不想创建自己的 mixin，你可以使用外部的工具处理响应式布局的断点，有很多 sass 的扩展在这个方面做得很好。</p>
+<ul>
+<li><a href="https://github.com/guardian/sass-mq" target="_blank" rel="external">SassMQ</a> by Kaelig</li>
+<li><a href="http://breakpoint-sass.com/" target="_blank" rel="external">Breakpoint</a> by Mason Wendell and Sam Richard</li>
+<li><a href="https://github.com/BPScott/breakup" target="_blank" rel="external">Breakup</a> by Ben Scott</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align:center">SassMQ</th>
+<th style="text-align:right">Breakpoint</th>
+<th style="text-align:right">Breakup</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MQ type</td>
+<td style="text-align:center"><code>*-width</code></td>
+<td style="text-align:right">any</td>
+<td style="text-align:right">any</td>
+</tr>
+<tr>
+<td>No Query fallback</td>
+<td style="text-align:center">yep</td>
+<td style="text-align:right">yep</td>
+<td style="text-align:right">yep</td>
+</tr>
+<tr>
+<td>API complexity</td>
+<td style="text-align:center">simple</td>
+<td style="text-align:right">very simple</td>
+<td style="text-align:right">medium</td>
+</tr>
+<tr>
+<td>Code complexity</td>
+<td style="text-align:center">very simple</td>
+<td style="text-align:right">complexe</td>
+<td style="text-align:right">simple</td>
+</tr>
+<tr>
+<td>Extra</td>
+<td style="text-align:center">Debug mode</td>
+<td style="text-align:right">Singularity.gs</td>
+<td style="text-align:right">—</td>
+</tr>
+</tbody>
+</table>
+<p>基本上是这样，如果发现有没有涉及的，记得一定告诉我。</p>
+<ul>
+<li><p>SassMQ</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">// Configuration</div><div class="line">$mq-responsive: true;</div><div class="line">$mq-static-breakpoint: desktop;</div><div class="line">$mq-breakpoints: (</div><div class="line">    mobile:  320px,</div><div class="line">    tablet:  740px,</div><div class="line">    desktop: 980px,</div><div class="line">    wide:    1300px</div><div class="line">);</div><div class="line"> </div><div class="line">// Example</div><div class="line">selector &#123;</div><div class="line">    @include mq($from: mobile) &#123;</div><div class="line">        property: value;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>BreakPoints</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$high-tide: 500px;</div><div class="line">$ex-presidents: 600px 800px;</div><div class="line">$surfboard-width: max-width 1000px;</div><div class="line">$surfboard-height: (min-height 1000px) (orientation portrait);</div><div class="line">     </div><div class="line">selector &#123;</div><div class="line">    @include breakpoint($high-tide) &#123;</div><div class="line">        property: value;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Breakup</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$breakup-breakpoints: (</div><div class="line">    &apos;thin&apos; &apos;(max-width: 35.999em)&apos;,</div><div class="line">    &apos;wide&apos; &apos;(min-width: 36em)&apos;,</div><div class="line">    &apos;full&apos; &apos;(min-width: 61em)&apos;</div><div class="line">);</div><div class="line"> </div><div class="line">selector &#123;</div><div class="line">    @include breakup-block(&apos;thin&apos;) &#123;</div><div class="line">        property: value;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="5-总结"><a href="#5-总结" class="headerlink" title="5. 总结"></a>5. 总结</h2><p>我们在这篇文章里看到的这么些个方案，都有长有短，没有一个完美的方案。最后我觉得还是由你来决定怎么把握可用性和复杂性的平衡。</p>
+<p>一句话，在合适的场合使用合适的工具。</p>
+<blockquote>
+<p>本文转载自：<a href="http://blog.csdn.net/whqet/article/details/26564287" target="_blank" rel="external">http://blog.csdn.net/whqet/article/details/26564287</a><br>原文：<a href="https://www.sitepoint.com/managing-responsive-breakpoints-sass/" target="_blank" rel="external">《Managing Responsive Breakpoints with Sass》</a><br>作者：<a href="https://www.sitepoint.com/author/hgiraudel/" target="_blank" rel="external">Hugo Giraudel</a>，来自法国，<a href="http://hugogiraudel.com/" target="_blank" rel="external">著名 SASS 大牛</a>，在 <a href="http://thesassway.com/" target="_blank" rel="external">SassWay</a> 等多个网站撰文推广 sass，是 SassyJSON、SassyMatrix 等多个开源项目的开发者，大家可以到他的<a href="http://hugogiraudel.com/" target="_blank" rel="external">官方网站</a>、<a href="https://github.com/HugoGiraudel" target="_blank" rel="external">github</a> 上了解详情。<br>翻译：前端开发whqet，以意译为主，不当之处请大家批评指正。</p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/03/12/an-introduction-to-bigpipe/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          BigPipe 学习研究
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/14/front-end-optimization/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">前端性能优化总结</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="sass-responsive-breakpoints" data-title="SASS优化响应式断点管理" data-url="http://zqianduan.com/2016/03/13/sass-responsive-breakpoints/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"zqianduan"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 Jimco
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?ccac13d2d4e18f7ac82a7f1c9de98a90";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+  </div>
+</body>
+</html>

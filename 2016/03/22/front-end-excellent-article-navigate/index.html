@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>前端优秀文章导航 | 最前端</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Javascript 解析 Facebook 的 Flux 应用架构  有趣的 HTML5：离线存储  了解 JavaScript 应用程序中的内存泄漏">
+<meta name="keywords" content="css,javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端优秀文章导航">
+<meta property="og:url" content="http://zqianduan.com/2016/03/22/front-end-excellent-article-navigate/index.html">
+<meta property="og:site_name" content="最前端">
+<meta property="og:description" content="Javascript 解析 Facebook 的 Flux 应用架构  有趣的 HTML5：离线存储  了解 JavaScript 应用程序中的内存泄漏">
+<meta property="og:updated_time" content="2017-04-27T07:01:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端优秀文章导航">
+<meta name="twitter:description" content="Javascript 解析 Facebook 的 Flux 应用架构  有趣的 HTML5：离线存储  了解 JavaScript 应用程序中的内存泄漏">
+  
+    <link rel="alternative" href="/atom.xml" title="最前端" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay">
+	<div class="st-so-wrap">
+		<input type="text" id="local-search-input" class="st-default-search-input st-so" placeholder="回车搜索 直接有效">
+	</div>
+</div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Jimco</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/jimco" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/515789799" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/301/" style="font-size: 10px;">301</a> <a href="/tags/algorithm/" style="font-size: 11.67px;">algorithm</a> <a href="/tags/angular/" style="font-size: 15px;">angular</a> <a href="/tags/async/" style="font-size: 10px;">async</a> <a href="/tags/backbone/" style="font-size: 10px;">backbone</a> <a href="/tags/bfc/" style="font-size: 10px;">bfc</a> <a href="/tags/browser/" style="font-size: 10px;">browser</a> <a href="/tags/cache/" style="font-size: 10px;">cache</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/comet/" style="font-size: 10px;">comet</a> <a href="/tags/css/" style="font-size: 18.33px;">css</a> <a href="/tags/dom/" style="font-size: 10px;">dom</a> <a href="/tags/emlog/" style="font-size: 10px;">emlog</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/event/" style="font-size: 10px;">event</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/frontend/" style="font-size: 10px;">frontend</a> <a href="/tags/gzip/" style="font-size: 11.67px;">gzip</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/https/" style="font-size: 11.67px;">https</a> <a href="/tags/iframe/" style="font-size: 10px;">iframe</a> <a href="/tags/image/" style="font-size: 10px;">image</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/layout/" style="font-size: 13.33px;">layout</a> <a href="/tags/media/" style="font-size: 10px;">media</a> <a href="/tags/memory/" style="font-size: 10px;">memory</a> <a href="/tags/meta/" style="font-size: 10px;">meta</a> <a href="/tags/mvvm/" style="font-size: 13.33px;">mvvm</a> <a href="/tags/oo/" style="font-size: 10px;">oo</a> <a href="/tags/pattern/" style="font-size: 10px;">pattern</a> <a href="/tags/promise/" style="font-size: 13.33px;">promise</a> <a href="/tags/router/" style="font-size: 10px;">router</a> <a href="/tags/samba/" style="font-size: 10px;">samba</a> <a href="/tags/server/" style="font-size: 16.67px;">server</a> <a href="/tags/setInterval/" style="font-size: 10px;">setInterval</a> <a href="/tags/snippet/" style="font-size: 10px;">snippet</a> <a href="/tags/socket-io/" style="font-size: 10px;">socket.io</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/this/" style="font-size: 10px;">this</a> <a href="/tags/typecho/" style="font-size: 10px;">typecho</a> <a href="/tags/ubb/" style="font-size: 10px;">ubb</a> <a href="/tags/uglify/" style="font-size: 10px;">uglify</a> <a href="/tags/waterflow/" style="font-size: 10px;">waterflow</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/二进制/" style="font-size: 10px;">二进制</a> <a href="/tags/运算符/" style="font-size: 10px;">运算符</a> <a href="/tags/重定向/" style="font-size: 10px;">重定向</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+					
+						<section class="switch-part switch-part3">
+					
+					<div id="js-aboutme">狼厂攻城师，爱打羽毛球，欢迎骚扰！</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Jimco</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Jimco</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/jimco" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/515789799" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-front-end-excellent-article-navigate" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/22/front-end-excellent-article-navigate/" class="article-date">
+  	<time datetime="2016-03-22T13:07:31.000Z" itemprop="datePublished">2016-03-22</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      前端优秀文章导航
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Snippet/">Snippet</a>
+	</div>
+
+
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+	</div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Javascript"><a href="#Javascript" class="headerlink" title="Javascript"></a>Javascript</h2><ul>
+<li><p><a href="http://web.jobbole.com/82201/" target="_blank" rel="external">解析 Facebook 的 Flux 应用架构</a></p>
+</li>
+<li><p><a href="https://segmentfault.com/a/1190000000732617" target="_blank" rel="external">有趣的 HTML5：离线存储</a></p>
+</li>
+<li><p><a href="http://www.ibm.com/developerworks/cn/web/wa-jsmemory/" target="_blank" rel="external">了解 JavaScript 应用程序中的内存泄漏</a></p>
+<a id="more"></a>
+</li>
+<li><p><a href="https://www.h5jun.com/post/left-pad.html" target="_blank" rel="external">由NPM引发的关于 left-pad 的那些事儿</a></p>
+</li>
+<li><p><a href="https://github.com/livoras/blog/issues/8" target="_blank" rel="external">JavaScript 基于时间的动画算法</a></p>
+</li>
+<li><p><a href="http://www.cnblogs.com/whitewolf/p/javascript-single-thread-and-browser-event-loop.html" target="_blank" rel="external">JavaScript单线程和浏览器事件循环简述</a></p>
+</li>
+<li><p><a href="https://segmentfault.com/a/1190000003933990" target="_blank" rel="external">Sizzle选择器引擎原理分析</a></p>
+</li>
+<li><p><a href="http://yanhaijing.com/html/2016/03/12/html5-video/" target="_blank" rel="external">HTML5视频的那些事儿</a></p>
+</li>
+<li><p><a href="http://matrix.h5jun.com/slide/show?id=117" target="_blank" rel="external">前端动画原理与实现</a></p>
+</li>
+<li><p><a href="http://www.cnblogs.com/coco1s/p/5261646.html" target="_blank" rel="external">【深入浅出jQuery】源码浅析–整体架构</a></p>
+</li>
+<li><p><a href="http://www.cnblogs.com/coco1s/p/5303041.html" target="_blank" rel="external">【深入浅出jQuery】源码浅析2–奇技淫巧</a></p>
+</li>
+<li><p><a href="http://blog.h5jun.com/post/inherits.html" target="_blank" rel="external">从本质认识JavaScript的原型继承和类继承</a></p>
+</li>
+<li><p><a href="http://www.zcfy.cc/article/425" target="_blank" rel="external">3 种不同的原型继承： ES6+ 版本</a></p>
+</li>
+<li><p><a href="http://www.cnblogs.com/lovesueee/p/4442509.html" target="_blank" rel="external">Angular系列文章之angular路由</a></p>
+</li>
+<li><p><a href="http://www.cnblogs.com/ywang1724/p/3946339.html" target="_blank" rel="external">常用排序算法之JavaScript实现</a></p>
+</li>
+<li><p><a href="http://www.nowamagic.net/librarys/veda/detail/255" target="_blank" rel="external">JavaScript排序算法之归并排序</a></p>
+</li>
+<li><p><a href="https://www.h5jun.com/post/array-shuffle.html" target="_blank" rel="external">数组的完全随机排列</a></p>
+</li>
+<li><p><a href="http://coolshell.cn/articles/2704.html" target="_blank" rel="external">检查素数的正则表达式</a></p>
+</li>
+<li><p><a href="http://ouvens.github.io/frontend-javascript/2015/12/28/nine-browser-cache-methods.html" target="_blank" rel="external">九种浏览器端缓存机制知多少</a></p>
+</li>
+<li><p><a href="https://yq.aliyun.com/articles/50624" target="_blank" rel="external">作为前端应当了解的Web缓存知识</a></p>
+</li>
+<li><p><a href="http://zqianduan.com/2016/03/22/front-end-excellent-article-navigate/">Vue.js：轻量高效的前端组件化方案</a></p>
+</li>
+<li><p><a href="http://www.cnblogs.com/axes/p/4603984.html" target="_blank" rel="external">移动前端—图片压缩上传实践</a></p>
+</li>
+<li><p><a href="https://github.com/berwin/Blog/issues/11" target="_blank" rel="external">深入浅出 - vue之深入响应式原理</a></p>
+</li>
+<li><p><a href="http://zcfy.cc/article/513" target="_blank" rel="external">JavaScript 创建对象: 方法一览与最佳实践</a></p>
+</li>
+<li><p><a href="http://qianduan.guru/2016/08/13/gesture_detection_in_html5/" target="_blank" rel="external">HTML5 手势检测原理和实现</a></p>
+</li>
+<li><p><a href="http://www.ituring.com.cn/article/48461" target="_blank" rel="external">从零开始编写自己的JavaScript框架</a></p>
+</li>
+<li><p><a href="http://www.zcfy.cc/article/1211" target="_blank" rel="external">React中一个没人能解释清楚的问题——为什么要使用Virtual DOM</a></p>
+</li>
+<li><p><a href="http://www.alloyteam.com/2016/12/learn-rxjs/" target="_blank" rel="external">构建流式应用—RxJS详解</a></p>
+</li>
+<li><p><a href="http://mp.weixin.qq.com/s/9-vW_zeocvQYrzZ1Bn1uiw" target="_blank" rel="external">Redux 与异步数据逻辑封装</a></p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/24336831?refer=study-fe" target="_blank" rel="external">ES 5 新增特性汇总</a></p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/24570791" target="_blank" rel="external">ES 6 新特性汇总（一图全览）</a></p>
+</li>
+<li><p><a href="http://mp.weixin.qq.com/s/9-vW_zeocvQYrzZ1Bn1uiw" target="_blank" rel="external">ECMAScript 6 规范总结</a></p>
+</li>
+</ul>
+<h2 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h2><ul>
+<li><p><a href="http://www.ibm.com/developerworks/cn/web/1409_chengfu_css3flexbox/" target="_blank" rel="external">深入理解 CSS3 弹性盒布局模型</a></p>
+</li>
+<li><p><a href="http://div.io/topic/1092" target="_blank" rel="external">移动端高清、多屏适配方案</a></p>
+</li>
+<li><p><a href="http://www.html-js.com/article/Like-the-winter-flexible-design-and-implementation-of-the-mobile-phone-Taobao-cold" target="_blank" rel="external">手机淘宝的flexible设计与实现</a></p>
+</li>
+<li><p><a href="http://www.nihaoshijie.com.cn/index.php/archives/593" target="_blank" rel="external">移动web适配之rem</a></p>
+</li>
+<li><p><a href="http://www.ibm.com/developerworks/cn/web/1604-postcss-css/index.html" target="_blank" rel="external">使用 PostCSS 进行 CSS 处理</a> </p>
+</li>
+<li><p><a href="https://xinranliu.me/2015-05-09-1px-in-retina/" target="_blank" rel="external">Retina 屏幕下的 1px 边框</a></p>
+</li>
+</ul>
+<h2 id="构建工具"><a href="#构建工具" class="headerlink" title="构建工具"></a>构建工具</h2><ul>
+<li><p><a href="https://github.com/ericdum/mujiang.info/issues/6/" target="_blank" rel="external">NPM 的 package.json 中文文档</a></p>
+</li>
+<li><p><a href="https://segmentfault.com/a/1190000005659878" target="_blank" rel="external">Webpack 前端构建集成方案</a></p>
+</li>
+<li><p><a href="https://segmentfault.com/a/1190000005969488" target="_blank" rel="external">使用 webpack + react + redux + es6 开发组件化前端项目</a></p>
+</li>
+</ul>
+<h2 id="开发者手册"><a href="#开发者手册" class="headerlink" title="开发者手册"></a>开发者手册</h2><ul>
+<li><p><a href="http://devdocs.io/" target="_blank" rel="external">DevDocs</a></p>
+</li>
+<li><p><a href="http://bonsaiden.github.io/JavaScript-Garden/zh/" target="_blank" rel="external">JavaScript 秘密花园</a></p>
+</li>
+<li><p><a href="http://www.ruanyifeng.com/blog/2014/05/restful_api.html" target="_blank" rel="external">RESTful API 设计指南</a></p>
+</li>
+<li><p><a href="https://github.com/markyun/My-blog/tree/master/Front-end-Developer-Questions/Questions-and-Answers" target="_blank" rel="external">前端开发面试题</a></p>
+</li>
+<li><p><a href="http://docs.huihoo.com/jquery/jquery-fundamentals/zh-cn/index.html" target="_blank" rel="external">jQuery 基本原理</a></p>
+</li>
+<li><p><a href="http://es6.ruanyifeng.com/" target="_blank" rel="external">ECMAScript 6入门</a></p>
+</li>
+<li><p><a href="http://javascript.ruanyifeng.com/" target="_blank" rel="external">JavaScript 标准参考教程（alpha）</a></p>
+</li>
+<li><p><a href="http://css.doyoe.com/" target="_blank" rel="external">CSS参考手册</a></p>
+</li>
+<li><p><a href="http://www.css88.com/doc/backbone/" target="_blank" rel="external">Backbone.js(1.1.2) API中文文档</a></p>
+</li>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide" target="_blank" rel="external">MDN JavaScript 指南</a></p>
+</li>
+<li><p><a href="http://es6.ruanyifeng.com/" target="_blank" rel="external">ECMAScript 6 入门</a></p>
+</li>
+<li><p><a href="http://blog.csdn.net/vbdfforever/article/details/50727462" target="_blank" rel="external">ECMAScript 6规范总结</a></p>
+</li>
+<li><p><a href="http://cn.redux.js.org/" target="_blank" rel="external">Redux 中文文档</a></p>
+</li>
+<li><p><a href="http://linuxtools-rst.readthedocs.io/zh_CN/latest/base/index.html" target="_blank" rel="external">Linux基础</a></p>
+</li>
+<li><p><a href="http://man.linuxde.net/" target="_blank" rel="external">Linux命令大全</a></p>
+</li>
+</ul>
+<h2 id="大前端"><a href="#大前端" class="headerlink" title="大前端"></a>大前端</h2><ul>
+<li><p><a href="http://www.w3cplus.com/javascript/state-of-the-art-javascript-in-2016.html" target="_blank" rel="external">2016年JavaScript技术栈展望</a></p>
+</li>
+<li><p><a href="http://www.jianshu.com/p/c6257701d682" target="_blank" rel="external">你可能不知道的font</a></p>
+</li>
+<li><p><a href="http://taobaofed.org/blog/2015 /12/17/seller-bigpipe/" target="_blank" rel="external">新版卖家中心 Bigpipe 实践（一）</a></p>
+</li>
+<li><p><a href="http://taobaofed.org/blog/2016/03/25/seller-bigpipe-coding/" target="_blank" rel="external">新版卖家中心 Bigpipe 实践（二）</a></p>
+</li>
+<li><p><a href="http://blog.jobbole.com/12749/" target="_blank" rel="external">现代浏览器的工作原理</a></p>
+</li>
+<li><p><a href="http://mp.weixin.qq.com/s?__biz=MzIzMzEzODYwOA==&amp;mid=417196806&amp;idx=1&amp;sn=fb9beaec30a5836e754d4a5be81d5cec" target="_blank" rel="external">京东资深前端架构师分享前端工程化在电商首页中的实践</a></p>
+</li>
+<li><p><a href="https://segmentfault.com/a/1190000004523659" target="_blank" rel="external">HTTPS科普扫盲帖</a></p>
+</li>
+<li><p><a href="https://imququ.com/post/how-to-decrypt-https.html" target="_blank" rel="external">三种解密 HTTPS 流量的方法介绍</a></p>
+</li>
+<li><p><a href="http://www.alloyteam.com/2016/07/httphttp2-0spdyhttps-reading-this-is-enough/" target="_blank" rel="external">HTTP2.0,SPDY,HTTPS你应该知道的一些事</a></p>
+</li>
+<li><p><a href="http://www.alloyteam.com/2017/01/http2-server-push-research/" target="_blank" rel="external">HTTP2 Server Push的研究</a></p>
+</li>
+<li><p><a href="https://imququ.com/search.html?s=%E5%85%B3%E4%BA%8E%E5%90%AF%E7%94%A8+HTTPS+%E7%9A%84%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB" target="_blank" rel="external">关于启用 HTTPS 的经验分享</a></p>
+</li>
+<li><p><a href="http://www.cnblogs.com/Jessy/p/3535612.html" target="_blank" rel="external">TCP的三次握手(建立连接）和四次挥手(关闭连接）</a></p>
+</li>
+<li><p><a href="https://jerryc8080.gitbooks.io/understand-tcp-and-udp/" target="_blank" rel="external">理解 TCP 和 UDP</a></p>
+</li>
+<li><p><a href="http://f2er.info/article/31" target="_blank" rel="external">超全面的移动端尺寸基础知识科普</a></p>
+</li>
+<li><p><a href="http://taobaofed.org/blog/2016/04/25/performance-composite/" target="_blank" rel="external">无线性能优化：Composite</a></p>
+</li>
+<li><p><a href="https://github.com/CraryPrimitiveMan/awesome-php-zh_CN" target="_blank" rel="external">PHP 资源列表</a></p>
+</li>
+<li><p><a href="http://ouvens.github.io/frontend-weboptimize/2015/11/17/front-end-image-optmize.html" target="_blank" rel="external">web前端图片极限优化策略</a></p>
+</li>
+<li><p><a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/image-optimization?hl=zh-cn" target="_blank" rel="external">Google Developer 图片优化</a></p>
+</li>
+<li><p><a href="http://blog.jobbole.com/100349/" target="_blank" rel="external">如果有人问你数据库的原理，叫他看这篇文章</a></p>
+</li>
+<li><p><a href="http://tech.meituan.com/mysql-index.html" target="_blank" rel="external">MySQL索引原理及慢查询优化</a></p>
+</li>
+<li><p><a href="https://www.qcloud.com/community/article/164816001481011945" target="_blank" rel="external">MySQL开发实践8问，你能hold住几个？</a></p>
+</li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/03/19/text-size-adjust/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          -webkit-text-size-adjust 使用说明
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/23/mvc-deformation/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">前端 MVC 变形记</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="front-end-excellent-article-navigate" data-title="前端优秀文章导航" data-url="http://zqianduan.com/2016/03/22/front-end-excellent-article-navigate/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"zqianduan"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 Jimco
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?ccac13d2d4e18f7ac82a7f1c9de98a90";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+  </div>
+</body>
+</html>

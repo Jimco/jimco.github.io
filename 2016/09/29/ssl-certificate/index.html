@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>SSL 证书简介 | 最前端</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="相关概念SSL证书：在应用HTTPS之前，用户应先配置SSL证书。SSL证书是由证书授权中心（CA）签发的对用户公钥的认证。证书的内容包括：电子签证机关的信息、公钥用户信息、公钥、权威机构的签字和有效期等。目前，证书的格式和验证方法普遍遵循X.509 国际标准。 HTTPS：Hyper Text Transfer Protocol over Secure Socket Layer。HTTPS是以安">
+<meta name="keywords" content="https,ssl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSL 证书简介">
+<meta property="og:url" content="http://zqianduan.com/2016/09/29/ssl-certificate/index.html">
+<meta property="og:site_name" content="最前端">
+<meta property="og:description" content="相关概念SSL证书：在应用HTTPS之前，用户应先配置SSL证书。SSL证书是由证书授权中心（CA）签发的对用户公钥的认证。证书的内容包括：电子签证机关的信息、公钥用户信息、公钥、权威机构的签字和有效期等。目前，证书的格式和验证方法普遍遵循X.509 国际标准。 HTTPS：Hyper Text Transfer Protocol over Secure Socket Layer。HTTPS是以安">
+<meta property="og:updated_time" content="2017-04-27T07:01:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SSL 证书简介">
+<meta name="twitter:description" content="相关概念SSL证书：在应用HTTPS之前，用户应先配置SSL证书。SSL证书是由证书授权中心（CA）签发的对用户公钥的认证。证书的内容包括：电子签证机关的信息、公钥用户信息、公钥、权威机构的签字和有效期等。目前，证书的格式和验证方法普遍遵循X.509 国际标准。 HTTPS：Hyper Text Transfer Protocol over Secure Socket Layer。HTTPS是以安">
+  
+    <link rel="alternative" href="/atom.xml" title="最前端" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay">
+	<div class="st-so-wrap">
+		<input type="text" id="local-search-input" class="st-default-search-input st-so" placeholder="回车搜索 直接有效">
+	</div>
+</div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Jimco</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/jimco" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/515789799" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/301/" style="font-size: 10px;">301</a> <a href="/tags/algorithm/" style="font-size: 11.67px;">algorithm</a> <a href="/tags/angular/" style="font-size: 15px;">angular</a> <a href="/tags/async/" style="font-size: 10px;">async</a> <a href="/tags/backbone/" style="font-size: 10px;">backbone</a> <a href="/tags/bfc/" style="font-size: 10px;">bfc</a> <a href="/tags/browser/" style="font-size: 10px;">browser</a> <a href="/tags/cache/" style="font-size: 10px;">cache</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/comet/" style="font-size: 10px;">comet</a> <a href="/tags/css/" style="font-size: 18.33px;">css</a> <a href="/tags/dom/" style="font-size: 10px;">dom</a> <a href="/tags/emlog/" style="font-size: 10px;">emlog</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/event/" style="font-size: 10px;">event</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/frontend/" style="font-size: 10px;">frontend</a> <a href="/tags/gzip/" style="font-size: 11.67px;">gzip</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/https/" style="font-size: 11.67px;">https</a> <a href="/tags/iframe/" style="font-size: 10px;">iframe</a> <a href="/tags/image/" style="font-size: 10px;">image</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/layout/" style="font-size: 13.33px;">layout</a> <a href="/tags/media/" style="font-size: 10px;">media</a> <a href="/tags/memory/" style="font-size: 10px;">memory</a> <a href="/tags/meta/" style="font-size: 10px;">meta</a> <a href="/tags/mvvm/" style="font-size: 13.33px;">mvvm</a> <a href="/tags/oo/" style="font-size: 10px;">oo</a> <a href="/tags/pattern/" style="font-size: 10px;">pattern</a> <a href="/tags/promise/" style="font-size: 13.33px;">promise</a> <a href="/tags/router/" style="font-size: 10px;">router</a> <a href="/tags/samba/" style="font-size: 10px;">samba</a> <a href="/tags/server/" style="font-size: 16.67px;">server</a> <a href="/tags/setInterval/" style="font-size: 10px;">setInterval</a> <a href="/tags/snippet/" style="font-size: 10px;">snippet</a> <a href="/tags/socket-io/" style="font-size: 10px;">socket.io</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/this/" style="font-size: 10px;">this</a> <a href="/tags/typecho/" style="font-size: 10px;">typecho</a> <a href="/tags/ubb/" style="font-size: 10px;">ubb</a> <a href="/tags/uglify/" style="font-size: 10px;">uglify</a> <a href="/tags/waterflow/" style="font-size: 10px;">waterflow</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/二进制/" style="font-size: 10px;">二进制</a> <a href="/tags/运算符/" style="font-size: 10px;">运算符</a> <a href="/tags/重定向/" style="font-size: 10px;">重定向</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+					
+						<section class="switch-part switch-part3">
+					
+					<div id="js-aboutme">狼厂攻城师，爱打羽毛球，欢迎骚扰！</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Jimco</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Jimco</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/jimco" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/515789799" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-ssl-certificate" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/09/29/ssl-certificate/" class="article-date">
+  	<time datetime="2016-09-29T05:40:28.000Z" itemprop="datePublished">2016-09-29</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SSL 证书简介
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Server/">Server</a>
+	</div>
+
+
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/https/">https</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssl/">ssl</a></li></ul>
+	</div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h2><p><strong>SSL证书：</strong>在应用HTTPS之前，用户应先配置SSL证书。SSL证书是由证书授权中心（CA）签发的对用户公钥的认证。证书的内容包括：电子签证机关的信息、公钥用户信息、公钥、权威机构的签字和有效期等。目前，证书的格式和验证方法普遍遵循X.509 国际标准。</p>
+<p><strong>HTTPS：</strong>Hyper Text Transfer Protocol over Secure Socket Layer。HTTPS是以安全为目标的HTTP通道，简单讲是HTTP的安全版。即HTTP下加入SSL层，HTTPS的安全基础是SSL。</p>
+<p><strong>SSL：</strong>Secure Sockets Layer。SSL是一个安全协议，它提供使用 TCP/IP 的通信应用程序间的隐私与完整性。因特网的超文本传输协议（HTTP）使用 SSL 来实现安全的通信。</p>
+<p><strong>TLS：</strong>Transport Layer Security Protocol。TLS是IETF制定的一种新的协议，它建立在SSL 3.0协议规范之上，是SSL 3.0的后续版本。在TLS与SSL3.0之间存在着显著的差别，主要是它们所支持的加密算法不同，所以TLS与SSL3.0不能互操作。TLS也经常用SSL来指代。<br><a id="more"></a></p>
+<p><strong>CA：</strong>即证书授权中心（CA, Certificate Authority）。CA是负责签发证书、认证证书、管理已颁发证书的机关。用户向CA提出申请后，CA负责审核用户信息，然后对关键信息利用私钥进行”签名”，并公开对应的公钥。客户端可以利用公钥验证签名。</p>
+<p><strong>非对称加密：</strong>即常见的RSA、DH、EC等算法，算法特点是密钥成对出现，一般称为公钥（公开）和私钥（保密），公钥加密的信息只能私钥解开，私钥加密的信息只能公钥解开。公钥对外公开，私钥由服务器保存。因此掌握公钥的不同客户端之间不能互相解密信息，只能和掌握私钥的服务器进行加密通信，服务器可以实现1对多的通信，客户端也可以用来验证掌握私钥的服务器身份。</p>
+<p><strong>CSR：</strong>CSR是Certificate Signing Request的英文缩写，即证书请求文件，也就是证书申请者在申请数字证书时由CSP（加密服务提供者）在生成私钥的同时所生成的证书请求文件。证书申请者只要把CSR文件提交给证书颁发机构后，证书颁发机构使用其根证书私钥签名就生成了证书公钥文件，也就是颁发给用户的证书。</p>
+<p><strong>PEM：</strong>Openssl所使用的文档格式。<a href="http://www.rfc-editor.org/rfc/" target="_blank" rel="external">RFC 1421-1424</a>。</p>
+<h2 id="创建证书"><a href="#创建证书" class="headerlink" title="创建证书"></a>创建证书</h2><p>可以使用OpenSSL来创建CSR，并通过相关机构（例如：沃通）申请证书，具体操作方法如下：</p>
+<h3 id="前置任务"><a href="#前置任务" class="headerlink" title="前置任务"></a>前置任务</h3><p>在申请证书前，用户应先获取并安装相关工具。</p>
+<p><strong>Linux：</strong>建议使用OpenSSL。OpenSSL是一个强大的SLL密码库，囊括主要的密码算法、常用的密钥和证书封装管理功能及SSL协议，并提供丰富的应用程序供测试或其它目的使用。</p>
+<p><strong>Windows：</strong>可供选择的工具包括：IIS Manager，SelfSSL，OpenSSL和Windows PowerShell cmdlets等。</p>
+<h3 id="使用OpenSSL创建证书"><a href="#使用OpenSSL创建证书" class="headerlink" title="使用OpenSSL创建证书"></a>使用OpenSSL创建证书</h3><p>提交证书申请前，用户需在本地生成私钥和证书请求文件（CSR）；然后用户可以将CSR提交至CA进行签名认证，也可以通过自签名的方式进行本地测试。具体操作方法如以下示例所示（本示例中使用的工具为OpenSSL）。</p>
+<ul>
+<li><p>(1) 执行命令 <code>openssl genrsa -out my-private-key.pem 2048</code>，通过RSA算法生成私钥，并保存在 <code>my-private-key.pem</code> 文件中。百度开放云支持1024、2048和4096 bits长度的私钥，建议使用2048 bits长度。</p>
+<p>  <strong>注意：</strong>请妥善保管私钥，避免遗失和泄露。</p>
+<p>  查看私钥文件的具体内容如下：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">-----BEGIN RSA PRIVATE KEY-----</div><div class="line">MIIEowIBAAKCAQEAtp7N1PA57N6cA73X9WyupkjZYx1bYHZA35gTrGa6ojd8oURW</div><div class="line">8cqXD46P0dccfiJ34s1eEMquuMsFTtezVNmMH9elADnKVIRBg/NfwehhLx++eeJ0</div><div class="line">CuOT08QB373Lyzud93BefhHfYB295DI42IF8NuC60jWVlfmZG7cBSAPSt24Lya1l</div><div class="line">PzvEULnDSXgMVyDcOW4v82hcztLhfliFUmrf5Vz/uRJNwBKuMrRIBGu4u8pxplzg</div><div class="line">......</div><div class="line">9z+Rm0fnFhc3/945EIic9sUCgYA0ZoqfXOkQ07UnIPwvFKNIIQRTJfY67V6sZt4t</div><div class="line">l3pbT+BlM2ihS4G4MlSfw4l6lFSPOCsF16RbftOlUPT/ieWWROBFR2tZ1RLNTfmo</div><div class="line">3T5w9tyjjYFOxL56sPh5MmTTq9JhtfMn+xxsaPwgASDLbj58x4dRj4y7jHqOMbCE</div><div class="line">15QNOQKBgADt2m46ZRnFZNL78Xl93/D0TOXowmjiOtgBhEwsuRnlPuDNMUSF4+OZ</div><div class="line">CWm17VfZRQSeN81v3N+0jeJkl3GFemC0Zt49pce4H9paZuv9qBvBXzEaOqiJXwE1</div><div class="line">Q/92Nt5ldSLaEtuMOqxv8pdRv7jIFox2mnimFxpGpjpyPqRK5YC1</div><div class="line">-----END RSA PRIVATE KEY-----</div></pre></td></tr></table></figure>
+</li>
+<li><p>(2) 执行命令 <code>openssl req -sha256 -new -key my-private-key.pem -out csr.pem</code>，根据系统提示输入相关配置信息，生成CSR文件。其中，<code>-key my-private-key.pem</code> 用来指定步骤1中生成的私钥文件；<code>-out csr.pem</code> 用来指定CSR文件的名称。</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">You are about to be asked to enter information that will be incorporated</div><div class="line">into your certificate request.</div><div class="line">What you are about to enter is what is called a Distinguished Name or a DN.</div><div class="line">There are quite a few fields but you can leave some blank</div><div class="line">For some fields there will be a default value,</div><div class="line">If you enter <span class="string">'.'</span>, the field will be left blank.</div><div class="line">-----</div><div class="line">Country Name (2 letter code) [AU]:CN</div><div class="line">State or Province Name (full name) [Some-State]:Beijing</div><div class="line">Locality Name (eg, city) []:Beijing</div><div class="line">Organization Name (eg, company) [Internet Widgits Pty Ltd]:My Company</div><div class="line">Organizational Unit Name (eg, section) []:.</div><div class="line">Common Name (e.g. server FQDN or YOUR name) []:www.mycompany.com</div><div class="line">Email Address []:example@mycompany.com</div><div class="line"></div><div class="line">Please enter the following <span class="string">'extra'</span> attributes</div><div class="line">to be sent with your certificate request</div><div class="line">A challenge password []:.</div><div class="line">An optional company name []:.</div></pre></td></tr></table></figure>
+<p>  查看CSR文件具体内容如下：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">-----BEGIN CERTIFICATE REQUEST-----</div><div class="line">MIICuzCCAaMCAQAwdjELMAkGA1UEBhMCQ04xEDAOBgNVBAgMB0JlaWppbmcxEDAO</div><div class="line">BgNVBAcMB0JlaWppbmcxDjAMBgNVBAoMBUppbWNvMQ4wDAYDVQQDDAVKaW1jbzEj</div><div class="line">MCEGCSqGSIb3DQEJARYUY2FveW91bmdAZm94bWFpbC5jb20wggEiMA0GCSqGSIb3</div><div class="line">......</div><div class="line">9Dbyxk5csKIR8BHzOaIndEX37fqbw5EGeSQkfGVpoeJXF39jyobMFlrW6vgywgCe</div><div class="line">2/8Jnw/oditEdX4c2kY8JzQYHADNoXxG9SR7ZGypd+LeF6utURQk+ol7K1MwzEvX</div><div class="line">QUsm4FKVeG6ACENqUZrHzwaDAMALxnHz6UHkpoEpmif+exs/cjROmy8w96fmytQv</div><div class="line">aes433mU7TA9XznzpS28YwBaNDNtBWzgPZ2gTbTY5Q==</div><div class="line">-----END CERTIFICATE REQUEST-----</div></pre></td></tr></table></figure>
+<p>  执行以上命令时所需填写的内容解释如下表所示：</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Country Name</td>
+<td>公司/组织所在国家ISO代码，中国代码为CN，其它国家代码可参考<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements" target="_blank" rel="external">ISO Code</a></td>
+</tr>
+<tr>
+<td>State or Province Name</td>
+<td>公司/组织所在的省/州名称</td>
+</tr>
+<tr>
+<td>Locality Name</td>
+<td>公司/组织所在城市名称</td>
+</tr>
+<tr>
+<td>Organization Name</td>
+<td>公司/组织的名称，此处应该出完整全称</td>
+</tr>
+<tr>
+<td>Organizational Unit Name</td>
+<td>产品或分支机构名称，可选</td>
+</tr>
+<tr>
+<td>Common Name</td>
+<td>公司/组织的完全限定域名（FQDN，Fully-Qualified Domain Name），例如： www.mycompany.com</td>
+</tr>
+<tr>
+<td>Email Address</td>
+<td>管理员的Email地址</td>
+</tr>
+<tr>
+<td>A challenge password</td>
+<td>加密证书请求的密码</td>
+</tr>
+<tr>
+<td>An optional company name</td>
+<td>可选公司/组织名称</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>(3) 向CA中心提交数字证书认证申请。用户可选择 <a href="https://www.verisign.com/" target="_blank" rel="external">VeriSign</a>、<a href="https://www.geotrust.com/" target="_blank" rel="external">GeoTrust</a> 等第三方认证机构。</p>
+<p>  用户也可以执行命令 <code>openssl x509 -req -days 365 -in csr.pem -signkey my-private-key.pem -out my-certificate.pem</code>，对证书进行自签名，用于网站的测试。其中，<code>-days 365</code> 代表证书有效期为365天；<code>-in csr.pem</code> 用来指定步骤2生成CSR文件；<code>-signkey my-private-key.pem</code> 用来指定用于对CSR进行签名的私钥，本示例中使用步骤1生成的私钥进行签名；<code>-out my-certificate.pem</code> 用来指定生成的证书名称。</p>
+<p>  查看生成的证书文件内容如下：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">-----BEGIN CERTIFICATE-----</div><div class="line">MIIDaDCCAlACCQCNYeeikeNQ0TANBgkqhkiG9w0BAQUFADB2MQswCQYDVQQGEwJD</div><div class="line">TjEQMA4GA1UECAwHQmVpamluZzEQMA4GA1UEBwwHQmVpamluZzEOMAwGA1UECgwF</div><div class="line">SmltY28xDjAMBgNVBAMMBUppbWNvMSMwIQYJKoZIhvcNAQkBFhRjYW95b3VuZ0Bm</div><div class="line">b3htYWlsLmNvbTAeFw0xNjA5MjkwNjA1NDVaFw0xNzA5MjkwNjA1NDVaMHYxCzAJ</div><div class="line">......</div><div class="line">YZZ54dCkVQybjSy8O/tGLi6MDwIDAQABMA0GCSqGSIb3DQEBBQUAA4IBAQAhhOVe</div><div class="line">p1yRWvbiag/ObWtxFuhOpWpvVsrYwlbgusoCfulJUtavD33ZCVzp5/Zg6QdhlDi1</div><div class="line">XPvmoXfj3HG9tjvyZnAqi8+vyozL6QTCo1mNDGCQyLqwU8b5J0nGe1lpayDF97wL</div><div class="line">UBQh+685ILSLZA4LnNvsqfVG8CxlJK8nvIWXbW0waMsnglsf1Gj7F<span class="built_in">cd</span>RFcYeMtSY</div><div class="line">pniTCET/TtiwDk2+0YTehD8gWiscp/W87sNwpGVKEFD4aGBFTWDG5lYgslJHi/I3</div><div class="line">6j4ov3PyZWKVIFWncxFPAtFFDnu7ZnXUxggXIEvYMKYaDcHwssLSuwAqWvhEClif</div><div class="line">mvIHZCCc1FYI9bNa</div><div class="line">-----END CERTIFICATE-----</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="证书格式要求"><a href="#证书格式要求" class="headerlink" title="证书格式要求"></a>证书格式要求</h2><p>上传证书前，用户需要确保：</p>
+<ol>
+<li><p>证书（包括：服务器证书、私钥、证书链）格式符合PEM格式要求。如果用户从CA收到的证书不是PEM格式的，需要转换成PEM格式。具体要求如下：</p>
+<ul>
+<li><p>证书以 <code>-----BEGIN CERTIFICATE-----</code> 开头，<code>-----END CERTIFICATE-----</code> 结尾；</p>
+</li>
+<li><p>每行64字符，最后一行不超过64字符。</p>
+<p>如果用户从CA收到的证书不是PEM格式的，需要转换成PEM格式，几种常见的证书格式转换为PEM格式的方法如下：</p>
+</li>
+<li><p><strong>DER -&gt; PEM:</strong></p>
+<p>  证书：<code>openssl x509 -inform der -in my-certificate.cer -out my-certificate.pem</code></p>
+<p>  私钥：<code>openssl rsa -inform DER -outform PEM -in my-private-key.der -out my-private-key.pem</code></p>
+</li>
+<li><p><strong>P7B -&gt; PEM:</strong></p>
+<p>  证书：<code>openssl pkcs7 -print_certs -in my-certificate.p7b -out my-certificate.pem</code></p>
+<p>  私钥：无私钥</p>
+</li>
+<li><p><strong>PFX -&gt; PEM:</strong></p>
+<p>  证书：<code>openssl pkcs12 -in certname.pfx -nokeys -out my-certificate.pem</code></p>
+<p>  私钥：<code>openssl pkcs12 -in certname.pfx -nocerts -out my-private-key.pem -nodes</code></p>
+</li>
+</ul>
+</li>
+<li><p>服务器证书需要在有效期内（证书开始时间 &lt;= 当前时间 &lt;= 证书失效时间）。</p>
+</li>
+<li><p>私钥不能加密，即执行生成私钥命令时不能添加密码参数。</p>
+</li>
+<li><p>服务器证书只能包含一个证书。</p>
+</li>
+<li><p>私钥需要和服务器证书里的公钥匹配。可以通过以下两条命令生成私钥和证书的MD5值，如果二者一致，则可认为私钥与证书里的公钥匹配。</p>
+<ul>
+<li><p><code>openssl x509 -noout -modulus -in my-certificate.pem | openssl md5</code></p>
+</li>
+<li><p><code>openssl rsa -noout -modulus -in my-private-key.pem | openssl md5</code></p>
+</li>
+</ul>
+</li>
+<li><p>证书链完整，即通过证书链可以对应到可信根证书。具体要求如下：</p>
+<ul>
+<li><p>证书之间不能有空行；</p>
+</li>
+<li><p>每一份证书遵守第一项中关于证书的格式要求，示例如下：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">-----BEGIN CERTIFICATE-----</div><div class="line"></div><div class="line">-----END CERTIFICATE-----</div><div class="line"></div><div class="line">-----BEGIN CERTIFICATE-----</div><div class="line"></div><div class="line">-----END CERTIFICATE-----</div><div class="line"></div><div class="line">-----BEGIN CERTIFICATE-----</div><div class="line"></div><div class="line">-----END CERTIFICATE-----</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/04/25/js-bit-operation/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Javascript 按位运算解析
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/12/19/javascript-this/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Javascript this 解析</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="ssl-certificate" data-title="SSL 证书简介" data-url="http://zqianduan.com/2016/09/29/ssl-certificate/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"zqianduan"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 Jimco
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?ccac13d2d4e18f7ac82a7f1c9de98a90";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+  </div>
+</body>
+</html>

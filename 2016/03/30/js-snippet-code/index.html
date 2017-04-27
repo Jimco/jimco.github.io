@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Javascript 代码片段笔记 | 最前端</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="千位分隔符123456789101112function commafy(num) &amp;#123;        num = num + &apos;&apos;;    var reg = /(-?\d+)(\d&amp;#123;3&amp;#125;)/;    while(reg.test(num)) &amp;#123;        num = num.replace(reg, &apos;$1,$2&apos;);    &amp;#125;    ret">
+<meta name="keywords" content="promise,router,event">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript 代码片段笔记">
+<meta property="og:url" content="http://zqianduan.com/2016/03/30/js-snippet-code/index.html">
+<meta property="og:site_name" content="最前端">
+<meta property="og:description" content="千位分隔符123456789101112function commafy(num) &amp;#123;        num = num + &apos;&apos;;    var reg = /(-?\d+)(\d&amp;#123;3&amp;#125;)/;    while(reg.test(num)) &amp;#123;        num = num.replace(reg, &apos;$1,$2&apos;);    &amp;#125;    ret">
+<meta property="og:updated_time" content="2017-04-27T07:01:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Javascript 代码片段笔记">
+<meta name="twitter:description" content="千位分隔符123456789101112function commafy(num) &amp;#123;        num = num + &apos;&apos;;    var reg = /(-?\d+)(\d&amp;#123;3&amp;#125;)/;    while(reg.test(num)) &amp;#123;        num = num.replace(reg, &apos;$1,$2&apos;);    &amp;#125;    ret">
+  
+    <link rel="alternative" href="/atom.xml" title="最前端" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay">
+	<div class="st-so-wrap">
+		<input type="text" id="local-search-input" class="st-default-search-input st-so" placeholder="回车搜索 直接有效">
+	</div>
+</div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Jimco</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/jimco" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/515789799" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/301/" style="font-size: 10px;">301</a> <a href="/tags/algorithm/" style="font-size: 11.67px;">algorithm</a> <a href="/tags/angular/" style="font-size: 15px;">angular</a> <a href="/tags/async/" style="font-size: 10px;">async</a> <a href="/tags/backbone/" style="font-size: 10px;">backbone</a> <a href="/tags/bfc/" style="font-size: 10px;">bfc</a> <a href="/tags/browser/" style="font-size: 10px;">browser</a> <a href="/tags/cache/" style="font-size: 10px;">cache</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/comet/" style="font-size: 10px;">comet</a> <a href="/tags/css/" style="font-size: 18.33px;">css</a> <a href="/tags/dom/" style="font-size: 10px;">dom</a> <a href="/tags/emlog/" style="font-size: 10px;">emlog</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/event/" style="font-size: 10px;">event</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/frontend/" style="font-size: 10px;">frontend</a> <a href="/tags/gzip/" style="font-size: 11.67px;">gzip</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/https/" style="font-size: 11.67px;">https</a> <a href="/tags/iframe/" style="font-size: 10px;">iframe</a> <a href="/tags/image/" style="font-size: 10px;">image</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/layout/" style="font-size: 13.33px;">layout</a> <a href="/tags/media/" style="font-size: 10px;">media</a> <a href="/tags/memory/" style="font-size: 10px;">memory</a> <a href="/tags/meta/" style="font-size: 10px;">meta</a> <a href="/tags/mvvm/" style="font-size: 13.33px;">mvvm</a> <a href="/tags/oo/" style="font-size: 10px;">oo</a> <a href="/tags/pattern/" style="font-size: 10px;">pattern</a> <a href="/tags/promise/" style="font-size: 13.33px;">promise</a> <a href="/tags/router/" style="font-size: 10px;">router</a> <a href="/tags/samba/" style="font-size: 10px;">samba</a> <a href="/tags/server/" style="font-size: 16.67px;">server</a> <a href="/tags/setInterval/" style="font-size: 10px;">setInterval</a> <a href="/tags/snippet/" style="font-size: 10px;">snippet</a> <a href="/tags/socket-io/" style="font-size: 10px;">socket.io</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/this/" style="font-size: 10px;">this</a> <a href="/tags/typecho/" style="font-size: 10px;">typecho</a> <a href="/tags/ubb/" style="font-size: 10px;">ubb</a> <a href="/tags/uglify/" style="font-size: 10px;">uglify</a> <a href="/tags/waterflow/" style="font-size: 10px;">waterflow</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/二进制/" style="font-size: 10px;">二进制</a> <a href="/tags/运算符/" style="font-size: 10px;">运算符</a> <a href="/tags/重定向/" style="font-size: 10px;">重定向</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+					
+						<section class="switch-part switch-part3">
+					
+					<div id="js-aboutme">狼厂攻城师，爱打羽毛球，欢迎骚扰！</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Jimco</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Jimco</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/jimco" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/515789799" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-js-snippet-code" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/30/js-snippet-code/" class="article-date">
+  	<time datetime="2016-03-30T05:55:44.000Z" itemprop="datePublished">2016-03-30</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Javascript 代码片段笔记
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Snippet/">Snippet</a>
+	</div>
+
+
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/event/">event</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/promise/">promise</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/router/">router</a></li></ul>
+	</div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="千位分隔符"><a href="#千位分隔符" class="headerlink" title="千位分隔符"></a>千位分隔符</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">commafy</span>(<span class="params">num</span>) </span>&#123;</div><div class="line">    </div><div class="line">    num = num + <span class="string">''</span>;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> reg = <span class="regexp">/(-?\d+)(\d&#123;3&#125;)/</span>;</div><div class="line"></div><div class="line">    <span class="keyword">while</span>(reg.test(num)) &#123;</div><div class="line">        num = num.replace(reg, <span class="string">'$1,$2'</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> num;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="jQuery-实现简单-Router"><a href="#jQuery-实现简单-Router" class="headerlink" title="jQuery 实现简单 Router"></a>jQuery 实现简单 Router</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">$</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> pathname = location.pathname;</div><div class="line">    $.route = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        $.each(<span class="built_in">arguments</span>, <span class="function"><span class="keyword">function</span>(<span class="params">index</span>) </span>&#123;</div><div class="line">            <span class="keyword">var</span> path = <span class="keyword">this</span>[<span class="string">"path"</span>];</div><div class="line">            <span class="keyword">var</span> func = <span class="keyword">this</span>[<span class="string">"func"</span>];</div><div class="line">            <span class="keyword">if</span>(path &amp;&amp; func) &#123;</div><div class="line">                <span class="keyword">if</span>(pathname.match(path)) &#123;</div><div class="line">                    $(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">                        func.apply(<span class="keyword">this</span>);</div><div class="line">                    &#125;);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;;</div><div class="line">&#125;)(jQuery);</div><div class="line"></div><div class="line"><span class="comment">// Example</span></div><div class="line">$.route(</div><div class="line">    &#123;</div><div class="line">        <span class="comment">// always match</span></div><div class="line">        <span class="comment">// http://example.com/foo/bar/baz.html</span></div><div class="line">        path: <span class="regexp">/./</span>,</div><div class="line">        <span class="attr">func</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="built_in">console</span>.log(<span class="string">"always match!"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// url contains /sample/index.html</span></div><div class="line">        <span class="comment">// http://example.com/foo/bar/sample/index.html</span></div><div class="line">        path: <span class="regexp">/\/sample\/index\.html/</span>,</div><div class="line">        <span class="attr">func</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="built_in">console</span>.log(<span class="string">"sample page!"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">);</div></pre></td></tr></table></figure>
+<h3 id="中文输入法截断解决方案"><a href="#中文输入法截断解决方案" class="headerlink" title="中文输入法截断解决方案"></a>中文输入法截断解决方案</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 利用 compositionstart 和 compositionend 来捕获 IME (input method editor) 的启动和关闭事件</span></div><div class="line">$(<span class="string">'#text'</span>).on(<span class="string">'input'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">    <span class="keyword">if</span>($(<span class="keyword">this</span>).prop(<span class="string">'comStart'</span>)) <span class="keyword">return</span>;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> value = $(<span class="keyword">this</span>).val();</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'当前输入：'</span> + value);</div><div class="line">      </div><div class="line">    <span class="comment">// ....</span></div><div class="line">&#125;)</div><div class="line">.on(<span class="string">'compositionstart'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">    $(<span class="keyword">this</span>).prop(<span class="string">'comStart'</span>, <span class="literal">true</span>);</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'中文输入，开始'</span>);</div><div class="line">&#125;)</div><div class="line">.on(<span class="string">'compositionend'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">    $(<span class="keyword">this</span>).prop(<span class="string">'comStart'</span>, <span class="literal">false</span>);</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'中文输入，结束'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="jQuery-pub-sub-简单实现"><a href="#jQuery-pub-sub-简单实现" class="headerlink" title="jQuery pub/sub 简单实现"></a>jQuery pub/sub 简单实现</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">$</span>) </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> o = $(&#123;&#125;);</div><div class="line"></div><div class="line">    $.subscribe = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        o.on.apply(o, <span class="built_in">arguments</span>);</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    $.unsubscribe = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        o.off.apply(o, <span class="built_in">arguments</span>);</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    $.publish = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        o.trigger.apply(o, <span class="built_in">arguments</span>);</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">&#125;(jQuery));</div></pre></td></tr></table></figure>
+<h3 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> eventSplitter = <span class="regexp">/\s+/</span>;</div><div class="line"></div><div class="line"><span class="keyword">var</span> Events = &#123;</div><div class="line">        <span class="comment">/**</span></div><div class="line">         * _callback = &#123;</div><div class="line">         *      tail: [Object],</div><div class="line">         *      next: &#123;</div><div class="line">         *          callback: [Function],</div><div class="line">         *          context: [Object],</div><div class="line">         *          next: &#123;</div><div class="line">         *              callback: [Function],</div><div class="line">         *              context: [Object],</div><div class="line">         *              next: [Object]</div><div class="line">         *          &#125;</div><div class="line">         *      &#125;</div><div class="line">         * &#125;</div><div class="line">         *</div><div class="line">         * 1. 事件列表最顶层存储了一个 tail 对象，它是最后一次绑定的回调事件的 next 的引用;</div><div class="line">         * 2. evts 允许指定多个事件名，通过空白字符进行分隔(如空格, 制表符等);</div><div class="line">         * 3. 当事件名称为"all"时, 在调用 fire 方法触发任何事件时, </div><div class="line">         * 均会调用"all"事件中绑定的所有回调函数;</div><div class="line">         */</div><div class="line">        on: <span class="function"><span class="keyword">function</span>(<span class="params">evts, callback, context</span>) </span>&#123;</div><div class="line">            <span class="keyword">var</span> evt, calls, node, tail, list;</div><div class="line"></div><div class="line">            <span class="keyword">if</span>(!callback) <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line"></div><div class="line">            evts = evts.split(eventSpliter);</div><div class="line">            calls = <span class="keyword">this</span>._callbacks || (<span class="keyword">this</span>._callbacks = &#123;&#125;);</div><div class="line"></div><div class="line">            <span class="keyword">while</span>(evt = evts.shift()) &#123;</div><div class="line">                list = calls[evt];</div><div class="line">                node = list ? list.tail : &#123;&#125;;</div><div class="line">                node.next = tail = &#123;&#125;;</div><div class="line">                node.callback = callback;</div><div class="line">                node.context = context;</div><div class="line"></div><div class="line">                calls[evt] = &#123;</div><div class="line">                    <span class="attr">tail</span>: tail,</div><div class="line">                    <span class="attr">next</span>: list ? list.next : node;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">        &#125;,</div><div class="line"></div><div class="line">        <span class="attr">off</span>: <span class="function"><span class="keyword">function</span>(<span class="params">evts, callback, context</span>) </span>&#123;</div><div class="line">            <span class="keyword">var</span> evt, calls, node, tail, cb, ctx;</div><div class="line"></div><div class="line">            <span class="keyword">if</span>(!(calls = <span class="keyword">this</span>._callbacks)) <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">            <span class="keyword">if</span>(!(evts || callback || context)) &#123;</div><div class="line">                <span class="keyword">delete</span> <span class="keyword">this</span>._callbacks;</div><div class="line">                <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            evts = evts ? evts.split(eventSpliter) : <span class="built_in">Object</span>.key(calls);</div><div class="line"></div><div class="line">            <span class="keyword">while</span>(evt = evts.shift()) &#123;</div><div class="line">                node = calls[evt];</div><div class="line">                <span class="keyword">delete</span> calls[evt];</div><div class="line"></div><div class="line">                <span class="keyword">if</span>(!node || !(callback || context)) <span class="keyword">continue</span>;</div><div class="line"></div><div class="line">                tail = node.tail;</div><div class="line">                <span class="keyword">while</span>((node = node.next) !== tail) &#123;</div><div class="line">                    cb = node.callback;</div><div class="line">                    ctx = node.context;</div><div class="line"></div><div class="line">                    <span class="keyword">if</span>((callback &amp;&amp; cb !== callback) || (context &amp;&amp; ctx !== context)) &#123;</div><div class="line">                        <span class="keyword">this</span>.on(evt, cb, ctx);</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">        &#125;,</div><div class="line"></div><div class="line">        <span class="attr">fire</span>: <span class="function"><span class="keyword">function</span>(<span class="params">evts</span>) </span>&#123;</div><div class="line">            <span class="keyword">var</span> evt, node, calls, tail, args, all, rest;</div><div class="line"></div><div class="line">            <span class="keyword">if</span>(!(calls = <span class="keyword">this</span>._callbacks)) <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">            all = calls.all;</div><div class="line">            evts = evts.split(eventSpliter);</div><div class="line">            rest = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>, <span class="number">1</span>);</div><div class="line"></div><div class="line">            <span class="keyword">while</span>(evt = evts.shift()) &#123;</div><div class="line">                <span class="keyword">if</span>(node = calls[evt]) &#123;</div><div class="line">                    tail = node.tail;</div><div class="line">                    <span class="keyword">while</span>((node = node.next) !== tail) &#123;</div><div class="line">                        node.callback.apply(node.context || <span class="keyword">this</span>, rest);</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                <span class="keyword">if</span>(node = all) &#123;</div><div class="line">                    tail = node.tail;</div><div class="line">                    args = [evt].concat(rest);</div><div class="line"></div><div class="line">                    <span class="keyword">while</span>((node = node.next) !== tail) &#123;</div><div class="line">                        node.callback.apply(node.context || <span class="keyword">this</span>, args);</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h3 id="短小强悍的-Javascript-异步调用库"><a href="#短小强悍的-Javascript-异步调用库" class="headerlink" title="短小强悍的 Javascript 异步调用库"></a>短小强悍的 Javascript 异步调用库</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> queue = <span class="function"><span class="keyword">function</span>(<span class="params">funcs, scope</span>) </span>&#123;</div><div class="line">    (<span class="function"><span class="keyword">function</span> <span class="title">next</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span>(funcs.length &gt; <span class="number">0</span>) &#123;</div><div class="line">            funcs.shift().apply(scope, [next].concat(<span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>, <span class="number">0</span>)));</div><div class="line">        &#125;</div><div class="line">    &#125;)();</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// Example</span></div><div class="line"><span class="keyword">var</span> obj = &#123; <span class="attr">value</span>: <span class="literal">null</span> &#125;;</div><div class="line"></div><div class="line">queue([</div><div class="line">    <span class="function"><span class="keyword">function</span>(<span class="params">callback</span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> me = <span class="keyword">this</span>;</div><div class="line">        setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">              me.value = <span class="number">10</span>;</div><div class="line">              callback(<span class="number">20</span>);</div><div class="line">        &#125;);</div><div class="line">    &#125;,</div><div class="line">    <span class="function"><span class="keyword">function</span>(<span class="params">callback, add</span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.value + add);</div><div class="line">        callback();</div><div class="line">    &#125;,</div><div class="line">    <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(obj.value);</div><div class="line">    &#125;</div><div class="line">], obj);</div></pre></td></tr></table></figure>
+<h3 id="干掉鼠标右键菜单"><a href="#干掉鼠标右键菜单" class="headerlink" title="干掉鼠标右键菜单"></a>干掉鼠标右键菜单</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">NoRightClick</span>(<span class="params">pid</span>) </span>&#123; <span class="comment">// pid: flash's parentNode id</span></div><div class="line">    <span class="keyword">var</span> el = <span class="built_in">document</span>.getElementById(pid);</div><div class="line">    <span class="keyword">if</span>(el.addEventListener) &#123;</div><div class="line">        el.addEventListener(<span class="string">'mousedown'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</div><div class="line">            <span class="keyword">if</span>(event.button == <span class="number">2</span>)&#123;</div><div class="line">                event.stopPropagation(); <span class="comment">// for firefox</span></div><div class="line">                event.preventDefault();  <span class="comment">// for chrome</span></div><div class="line">            &#125;</div><div class="line">        &#125;,<span class="literal">true</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> &#123;</div><div class="line">        el.attachEvent(<span class="string">'onmousedown'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="keyword">if</span>(event.button == <span class="number">2</span>) &#123;</div><div class="line">                el.setCapture();</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">   </div><div class="line">        el.attachEvent(<span class="string">'onmouseup'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            el.releaseCapture();</div><div class="line">        &#125;);</div><div class="line">   </div><div class="line">        el.oncontextmenu = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="判断是否是素数"><a href="#判断是否是素数" class="headerlink" title="判断是否是素数"></a>判断是否是素数</h3><pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">isPrime</span>(<span class="params">num</span>) </span>{
+    <span class="keyword">return</span> n &lt; <span class="number">2</span> ? <span class="literal">false</span> : !<span class="regexp">/^(11+?)\1+$/</span>.test(<span class="built_in">Array</span>(num+<span class="number">1</span>).join(<span class="number">1</span>));
+}
+</code></pre>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/03/24/nginx-rewrite-rule/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Nginx Rewrite 规则
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/04/05/js-swap-algorithm/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">不用中间变量交换两个数值变量的值</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="js-snippet-code" data-title="Javascript 代码片段笔记" data-url="http://zqianduan.com/2016/03/30/js-snippet-code/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"zqianduan"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 Jimco
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?ccac13d2d4e18f7ac82a7f1c9de98a90";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+  </div>
+</body>
+</html>

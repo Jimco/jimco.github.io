@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>BFC 和 HasLayout | 最前端</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="BFC 的定义是 W3C CSS2.1 规范中的一个概念，它决定了元素如何对其元素进行定位，以及与其它元素的关系和相互作用。 在创建了 Block Formating Context 的元素中，其子元素会一个接一个地放置。垂直方向上他们的起点是一个包含块的顶部，两个相邻的元素之间的垂直距离取决于 margin 特性。在 Block Formating Context 中相邻的块级元素的垂直边距会折">
+<meta name="keywords" content="bfc,layout">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BFC 和 HasLayout">
+<meta property="og:url" content="http://zqianduan.com/2016/03/08/bfc-haslayout/index.html">
+<meta property="og:site_name" content="最前端">
+<meta property="og:description" content="BFC 的定义是 W3C CSS2.1 规范中的一个概念，它决定了元素如何对其元素进行定位，以及与其它元素的关系和相互作用。 在创建了 Block Formating Context 的元素中，其子元素会一个接一个地放置。垂直方向上他们的起点是一个包含块的顶部，两个相邻的元素之间的垂直距离取决于 margin 特性。在 Block Formating Context 中相邻的块级元素的垂直边距会折">
+<meta property="og:updated_time" content="2017-04-27T07:01:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BFC 和 HasLayout">
+<meta name="twitter:description" content="BFC 的定义是 W3C CSS2.1 规范中的一个概念，它决定了元素如何对其元素进行定位，以及与其它元素的关系和相互作用。 在创建了 Block Formating Context 的元素中，其子元素会一个接一个地放置。垂直方向上他们的起点是一个包含块的顶部，两个相邻的元素之间的垂直距离取决于 margin 特性。在 Block Formating Context 中相邻的块级元素的垂直边距会折">
+  
+    <link rel="alternative" href="/atom.xml" title="最前端" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay">
+	<div class="st-so-wrap">
+		<input type="text" id="local-search-input" class="st-default-search-input st-so" placeholder="回车搜索 直接有效">
+	</div>
+</div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Jimco</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/jimco" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/515789799" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/301/" style="font-size: 10px;">301</a> <a href="/tags/algorithm/" style="font-size: 11.67px;">algorithm</a> <a href="/tags/angular/" style="font-size: 15px;">angular</a> <a href="/tags/async/" style="font-size: 10px;">async</a> <a href="/tags/backbone/" style="font-size: 10px;">backbone</a> <a href="/tags/bfc/" style="font-size: 10px;">bfc</a> <a href="/tags/browser/" style="font-size: 10px;">browser</a> <a href="/tags/cache/" style="font-size: 10px;">cache</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/comet/" style="font-size: 10px;">comet</a> <a href="/tags/css/" style="font-size: 18.33px;">css</a> <a href="/tags/dom/" style="font-size: 10px;">dom</a> <a href="/tags/emlog/" style="font-size: 10px;">emlog</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/event/" style="font-size: 10px;">event</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/frontend/" style="font-size: 10px;">frontend</a> <a href="/tags/gzip/" style="font-size: 11.67px;">gzip</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/https/" style="font-size: 11.67px;">https</a> <a href="/tags/iframe/" style="font-size: 10px;">iframe</a> <a href="/tags/image/" style="font-size: 10px;">image</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/layout/" style="font-size: 13.33px;">layout</a> <a href="/tags/media/" style="font-size: 10px;">media</a> <a href="/tags/memory/" style="font-size: 10px;">memory</a> <a href="/tags/meta/" style="font-size: 10px;">meta</a> <a href="/tags/mvvm/" style="font-size: 13.33px;">mvvm</a> <a href="/tags/oo/" style="font-size: 10px;">oo</a> <a href="/tags/pattern/" style="font-size: 10px;">pattern</a> <a href="/tags/promise/" style="font-size: 13.33px;">promise</a> <a href="/tags/router/" style="font-size: 10px;">router</a> <a href="/tags/samba/" style="font-size: 10px;">samba</a> <a href="/tags/server/" style="font-size: 16.67px;">server</a> <a href="/tags/setInterval/" style="font-size: 10px;">setInterval</a> <a href="/tags/snippet/" style="font-size: 10px;">snippet</a> <a href="/tags/socket-io/" style="font-size: 10px;">socket.io</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/this/" style="font-size: 10px;">this</a> <a href="/tags/typecho/" style="font-size: 10px;">typecho</a> <a href="/tags/ubb/" style="font-size: 10px;">ubb</a> <a href="/tags/uglify/" style="font-size: 10px;">uglify</a> <a href="/tags/waterflow/" style="font-size: 10px;">waterflow</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/二进制/" style="font-size: 10px;">二进制</a> <a href="/tags/运算符/" style="font-size: 10px;">运算符</a> <a href="/tags/重定向/" style="font-size: 10px;">重定向</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+					
+						<section class="switch-part switch-part3">
+					
+					<div id="js-aboutme">狼厂攻城师，爱打羽毛球，欢迎骚扰！</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Jimco</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/avatar.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Jimco</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/jimco" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/515789799" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-bfc-haslayout" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/08/bfc-haslayout/" class="article-date">
+  	<time datetime="2016-03-08T08:50:31.000Z" itemprop="datePublished">2016-03-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      BFC 和 HasLayout
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/HTML-CSS/">HTML/CSS</a>
+	</div>
+
+
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bfc/">bfc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/layout/">layout</a></li></ul>
+	</div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="BFC-的定义"><a href="#BFC-的定义" class="headerlink" title="BFC 的定义"></a>BFC 的定义</h3><p>是 W3C CSS2.1 规范中的一个概念，它决定了元素如何对其元素进行定位，以及与其它元素的关系和相互作用。</p>
+<p>在创建了 Block Formating Context 的元素中，其子元素会一个接一个地放置。垂直方向上他们的起点是一个包含块的顶部，两个相邻的元素之间的垂直距离取决于 margin 特性。在 Block Formating Context 中相邻的块级元素的垂直边距会折叠（collapse）。</p>
+<p>在 Block Formating Context 中，每一个元素左外边距与包含块的左边相接触（对于从右到左的格式化，右外边接触右边），即使存在浮动也是如此（尽管一个元素的内容区域会由于浮动而压缩），除非这个元素也创建了一个 Block Formating Context。<br><a id="more"></a></p>
+<h3 id="BFC到底是什么？"><a href="#BFC到底是什么？" class="headerlink" title="BFC到底是什么？"></a>BFC到底是什么？</h3><p>当涉及到可视化布局的时候，Block Formatting Context 提供了一个环境，HTML 元素在这个环境中按照一定规则进行布局。一个环境中的元素不会影响到其它环境中的布局。比如浮动元素会形成 BFC，浮动元素内部子元素的主要受该浮动元素影响，两个浮动元素之间是互不影响的。这里有点类似一个 BFC 就是一个独立的行政单位的意思。</p>
+<h3 id="怎样才能形成BFC"><a href="#怎样才能形成BFC" class="headerlink" title="怎样才能形成BFC"></a>怎样才能形成BFC</h3><ul>
+<li><code>float</code> 的值不为 <code>none</code></li>
+<li><code>overflow</code> 的值不为 <code>visible</code></li>
+<li><code>display</code> 的值为 <code>table-cell</code>, <code>table-caption</code>, <code>inline-block</code> 中的任何一个</li>
+<li><code>position</code> 的值不为 <code>relative</code> 和 <code>static</code></li>
+</ul>
+<h3 id="BFC-的作用"><a href="#BFC-的作用" class="headerlink" title="BFC 的作用"></a>BFC 的作用</h3><ol>
+<li><p>不和浮动元素重叠</p>
+<p> 如果一个浮动元素后面跟着一个非浮动的元素，那么就会产生一个覆盖的现象，很多自适应的两栏布局就是这么做的。比如下图的效果，<a href="http://hikejun.com/blog/2011/10/26/%E8%BF%91%E6%9C%9F%E9%9D%A2%E8%AF%95%E6%84%9F%E5%8F%97/" target="_blank" rel="external">参考例子</a></p>
+</li>
+<li><p>清除元素内部浮动</p>
+<p> 只要把父元素设为BFC就可以清理子元素的浮动了，最常见的用法就是在父元素上设置<code>overflow: hidden</code>样式，对于 IE6 加上<code>zoom:1</code>就可以了(IE Haslayout)</p>
+</li>
+<li><p>嵌套元素 margin 边距折叠问题的解决</p>
+<p> 按照 BFC 的定义，只有同属于一个 BFC 时，两个元素才有可能发生垂直 margin 的重叠，这个包括相邻元素，嵌套元素，只要他们之间没有阻挡(例如边框，非空内容，padding等)就会发生 margin 重叠。</p>
+<p> 因此要解决 margin 重叠问题，只要让它们不在同一个 BFC 就行了，但是对于两个相邻元素来说，意义不大，没有必要给它们加个外壳，但是对于嵌套元素来说就很有必要了，只要把父元素设为 BFC 就可以了。这样子元素的 margin 就不会和父元素的 margin 发生重叠了。</p>
+</li>
+</ol>
+<h3 id="IE-HasLayout"><a href="#IE-HasLayout" class="headerlink" title="IE HasLayout"></a>IE HasLayout</h3><p>Layout 是一个 Internet Explorer for Windows 的私有概念，它决定了一个元素如何显示以及约束其包含的内容、如何与其他元素交互和建立联系、如何响应和传递应用程序事件、用户事件等。这种渲染特性可以通过某些 CSS 属性被不可逆转地触发。而有些 HTML 元素则默认就具有 layout。</p>
+<p>一个元素“得到 layout”，或者说一个元素“拥有 layout” 的时候，是指它的微软专有属性 hasLayout 被设为了 true 。一个“layout 元素”可以是一个默认就拥有 layout 的元素或者是一个通过设置某些 CSS 属性得到 layout 的元素。</p>
+<p>不同于标准属性，也不像某些浏览器的私有 CSS 属性，layout 无法通过某一个 CSS 声明直接设定 。也就是说没有“layout 属性”这么一个东西，元素要么本身自动拥有 layout，要么借助一些 CSS 声明悄悄地获得 layout。</p>
+<p>下列元素应该是默认具有 layout 的：</p>
+<ul>
+<li><code>&lt;html&gt;</code>, <code>&lt;body&gt;</code></li>
+<li><code>&lt;table&gt;</code>, <code>&lt;tr&gt;</code>, <code>&lt;th&gt;</code>, <code>&lt;td&gt;</code></li>
+<li><code>&lt;img&gt;</code></li>
+<li><code>&lt;hr&gt;</code></li>
+<li><code>&lt;input&gt;</code>, <code>&lt;button&gt;</code>, <code>&lt;select&gt;</code>, <code>&lt;textarea&gt;</code>, <code>&lt;fieldset&gt;</code>, <code>&lt;legend&gt;</code></li>
+<li><code>&lt;iframe&gt;</code>, <code>&lt;embed&gt;</code>, <code>&lt;object&gt;</code>, <code>&lt;applet&gt;</code></li>
+<li><code>&lt;marquee&gt;</code></li>
+</ul>
+<p>下列 CSS 属性和取值将会让一个元素获得 layout：</p>
+<ul>
+<li><p>position: <code>absolute</code> </p>
+<p>  绝对定位元素的包含区块(containing block)就会经常在这一方面出问题。</p>
+</li>
+<li><p>float: <code>left</code> | <code>right</code> </p>
+<p>  由于 layout 元素的特性，浮动模型会有很多怪异的表现。</p>
+</li>
+<li><p>display: <code>inline-block</code> </p>
+<p>  当一个内联级别的元素需要 layout 的时候往往就要用到它，这也可能也是这个 CSS 属性的唯一效果–让某个元素拥有 layout。<code>inline-block行为</code>在 IE 中是可以实现的，但是非常与众不同： IE/Win: inline-block and hasLayout 。</p>
+</li>
+<li><p>width: 除 <code>auto</code> 外的任意值 </p>
+<p>  很多人遇到 layout 相关问题发生时，一般都会先尝试用这个来修复。</p>
+</li>
+<li><p>height: 除 <code>auto</code> 外的任意值 </p>
+<p>  height: 1% 就在 Holly Hack 中用到。</p>
+</li>
+<li><p>zoom: 除 <code>normal</code> 外的任意值 </p>
+<p>  IE专有属性。不过 zoom: 1 可以临时用做调试。</p>
+</li>
+<li><p>writing-mode: <code>tb-rl</code> </p>
+<p>  MS专有属性。</p>
+</li>
+</ul>
+<p>IE7中引入的hasLayout成员</p>
+<ul>
+<li><p>overflow: <code>hidden</code> | <code>scroll</code> | <code>auto</code></p>
+<p>  在 IE7 中，<code>overflow</code> 也变成了一个 layout 触发器，这个属性在之前版本 IE 中没有触发 layout 的功能。</p>
+</li>
+<li><p>position: <code>fixed</code></p>
+</li>
+<li><p>min-width: 任意值 </p>
+<p>  就算设为0也可以让该元素获得 layout。</p>
+</li>
+<li><p>max-width: 除 <code>none</code> 之外的任意值</p>
+</li>
+<li><p>min-height: 任意值 </p>
+<p>  即使设为0也可以让该元素的 haslayout=true</p>
+</li>
+<li><p>max-height: 除 <code>none</code> 之外的任意值</p>
+</li>
+</ul>
+<p>参考资料：</p>
+<ul>
+<li>常规流( Normal flow )：<a href="http://www.w3help.org/zh-cn/kb/010/" target="_blank" rel="external">http://www.w3help.org/zh-cn/kb/010/</a></li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/03/08/js-memory-management/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Javascript 中的内存管理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/08/holy-grail-layout/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">圣杯布局</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="bfc-haslayout" data-title="BFC 和 HasLayout" data-url="http://zqianduan.com/2016/03/08/bfc-haslayout/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"zqianduan"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 Jimco
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?ccac13d2d4e18f7ac82a7f1c9de98a90";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+  </div>
+</body>
+</html>
