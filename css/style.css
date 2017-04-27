@@ -437,7 +437,8 @@ a {
   #container .share {
     padding: 3px 10px;
   }
-  #container .duoshuo {
+  #container .duoshuo,
+  #container .youyan {
     padding: 0 13px;
   }
   #container #disqus_thread {
@@ -731,7 +732,8 @@ a {
   text-align: left;
   line-height: 30px;
 }
-.duoshuo {
+.duoshuo,
+.youyan {
   padding: 0 40px;
 }
 #disqus_thread {
@@ -1550,7 +1552,7 @@ a {
 }
 .article-entry .highlight .line {
   font-size: 15px;
-  height: 15px;
+  height: 22.400000000000002px;
 }
 .article-entry .gist {
   margin: 0 -20px;
