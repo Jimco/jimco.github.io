@@ -16,14 +16,21 @@
   </url>
   
   <url>
-    <loc>http://zqianduan.com/2016/03/08/bfc-haslayout/</loc>
+    <loc>http://zqianduan.com/2016/02/18/browser-render-mechanism/</loc>
     
     <lastmod>2017-04-27T07:01:51.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://zqianduan.com/2016/02/18/browser-render-mechanism/</loc>
+    <loc>http://zqianduan.com/2016/02/18/compat/</loc>
+    
+    <lastmod>2017-04-27T07:01:51.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zqianduan.com/2017/01/04/dev-server-samba/</loc>
     
     <lastmod>2017-04-27T07:01:51.000Z</lastmod>
     
@@ -44,13 +51,6 @@
   </url>
   
   <url>
-    <loc>http://zqianduan.com/2017/01/04/dev-server-samba/</loc>
-    
-    <lastmod>2017-04-27T07:01:51.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://zqianduan.com/2016/03/22/front-end-excellent-article-navigate/</loc>
     
     <lastmod>2017-04-27T07:01:51.000Z</lastmod>
@@ -65,14 +65,14 @@
   </url>
   
   <url>
-    <loc>http://zqianduan.com/2016/03/01/front-end-knowledge-system/</loc>
+    <loc>http://zqianduan.com/2016/03/14/front-end-optimization/</loc>
     
     <lastmod>2017-04-27T07:01:51.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://zqianduan.com/2016/03/14/front-end-optimization/</loc>
+    <loc>http://zqianduan.com/2016/03/01/front-end-knowledge-system/</loc>
     
     <lastmod>2017-04-27T07:01:51.000Z</lastmod>
     
@@ -93,14 +93,14 @@
   </url>
   
   <url>
-    <loc>http://zqianduan.com/2016/03/10/html-css-layout/</loc>
+    <loc>http://zqianduan.com/2016/03/04/html-meta/</loc>
     
     <lastmod>2017-04-27T07:01:51.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://zqianduan.com/2016/03/04/html-meta/</loc>
+    <loc>http://zqianduan.com/2016/03/06/infinite-loading-disadvantage/</loc>
     
     <lastmod>2017-04-27T07:01:51.000Z</lastmod>
     
@@ -114,14 +114,14 @@
   </url>
   
   <url>
-    <loc>http://zqianduan.com/2016/03/07/https-server-config/</loc>
+    <loc>http://zqianduan.com/2016/03/10/html-css-layout/</loc>
     
     <lastmod>2017-04-27T07:01:51.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://zqianduan.com/2016/03/06/infinite-loading-disadvantage/</loc>
+    <loc>http://zqianduan.com/2016/03/07/https-server-config/</loc>
     
     <lastmod>2017-04-27T07:01:51.000Z</lastmod>
     
@@ -149,7 +149,7 @@
   </url>
   
   <url>
-    <loc>http://zqianduan.com/2016/02/18/compat/</loc>
+    <loc>http://zqianduan.com/2016/03/08/bfc-haslayout/</loc>
     
     <lastmod>2017-04-27T07:01:51.000Z</lastmod>
     
@@ -163,14 +163,14 @@
   </url>
   
   <url>
-    <loc>http://zqianduan.com/2016/04/25/js-bit-operation/</loc>
+    <loc>http://zqianduan.com/2016/03/09/js-cross-domain/</loc>
     
     <lastmod>2017-04-27T07:01:51.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://zqianduan.com/2016/03/09/js-cross-domain/</loc>
+    <loc>http://zqianduan.com/2016/04/25/js-bit-operation/</loc>
     
     <lastmod>2017-04-27T07:01:51.000Z</lastmod>
     
@@ -219,13 +219,6 @@
   </url>
   
   <url>
-    <loc>http://zqianduan.com/2016/02/27/nginx-gzip/</loc>
-    
-    <lastmod>2017-04-27T07:01:51.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://zqianduan.com/2016/03/23/mvc-deformation/</loc>
     
     <lastmod>2017-04-27T07:01:51.000Z</lastmod>
@@ -233,7 +226,7 @@
   </url>
   
   <url>
-    <loc>http://zqianduan.com/2016/03/24/nginx-rewrite-rule/</loc>
+    <loc>http://zqianduan.com/2016/02/27/nginx-gzip/</loc>
     
     <lastmod>2017-04-27T07:01:51.000Z</lastmod>
     
@@ -241,6 +234,13 @@
   
   <url>
     <loc>http://zqianduan.com/2016/03/13/sass-responsive-breakpoints/</loc>
+    
+    <lastmod>2017-04-27T07:01:51.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zqianduan.com/2016/03/24/nginx-rewrite-rule/</loc>
     
     <lastmod>2017-04-27T07:01:51.000Z</lastmod>
     
@@ -268,14 +268,14 @@
   </url>
   
   <url>
-    <loc>http://zqianduan.com/2016/03/04/ubb-regexp/</loc>
+    <loc>http://zqianduan.com/2016/03/19/text-size-adjust/</loc>
     
     <lastmod>2017-04-27T07:01:51.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://zqianduan.com/2016/03/19/text-size-adjust/</loc>
+    <loc>http://zqianduan.com/2016/03/04/ubb-regexp/</loc>
     
     <lastmod>2017-04-27T07:01:51.000Z</lastmod>
     
